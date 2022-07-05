@@ -15,10 +15,7 @@ class CreateCommandesTable extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantite');
-            $table->float('mtt_HT');
-            $table->float('mtt_TTC');
-            $table->boolean('etat');
+            $table->date('date');
             $table->foreignId('users_id')->constrained("users");
             $table->timestamps();
         });

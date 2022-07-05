@@ -75,7 +75,23 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('admins.commandes')}}" class="nav-link">
+            <i class="nav-icon fas fa-cart-arrow-down"></i>
+            <p>
+              Commandes
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-luggage-cart"></i>
+            <p>
+              Lignes de Commandes
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('admins.ravitaillements')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-in-alt"></i>
             <p>
               Ravitaillements
@@ -103,14 +119,6 @@
             <i class="nav-icon fas fa-file-invoice"></i>
             <p>
               Factures
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-cart-arrow-down"></i>
-            <p>
-              Commandes
             </p>
           </a>
         </li>

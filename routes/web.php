@@ -73,6 +73,22 @@ Route::post('admins/produits/create',[App\Http\Controllers\Admins\ProduitControl
 Route::delete('admins/produits/{produit}',[App\Http\Controllers\Admins\ProduitController::class, "delete"])->name("produits.supprimer");
 Route::put('admins/produits/{produit}',[App\Http\Controllers\Admins\ProduitController::class, "update"])->name("produits.update");
 
+//Routes Admin--Commandes
+Route::get('admins/commandes',[App\Http\Controllers\Admins\CommandeController::class, "index"])->name("admins.commandes");
+Route::get('admins/commandes/create',[App\Http\Controllers\Admins\CommandeController::class, "create"])->name("commandes.create");
+Route::get('admins/commandes/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "edit"])->name("commandes.edit");
+Route::post('admins/commandes/create',[App\Http\Controllers\Admins\CommandeController::class, "store"])->name("commandes.ajouter");
+Route::delete('admins/commandes/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "delete"])->name("commandes.supprimer");
+Route::put('admins/commandes/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "update"])->name("commandes.update");
+
+//Routes Admin--Ravitaillements
+Route::get('admins/ravitaillements',[App\Http\Controllers\Admins\RavitaillementController::class, "index"])->name("admins.ravitaillements");
+Route::get('admins/ravitaillements/create',[App\Http\Controllers\Admins\RavitaillementController::class, "create"])->name("ravitaillements.create");
+Route::get('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admins\RavitaillementController::class, "edit"])->name("ravitaillements.edit");
+Route::post('admins/ravitaillements/create',[App\Http\Controllers\Admins\RavitaillementController::class, "store"])->name("ravitaillements.ajouter");
+Route::delete('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admins\RavitaillementController::class, "delete"])->name("ravitaillements.supprimer");
+Route::put('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admins\RavitaillementController::class, "update"])->name("ravitaillements.update");
+
 Route::middleware([
     'auth:sanctum', 'verified'])->get('/gerant/dashboard',function () {
         return view('gerant-dashboard');

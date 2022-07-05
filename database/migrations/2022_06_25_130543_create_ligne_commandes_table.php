@@ -15,10 +15,12 @@ class CreateLigneCommandesTable extends Migration
     {
         Schema::create('ligne_commandes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('produits_id')->constrained("produits");
             $table->integer('quantite');
-            $table->date('date');
-            $table->foreignId('produits_id')->constrained("produits"); 
+            $table->float('prix_unitaire');
+            $table->float('prix_total'); 
             $table->foreignId('commandes_id')->constrained("commandes");
+            $table->boolean('etat');
             $table->timestamps();
         });
     }
