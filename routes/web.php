@@ -89,6 +89,22 @@ Route::post('admins/ravitaillements/create',[App\Http\Controllers\Admins\Ravitai
 Route::delete('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admins\RavitaillementController::class, "delete"])->name("ravitaillements.supprimer");
 Route::put('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admins\RavitaillementController::class, "update"])->name("ravitaillements.update");
 
+//Routes Admin--LigneCommandes
+Route::get('admins/lignecommandes',[App\Http\Controllers\Admins\LigneCommandeController::class, "index"])->name("admins.lignecommandes");
+Route::get('admins/lignecommandes/create',[App\Http\Controllers\Admins\LigneCommandeController::class, "create"])->name("lignecommandes.create");
+Route::get('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "edit"])->name("lignecommandes.edit");
+Route::post('admins/lignecommandes/create',[App\Http\Controllers\Admins\LigneCommandeController::class, "store"])->name("lignecommandes.ajouter");
+Route::delete('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "delete"])->name("lignecommandes.supprimer");
+Route::put('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "update"])->name("lignecommandes.update");
+
+//Routes Admin--Clients
+Route::get('admins/clients',[App\Http\Controllers\Admins\ClientController::class, "index"])->name("admins.clients");
+Route::get('admins/clients/create',[App\Http\Controllers\Admins\ClientController::class, "create"])->name("clients.create");
+Route::get('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "edit"])->name("clients.edit");
+Route::post('admins/clients/create',[App\Http\Controllers\Admins\ClientController::class, "store"])->name("clients.ajouter");
+Route::delete('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "delete"])->name("clients.supprimer");
+Route::put('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "update"])->name("clients.update");
+
 Route::middleware([
     'auth:sanctum', 'verified'])->get('/gerant/dashboard',function () {
         return view('gerant-dashboard');

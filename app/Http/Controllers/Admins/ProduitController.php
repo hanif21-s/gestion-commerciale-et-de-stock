@@ -9,6 +9,7 @@ use App\Models\Categorie;
 use App\Models\Taxe;
 use App\Models\Remise;
 use App\Models\Fournisseur;
+use DB;
 
 class ProduitController extends Controller
 {
@@ -43,15 +44,14 @@ class ProduitController extends Controller
             "qtte_stock"=>"required",
             "prix_achat"=>"required",
             "prix_HT"=>"required",
-            "stock_minimum"=>"required",
+            "stock_minimum"=>"required", 
             "date_peremption"=>"required",
-            "benefice"=>"required",
+            "benefice"=>"",
             "categories_id"=>"required",
             "taxes_id"=>"required",
             "remises_id"=>"required",
             "fournisseurs_id"=>"required",
         ]);
-
         Produit::create($request->all());
         return redirect('/admins/produits')->with("success", "Produit ajouté avec succès!");
     }
@@ -64,7 +64,6 @@ class ProduitController extends Controller
             "prix_HT"=>"required",
             "stock_minimum"=>"required",
             "date_peremption"=>"required",
-            "benefice"=>"required",
             "categories_id"=>"required",
             "taxes_id"=>"required",
             "remises_id"=>"required",

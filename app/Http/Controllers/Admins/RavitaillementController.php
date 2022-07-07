@@ -68,11 +68,41 @@ class RavitaillementController extends Controller
     }
 
      public function update(Request $request, Ravitaillement $ravitaillement){
+        $ravitaillements = Ravitaillement::all();
+        $produits = Produit::all();
+        $quantiteini = $ravitaillement->quantite;
+        //dd($quantiteini);
         $request->validate([
             "quantite"=>"required",
             "date"=>"required",
             "produits_id"=>"required",
         ]);
+        $quantitemodi = request('quantite');
+        //dd($quantitemodi);
+        $produitrens = request('produits_id');
+        //dd($produitrens);
+        $id = DB::table('produits')
+            ->select('produits.*')
+            ->first();
+        $qtte = $id->qtte_stock;
+        //dd($qtte);
+        $stockupdate = DB::table('produits')
+            ->join('ravitaillements', 'ravitaillements.produits_id', '=' ,'produits.id')
+            ->select( 'produits.*')
+            ->where([
+                ['ravitaillements.produits_id', '=', $produitrens],
+            ])
+            ->first();
+            //dd($stockupdate);
+        $qtts = $stockupdate->qtte_stock;
+            //dd($qtts);
+        $qttreset = $qtts - $quantiteini;
+            //dd($qttreset);
+        $QuantiteStock = $qttreset + $quantitemodi;
+            //dd($QuantiteStock);
+        $produit = Produit::find($stockupdate->id);
+        $produit->qtte_stock = $QuantiteStock;
+        $produit->save();
         $ravitaillement->update($request->all());
         return redirect('/admins/ravitaillements')->with("success", "Ravitaillement mis à jour avec succès!");
     }

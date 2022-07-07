@@ -21,7 +21,7 @@ class CreateProduitsTable extends Migration
             $table->float("prix_HT");
             $table->integer("stock_minimum");
             $table->date("date_peremption");
-            $table->float("benefice");
+            $table->float("benefice")->nullable();
             $table->foreignId('categories_id')->constrained("categories");
             $table->foreignId('taxes_id')->constrained("taxes");
             $table->foreignId('remises_id')->constrained("remises");

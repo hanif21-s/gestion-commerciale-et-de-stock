@@ -48,10 +48,6 @@
     <input type="date" class="form-control" required name="date_peremption" value="{{$produit->date_peremption}}" min="{{  now()->toDateString('Y-m-d') }}">
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Benefice</label>
-    <input type="number" class="form-control" required name="benefice" value="{{$produit->benefice}}">
-  </div>
-  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Catégorie</label>
     <select class="form-control" required name="categories_id">
       <option value=""></option>

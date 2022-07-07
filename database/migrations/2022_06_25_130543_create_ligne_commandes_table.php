@@ -17,8 +17,8 @@ class CreateLigneCommandesTable extends Migration
             $table->id();
             $table->foreignId('produits_id')->constrained("produits");
             $table->integer('quantite');
-            $table->float('prix_unitaire');
-            $table->float('prix_total'); 
+            $table->float('prix_unitaire')->nullable();
+            $table->float('prix_total')->nullable(); 
             $table->foreignId('commandes_id')->constrained("commandes");
             $table->boolean('etat');
             $table->timestamps();

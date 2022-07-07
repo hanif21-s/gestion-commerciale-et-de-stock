@@ -57,7 +57,7 @@
       <td>{{$produit->prix_HT}}</td>
       <td>{{$produit->stock_minimum}}</td>
       <td>{{$produit->date_peremption}}</td>
-      <td>{{$produit->benefice}}</td>
+      <td>{{$produit->prix_HT - $produit->prix_achat}}</td>
       <td>{{$produit->Categorie['libelle']}}</td>
       <td>{{$produit->Taxe['libelle']}}</td>
       <td>{{$produit->Remise['libelle']}}</td>

@@ -22,7 +22,7 @@
         <input type="hidden" name="_method" value="put">
   <div class="mb-3">
     <label class="form-label">Date</label>
-    <input type="text" class="form-control" required name="date" value="{{$commande->date}}" readonly="">
+    <input type="date" class="form-control" required name="date" value="{{$commande->date}}" readonly="">
   </div>
   <div class="mb-3">
     <label class="form-label">Vendeur</label>

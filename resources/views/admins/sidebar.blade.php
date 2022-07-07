@@ -83,7 +83,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{ route('admins.lignecommandes')}}" class="nav-link">
             <i class="nav-icon fas fa-luggage-cart"></i>
             <p>
               Lignes de Commandes
@@ -99,7 +99,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{ route('admins.clients')}}" class="nav-link">
             <i class="nav-icon fas fa-street-view"></i>
             <p>
               Clients
