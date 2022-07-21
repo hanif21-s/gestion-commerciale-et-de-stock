@@ -66,8 +66,10 @@ Route::get('admins/fournisseurs/{fournisseur}',[App\Http\Controllers\Admins\Four
 Route::put('admins/fournisseurs/{fournisseur}',[App\Http\Controllers\Admins\FournisseurController::class, "update"])->name("fournisseurs.update");
 
 //Routes Admin--Produits
+Route::get('admins/commandeProduits',[App\Http\Controllers\Admins\ProduitController::class, "index1"])->name("admins.commandeProduits");
 Route::get('admins/produits',[App\Http\Controllers\Admins\ProduitController::class, "index"])->name("admins.produits");
 Route::get('admins/produits/create',[App\Http\Controllers\Admins\ProduitController::class, "create"])->name("produits.create");
+Route::get('admins/produits/createCommandeProduits/{id}',[App\Http\Controllers\Admins\ProduitController::class, "create1"])->name("produits.createCommandeProduits");
 Route::get('admins/produits/{produit}',[App\Http\Controllers\Admins\ProduitController::class, "edit"])->name("produits.edit");
 Route::post('admins/produits/create',[App\Http\Controllers\Admins\ProduitController::class, "store"])->name("produits.ajouter");
 Route::delete('admins/produits/{produit}',[App\Http\Controllers\Admins\ProduitController::class, "delete"])->name("produits.supprimer");
@@ -93,7 +95,7 @@ Route::put('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admin
 Route::get('admins/lignecommandes',[App\Http\Controllers\Admins\LigneCommandeController::class, "index"])->name("admins.lignecommandes");
 Route::get('admins/lignecommandes/create',[App\Http\Controllers\Admins\LigneCommandeController::class, "create"])->name("lignecommandes.create");
 Route::get('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "edit"])->name("lignecommandes.edit");
-Route::post('admins/lignecommandes/create',[App\Http\Controllers\Admins\LigneCommandeController::class, "store"])->name("lignecommandes.ajouter");
+Route::post('admins/lignecommandes/create/{id}',[App\Http\Controllers\Admins\LigneCommandeController::class, "store1"])->name("lignecommandes.ajouter");
 Route::delete('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "delete"])->name("lignecommandes.supprimer");
 Route::put('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "update"])->name("lignecommandes.update");
 

@@ -9,6 +9,8 @@ use App\Models\Categorie;
 use App\Models\Taxe;
 use App\Models\Remise;
 use App\Models\Fournisseur;
+use App\Models\LigneCommande;
+use App\Models\Commande;
 use DB;
 
 class ProduitController extends Controller
@@ -22,6 +24,14 @@ class ProduitController extends Controller
         return view('admins.produits',compact('produits'));
     }
 
+    public function index1(Request $request) {
+        $commandes_id = Commande::all()->last()->id;
+        $commandes = Commande::whereId($commandes_id);
+        $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
+        $produits = Produit::all(); 
+        return view('admins.commandeProduits',compact('lignecommandes','produits'));
+    }
+
     public function create() {
     $categories = Categorie::all();
     $remises = Remise::all();
@@ -29,6 +39,13 @@ class ProduitController extends Controller
     $fournisseurs = Fournisseur::all();
         return view('admins.createProduit',compact('categories', 'remises', 'taxes', 'fournisseurs'));
     }
+
+    public function create1($id) {
+        $commandes = Commande::all();
+        //$produits = Produit::all();
+        $produits = Produit::find($id);
+        return view('admins.createCommandeProduits', compact('commandes', 'produits'));
+        }
 
     public function edit(Produit $produit) {
         $categories = Categorie::all();
@@ -55,7 +72,7 @@ class ProduitController extends Controller
         Produit::create($request->all());
         return redirect('/admins/produits')->with("success", "Produit ajouté avec succès!");
     }
-
+   
      public function update(Request $request, Produit $produit){
         $request->validate([
             "nom"=>"required",

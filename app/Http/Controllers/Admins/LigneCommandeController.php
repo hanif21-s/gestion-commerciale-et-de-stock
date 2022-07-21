@@ -16,9 +16,13 @@ class LigneCommandeController extends Controller
     }
     
     public function index() {
-        $lignecommandes = LigneCommande::all();
-            return view('admins.lignecommandes',compact('lignecommandes'));
-        }
+        $commandes_id = Commande::all()->last()->id;
+        $commandes = Commande::whereId($commandes_id);
+        $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
+        //dd($lignecommandes);
+        $produits = Produit::all();
+            return view('admins.lignecommandes',compact('lignecommandes','produits','commandes'));
+        } 
 
     public function delete(LigneCommande $lignecommande){
         $lignecommande->delete();
@@ -29,7 +33,7 @@ class LigneCommandeController extends Controller
         $commandes = Commande::all();
         $produits = Produit::all();
         return view('admins.createLigneCommande', compact('commandes', 'produits'));
-    }
+    } 
 
     public function store(Request $request){
         $produits = Produit::all();
@@ -43,6 +47,9 @@ class LigneCommandeController extends Controller
             "commandes_id"=>"required",
             "etat"=>"required",
         ]);
+        $data = $request->all();
+        //dd($data);
+        //$data = LigneCommande::create($request->all());
         $quantite = request('quantite');
         //dd($quantite);
         $produitrens = request('produits_id');
@@ -53,18 +60,19 @@ class LigneCommandeController extends Controller
             ->first();
         //dd($id);
             $qtte = $id->qtte_stock;
+            //dd($qtte);
             $stockupdate = DB::table('produits')
             ->join('ligne_commandes', 'ligne_commandes.produits_id', '=' ,'produits.id')
             ->select( 'produits.*')
             ->where([
-                ['ligne_commandes.produits_id', '=', $produitrens],
+                ['ligne_commandes.produits_id', '=', $request->produits_id],
             ])
             ->first();
-            // dd($stockupdate);
+            //dd($stockupdate);
             $qtts = $stockupdate->qtte_stock;
             //dd($qtts);
 
-            $qttv = $quantite;
+            $qttv = $request->quantite;
             //dd($qttv);
 
         if($qttv > $qtts){
@@ -81,6 +89,25 @@ class LigneCommandeController extends Controller
             return redirect('/admins/lignecommandes')->with("success", "Ligne commande ajoutée avec succès!");
         }
     }
+
+    public function store1(Request $request, $id){
+        $commandes = Commande::all();
+        $produits = Produit::all();
+        $lignecommandes = LigneCommande::all();
+        $commandes_id = Commande::all()->last()->id;
+        //dd($commandes_id);
+        $lignecommandes = new LigneCommande();
+        $lignecommandes->produits_id=$id;
+        $lignecommandes->quantite = $request->input('quantite');
+        $lignecommandes->etat = $request->input('etat');
+        $lignecommandes->commandes_id =$commandes_id;
+        $lignecommandes->save();
+        //dd($lignecommandes);
+        //dd($id);
+            return redirect('/admins/commandeProduits')->with("success", "Ligne commande ajoutée avec succès!");
+            //return back()->with("success", "La ligne commande ajoutéee avec succès!");
+    }
+
 
     public function edit(LigneCommande $lignecommande) {
         $commandes = Commande::all();

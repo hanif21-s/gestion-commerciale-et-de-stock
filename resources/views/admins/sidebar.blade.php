@@ -83,14 +83,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admins.lignecommandes')}}" class="nav-link">
-            <i class="nav-icon fas fa-luggage-cart"></i>
-            <p>
-              Lignes de Commandes
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
           <a href="{{ route('admins.ravitaillements')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-in-alt"></i>
             <p>

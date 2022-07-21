@@ -13,4 +13,8 @@ class Commande extends Model
     public function User(){
         return $this->belongsTo(User::class, 'users_id');
     }
+    
+    public function LigneCommande(){
+        return $this->belongsToMany(LigneCommande::class);
+    }
 }

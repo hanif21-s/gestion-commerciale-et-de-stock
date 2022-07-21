@@ -54,7 +54,7 @@ class RavitaillementController extends Controller
                 ['ravitaillements.produits_id', '=', $data->produits_id],
             ])
             ->first();
-            // dd($stockupdate);
+            //dd($stockupdate);
             $qtts = $stockupdate->qtte_stock;
             //dd($qtts);
             $qttv = $data->quantite;

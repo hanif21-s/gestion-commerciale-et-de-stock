@@ -15,7 +15,7 @@
       <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">N° de commande</th>
       <th scope="col">Date</th>
       <th scope="col">User</th>
       <th scope="col">Actions</th>
@@ -24,7 +24,7 @@
   <tbody>
     @foreach ($commandes as $commande)
     <tr>
-      <th scope="row">{{$loop->index + 1}}</th>
+      <th scope="row">{{$commande->id}}</th>
       <td>{{$commande->date}}</td>
       <td>{{$commande->User['name']}}</td>
       <td>

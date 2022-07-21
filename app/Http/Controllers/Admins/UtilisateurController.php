@@ -30,16 +30,16 @@ class UtilisateurController extends Controller
         $request->validate([
             "name"=>"required",
             "email"=>"required",
-            "is_admin"=>"required",
-            "is_gerant"=>"required",
-            "is_commercial"=>"required",
-            "is_caissier"=>"required",
+            "is_admin"=>"",
+            "is_gerant"=>"",
+            "is_commercial"=>"",
+            "is_caissier"=>"",
             "password"=>"required",
             "tel"=>"required",
             "adresse"=>"required",
             "sexe"=>"required",
         ]);
-
+dd($request);
         User::create($request->all());
         return redirect('/admins/utilisateurs')->with("success", "Utilisateur ajouté avec succès!");
     }

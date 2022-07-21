@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admins;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Commande;
+use App\Models\LigneCommande;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommandeController extends Controller
 {
@@ -15,7 +18,8 @@ class CommandeController extends Controller
     
     public function index() {
         $commandes = Commande::all();
-            return view('admins.commandes',compact('commandes'));
+        $lignecommandes = LigneCommande::all();
+            return view('admins.commandes',compact('commandes', 'lignecommandes')); 
         }
 
     public function delete(Commande $commande){
@@ -24,17 +28,27 @@ class CommandeController extends Controller
     }
 
     public function create() {
-        return view('admins.createCommande');
+        $commandes = Commande::all();
+        return view('admins.createCommande',compact('commandes'));
     }
 
-    public function store(Request $request){
-        $request->validate([
+    public function store(){
+        /* $request->validate([
             "date"=>"required",
             "users_id"=>"required",
-        ]);
+        ]); */
+        //dd($id);
+        $date = now()->toDateString('d-m-Y');
+        //dd($date);
+        $commandes = new Commande();
+        $commandes->users_id=Auth::user()->id;
+        $commandes->date=$date;
+        //dd($commandes);
+        $commandes->save();
+        //dd($commandes);
 
-        Commande::create($request->all());
-        return redirect('/admins/commandes')->with("success", "Commande ajoutée avec succès!");
+        //Commande::create($request->all());
+        return redirect('/admins/commandeProduits')->with("success", "Commande ajoutée avec succès!");
     }
 
     public function edit(Commande $commande) {
