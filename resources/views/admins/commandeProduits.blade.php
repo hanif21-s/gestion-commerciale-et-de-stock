@@ -63,7 +63,7 @@
   <!-- /.row -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title"><b>Liste des produits commandés</b></h3>
+      <h3 class="card-title"><b>Liste des produits disponibles</b></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">

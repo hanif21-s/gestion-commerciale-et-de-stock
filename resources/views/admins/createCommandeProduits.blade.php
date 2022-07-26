@@ -31,7 +31,7 @@
     </select>
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
-  <a href="{{route('admins.lignecommandes')}}" class="btn btn-danger">Annuler</a>
+  <a href="{{route('admins.commandeProduits')}}" class="btn btn-danger">Annuler</a> 
 </form>
   </div>
 </div>

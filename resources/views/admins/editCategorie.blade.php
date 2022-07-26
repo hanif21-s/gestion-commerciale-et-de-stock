@@ -31,16 +31,12 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Categorie Parent</label>
     <select class="form-control" name="parent_id">
-      <option value=""></option>
-      
-         @if($categorie->parent_id == $categorie->id)
+         @foreach($parents as $parent)
          
-          <option value="{{$categorie->id}}" selected>{{$categorie->parent_id}}</option>
+          <option value="{{$categorie->parent_id}}" selected>{{$categorie->parent_id}}</option>
           
-          @else
-          <option value="{{$categorie->id}}">{{$categorie->parent_id}}</option>
-        @endif
-        
+        @endforeach
+         
 
     </select>
   </div>

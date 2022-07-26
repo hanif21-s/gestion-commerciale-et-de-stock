@@ -39,16 +39,7 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">N° de commande</label>
-    <select class="form-control" required name="commandes_id">
-      <option value=""></option>
-        @foreach($commandes as $commande)
-        @if($commande->id == $lignecommande->commandes_id)
-          <option value="{{$commande->id}}" selected>{{$commande->id}}</option>
-          @else
-          <option value="{{$commande->id}}">{{$commande->id}}</option>
-        @endif
-        @endforeach
-    </select>
+    <input type="number" class="form-control" required name="commandes_id" value="{{$lignecommande->commandes_id}}" readonly="">
   </div>
   <div class="mb-3">
     <label class="form-label">Etat</label>

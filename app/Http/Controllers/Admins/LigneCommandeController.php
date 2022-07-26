@@ -35,77 +35,35 @@ class LigneCommandeController extends Controller
         return view('admins.createLigneCommande', compact('commandes', 'produits'));
     } 
 
-    public function store(Request $request){
-        $produits = Produit::all();
-        $lignecommandes = LigneCommande::all();
 
-        $request->validate([
-            "produits_id"=>"required",
-            "quantite"=>"required",
-            "prix_unitaire"=>"",
-            "prix_total"=>"",
-            "commandes_id"=>"required",
-            "etat"=>"required",
-        ]);
-        $data = $request->all();
-        //dd($data);
-        //$data = LigneCommande::create($request->all());
-        $quantite = request('quantite');
-        //dd($quantite);
-        $produitrens = request('produits_id');
-        //dd($produitrens);
-
-        $id = DB::table('produits')
-            ->select('produits.*')
-            ->first();
-        //dd($id);
-            $qtte = $id->qtte_stock;
-            //dd($qtte);
-            $stockupdate = DB::table('produits')
-            ->join('ligne_commandes', 'ligne_commandes.produits_id', '=' ,'produits.id')
-            ->select( 'produits.*')
-            ->where([
-                ['ligne_commandes.produits_id', '=', $request->produits_id],
-            ])
-            ->first();
-            //dd($stockupdate);
-            $qtts = $stockupdate->qtte_stock;
-            //dd($qtts);
-
-            $qttv = $request->quantite;
-            //dd($qttv);
-
-        if($qttv > $qtts){
-            return back()->withErrors([
-                'message' => 'Ajout de la ligne de commande impossible ! Quantité du produit en stock insuffisant']);
-        }
-        else{
-            $QuantiteStock = $qtts - $qttv;
-            //dd($QuantiteStock);
-            $produit = Produit::find($stockupdate->id);
-            $produit->qtte_stock = $QuantiteStock;
-            $produit->save();
-            LigneCommande::create($request->all());
-            return redirect('/admins/lignecommandes')->with("success", "Ligne commande ajoutée avec succès!");
-        }
-    }
-
-    public function store1(Request $request, $id){
+    public function store(Request $request, $id){
         $commandes = Commande::all();
         $produits = Produit::all();
         $lignecommandes = LigneCommande::all();
         $commandes_id = Commande::all()->last()->id;
-        //dd($commandes_id);
         $lignecommandes = new LigneCommande();
+        $produits_id = Produit::find($id);
+        //dd($produits_id);
         $lignecommandes->produits_id=$id;
         $lignecommandes->quantite = $request->input('quantite');
         $lignecommandes->etat = $request->input('etat');
         $lignecommandes->commandes_id =$commandes_id;
-        $lignecommandes->save();
-        //dd($lignecommandes);
         //dd($id);
+        $qtte_stock = $produits_id->qtte_stock;
+        //dd($quantite);
+        if($lignecommandes->quantite > $produits_id->qtte_stock){
+            return back()->withErrors([
+                'message' => 'Ajout de la ligne de commande impossible ! Quantité du produit en stock insuffisant']);
+        }
+        else if($lignecommandes->quantite <= $produits_id->qtte_stock){
+            $stock_nv = $qtte_stock - $lignecommandes->quantite;
+            //dd($QuantiteStock);
+            $produit = Produit::find($id);
+            $produit->qtte_stock = $stock_nv;
+            $produit->save();
+            $lignecommandes->save();
             return redirect('/admins/commandeProduits')->with("success", "Ligne commande ajoutée avec succès!");
-            //return back()->with("success", "La ligne commande ajoutéee avec succès!");
+        } 
     }
 
 
@@ -138,10 +96,10 @@ class LigneCommandeController extends Controller
         $qtte = $id->qtte_stock;
         //dd($qtte);
         $stockupdate = DB::table('produits')
-            ->join('ravitaillements', 'ravitaillements.produits_id', '=' ,'produits.id')
+            ->join('ligne_commandes', 'ligne_commandes.produits_id', '=' ,'produits.id')
             ->select( 'produits.*')
             ->where([
-                ['ravitaillements.produits_id', '=', $produitrens],
+                ['ligne_commandes.produits_id', '=', $produitrens],
             ])
             ->first();
         //dd($stockupdate);
@@ -155,6 +113,6 @@ class LigneCommandeController extends Controller
         $produit->qtte_stock = $QuantiteStock;
         $produit->save();
         $lignecommande->update($request->all());
-        return redirect('/admins/lignecommandes')->with("success", "Ligne commande mise à jour avec succès!");
+        return redirect('/admins/commandeProduits')->with("success", "Ligne commande mise à jour avec succès!");
     }
 }

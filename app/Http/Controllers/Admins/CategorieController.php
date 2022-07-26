@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use DB;
 
 class CategorieController extends Controller
 {
@@ -41,7 +42,12 @@ class CategorieController extends Controller
 
     public function edit(Categorie $categorie) {
         $categories = Categorie::all();
-        return view('admins.editCategorie',compact('categorie', "categories"));
+        //dd($categories);
+        $parents = DB::table('categories')
+            ->select('categories.parent_id')
+            ->get();
+        //dd($parent);
+        return view('admins.editCategorie',compact('categorie', "categories", "parents"));
     }
 
     public function update(Request $request, Categorie $categorie){

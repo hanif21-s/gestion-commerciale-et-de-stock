@@ -1,6 +1,12 @@
 @extends("admins.app")
 @section("content")
 <style type="text/css">
+ #scrolly{
+            overflow-x: scroll;
+            margin: 0 auto;
+            white-space: nowrap;
+        }
+
     /*arbre généalogique début*/
 .tree ul {
 	padding-top: 20px; 
@@ -96,7 +102,7 @@ right connector from last child*/
 /*arbre généalogique fin*/
 </style>
 
-<div class="my-3 p-3 bg-body rounded shadow-sm">
+<div class="my-3 p-3 bg-body rounded shadow-sm" id="scrolly">
   <h3 class="border-bottom pb-2 mb-3">Arbre Généalogique des Categories</h3>
     <div class="d-flex justify-content-start mb-2"><a href="{{route('admins.listCategorie')}}" class="btn btn-primary mb-3">Liste des Catégories</a></div>
   </br>
@@ -110,7 +116,6 @@ right connector from last child*/
         <h3>{{session()->get('success')}}</h3>
       </div>
     @endif
-<div>
     <div class="tree">
             <ul class="nav">
                 @foreach($first_categories as $categorie)
@@ -178,6 +183,7 @@ right connector from last child*/
               @endforeach
             </ul>  
     </div>
+</div>
 @endsection
 
 

@@ -95,7 +95,7 @@ Route::put('admins/ravitaillements/{ravitaillement}',[App\Http\Controllers\Admin
 Route::get('admins/lignecommandes',[App\Http\Controllers\Admins\LigneCommandeController::class, "index"])->name("admins.lignecommandes");
 Route::get('admins/lignecommandes/create',[App\Http\Controllers\Admins\LigneCommandeController::class, "create"])->name("lignecommandes.create");
 Route::get('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "edit"])->name("lignecommandes.edit");
-Route::post('admins/lignecommandes/create/{id}',[App\Http\Controllers\Admins\LigneCommandeController::class, "store1"])->name("lignecommandes.ajouter");
+Route::post('admins/lignecommandes/create/{id}',[App\Http\Controllers\Admins\LigneCommandeController::class, "store"])->name("lignecommandes.ajouter");
 Route::delete('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "delete"])->name("lignecommandes.supprimer");
 Route::put('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\LigneCommandeController::class, "update"])->name("lignecommandes.update");
 
