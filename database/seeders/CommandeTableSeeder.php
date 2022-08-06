@@ -15,8 +15,8 @@ class CommandeTableSeeder extends Seeder
     public function run()
     {
         DB::table("commandes")->insert([
-            ["date"=>"2022-07-01", "users_id"=>"1",],
-            ["date"=>"2022-07-03", "users_id"=>"1",],
+            ["date"=>"2022-07-01", "users_id"=>"1", "clients_id"=>"1"],
+            ["date"=>"2022-07-03", "users_id"=>"1", "clients_id"=>"2"],
         ]);
     }
 }

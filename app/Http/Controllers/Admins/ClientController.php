@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admins;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Reglement;
 
 class ClientController extends Controller
 {
@@ -16,6 +17,13 @@ class ClientController extends Controller
     $clients = Client::all();
         return view('admins.clients',compact('clients'));
     }
+
+    public function index1($commandes_id) {
+        $last_id_commandes=$commandes_id;
+        $clients = Client::all();
+        $reglements= Reglement::all();
+            return view('admins.clientFacture',compact('clients','last_id_commandes','reglements'));
+        }
     
     public function create() {
         return view('admins.createClient');
@@ -34,8 +42,10 @@ class ClientController extends Controller
             "adresse"=>"required",
             "sexe"=>"required",
         ]);
+        //dd($id);
         Client::create($request->all());
-        return redirect('/admins/clients')->with("success", "Client(e) ajouté(e) avec succès!");
+        //return redirect('/admins/clients')->with("success", "Client(e) ajouté(e) avec succès!");
+        return back()->with("success", "Client(e) ajouté(e) avec succès!");
     }
 
      public function update(Request $request, Client $client){

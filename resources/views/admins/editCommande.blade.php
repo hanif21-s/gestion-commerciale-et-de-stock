@@ -28,6 +28,19 @@
     <label class="form-label">Vendeur</label>
     <input type="text" class="form-control" required name="users_id" readonly="" value="{{ Auth::user()->id }}">
   </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Client</label>
+    <select class="form-control" required name="clients_id">
+      <option value=""></option>
+        @foreach($clients as $client)
+        @if($client->id == $commande->clients_id)
+          <option value="{{$client->id}}" selected>{{$client->nom}} {{$client->prenoms}}</option>
+          @else
+          <option value="{{$client->id}}">{{$client->nom}} {{$client->prenoms}}</option>
+        @endif
+        @endforeach
+    </select>
+  </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.commandes')}}" class="btn btn-danger">Annuler</a>
 </form>

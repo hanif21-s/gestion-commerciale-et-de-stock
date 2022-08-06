@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -120,7 +121,33 @@
     $("#example2").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    $("#example3").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
+  $(function () {
+        var params = window.location.pathname;
+        params = params.toLowerCase();
+ 
+        if (params != "/") {
+            $(".nav-sidebar li a").each(function (i) {
+                var obj = this;
+                var url = $(this).attr("href");
+                if (url == "" || url == "#") {
+                    return true;
+                }
+                url = url.toLowerCase();
+                if (url.indexOf(params) > -1) {
+                    $(this).parent().addClass("active open menu-open");
+                    $(this).parent().parent().addClass("active open menu-open");
+                    $(this).parent().parent().parent().addClass("active open menu-open");
+                    $(this).parent().parent().parent().parent().addClass("active open menu-open");
+                    $(this).parent().parent().parent().parent().parent().addClass("active open menu-open");
+                    return false;
+                }
+            });
+        }
+    });
 </script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

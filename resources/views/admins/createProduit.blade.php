@@ -52,33 +52,6 @@
         @endforeach
     </select>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Taxe</label>
-    <select class="form-control" required name="taxes_id">
-      <option value=""></option>
-        @foreach($taxes as $taxe)
-          <option value="{{$taxe->id}}">{{$taxe->libelle}}</option>
-        @endforeach
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Remise</label>
-    <select class="form-control" required name="remises_id">
-      <option value=""></option>
-        @foreach($remises as $remise)
-          <option value="{{$remise->id}}">{{$remise->libelle}}</option>
-        @endforeach
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Fournisseur</label>
-    <select class="form-control" required name="fournisseurs_id">
-      <option value=""></option>
-        @foreach($fournisseurs as $fournisseur)
-          <option value="{{$fournisseur->id}}">{{$fournisseur->societe}}</option>
-        @endforeach
-    </select>
-  </div>
   
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.produits')}}" class="btn btn-danger">Annuler</a>

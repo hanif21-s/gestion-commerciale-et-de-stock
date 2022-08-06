@@ -1,47 +1,35 @@
 @extends("admins.app")
 @section('content')
-<div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h3 class="border-bottom pb-2 mb-3">Liste des Fournisseurs</h3>
-    <div class="d-flex justify-content-end mb-2">
-      <div><a href="{{route('fournisseurs.create')}}" class="btn btn-primary mb-3">Ajouter un nouveau fournisseur</a></div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"><b>Liste des fournisseurs</b></h3>
+      <div class="d-flex justify-content-end">
+        <div><a href="{{route('fournisseurs.create')}}" class="btn btn-primary mb-3">Ajouter un nouveau fournisseur</a></div>
+      </div>
     </div>
-    </br>
     @if(session()->has("successDelete"))
       <div class="alert alert-success">
         <h3>{{session()->get('successDelete')}}</h3>
       </div>
-    @endif
-    @if(session()->has("success"))
-      <div class="alert alert-success">
-        <h3>{{session()->get('success')}}</h3>
-      </div>
-    @endif
-    @if($errors->any())
-    <div class="alert alert-danger">
-      <ul>
-      @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-      @endforeach
-      </ul> 
-    </div>
-    @endif
-    <div>
-      <table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Société</th>
-      <th scope="col">Adresse</th>
-      <th scope="col">Code Postal</th>
-      <th scope="col">Ville</th>
-      <th scope="col">Pays</th>
-      <th scope="col">Tel</th>
-      <th scope="col">Email</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($fournisseurs as $fournisseur)
+      @endif
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="example2" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Société</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Pays</th>
+            <th scope="col">Tel</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($fournisseurs as $fournisseur)
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
       <td>{{$fournisseur->societe}}</td>
@@ -61,8 +49,22 @@
       </td>
     </tr>
     @endforeach
-  </tbody>
-</table>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Société</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Pays</th>
+            <th scope="col">Tel</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
+    <!-- /.card-body -->
   </div>
 @endsection

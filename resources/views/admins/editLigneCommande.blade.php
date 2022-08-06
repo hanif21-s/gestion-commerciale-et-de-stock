@@ -22,16 +22,7 @@
         <input type="hidden" name="_method" value="put">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Produit</label>
-    <select class="form-control" required name="produits_id">
-      <option value=""></option>
-        @foreach($produits as $produit)
-        @if($produit->id == $lignecommande->produits_id)
-          <option value="{{$produit->id}}" selected>{{$produit->nom}}</option>
-          @else
-          <option value="{{$produit->id}}">{{$produit->nom}}</option>
-        @endif
-        @endforeach
-    </select>
+    <input type="tetx" class="form-control" required name="produits_id" value="{{$lignecommande->produits_id}}" readonly="">
   </div>
   <div class="mb-3">
     <label class="form-label">Quantité</label>
@@ -40,19 +31,6 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">N° de commande</label>
     <input type="number" class="form-control" required name="commandes_id" value="{{$lignecommande->commandes_id}}" readonly="">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Etat</label>
-    <select class="form-control" required name="etat">
-        <option value=""></option>
-        @if($lignecommande->etat == "1")
-        <option value="1" selected>Disponible</option>
-        <option value="0">Non Disponible</option>
-        @else
-        <option value="1">Disponible</option>
-        <option value="0" selected>Non Disponible</option>
-        @endif
-    </select>
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.lignecommandes')}}" class="btn btn-danger">Annuler</a>

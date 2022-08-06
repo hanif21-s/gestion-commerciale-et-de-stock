@@ -9,7 +9,7 @@ class LigneCommande extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["produits_id","quantite","prix_unitaire","prix_total","commandes_id","etat"];
+    protected $fillable = ["produits_id","quantite","prix_total","commandes_id"];
 
     public function Produit(){
         return $this->belongsTo(Produit::class, 'produits_id');

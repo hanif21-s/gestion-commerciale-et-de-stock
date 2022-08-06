@@ -36,7 +36,7 @@
                   <form id="form-{{$lignecommande->id}}" action="{{route('lignecommandes.supprimer', ['lignecommande'=>$lignecommande->id])}}" method="post"> 
                     @csrf
                     <input type="hidden" name="_method" value="delete">
-                  </form>
+                  </form> 
                 </td>
               </tr>
               @endforeach
@@ -53,7 +53,7 @@
             </tr>
             </tfoot>
           </table>
-          <div style="text-align:center"><a href="{{route('admins.commandes')}}" class="btn btn-success">Terminer la commande</a></div>
+          <div style="text-align:center"><a href="{{route('admins.clientFacture',$commandes_id )}}" class="btn btn-success">Terminer la commande et l'affecter à un client</a></div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -90,7 +90,7 @@
               <a href="{{route('produits.createCommandeProduits', $produit->id)}}" class="btn btn-success">Vendre</a>
             </td>
           </tr>
-          @endforeach
+          @endforeach 
         </tbody>
         <tfoot>
         <tr>

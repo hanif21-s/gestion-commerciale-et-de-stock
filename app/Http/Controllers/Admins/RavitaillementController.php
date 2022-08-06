@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admins;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ravitaillement;
+use App\Models\Fournisseur;
 use App\Models\Produit;
+use App\Models\LigneRavitaillement;
 use DB;
 
 class RavitaillementController extends Controller
@@ -16,12 +18,15 @@ class RavitaillementController extends Controller
     
     public function index() {
     $ravitaillements = Ravitaillement::all();
-        return view('admins.ravitaillements',compact('ravitaillements'));
+    $fournisseurs = Fournisseur::all();
+        return view('admins.ravitaillements',compact('ravitaillements','fournisseurs'));
     }
 
     public function create() {
     $produits = Produit::all();
-        return view('admins.createRavitaillement',compact('produits'));
+    $fournisseurs = Fournisseur::all();
+    $ligneravitaillements = LigneRavitaillement::all();
+        return view('admins.achats',compact('produits','ligneravitaillements', 'fournisseurs'));
     }
 
     public function edit(Ravitaillement $ravitaillement) {

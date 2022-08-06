@@ -1,32 +1,33 @@
 @extends("admins.app")
 @section('content')
-<div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h3 class="border-bottom pb-2 mb-3">Liste des Utilisateurs</h3>
-    <div class="d-flex justify-content-end mb-2">
-      <div><a href="{{route('utilisateurs.create')}}" class="btn btn-primary mb-3">Ajouter un nouvel utilisateur</a></div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"><b>Liste des utilisateurs</b></h3>
+      <div class="d-flex justify-content-end">
+        <div><a href="{{route('utilisateurs.create')}}" class="btn btn-primary mb-3">Ajouter un nouvel utilisateur</a></div>
+      </div>
     </div>
-    </br>
     @if(session()->has("successDelete"))
       <div class="alert alert-success">
         <h3>{{session()->get('successDelete')}}</h3>
       </div>
       @endif
-    <div>
-      <table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Tel</th>
-      <th scope="col">Adresse</th>
-      <th scope="col">Sexe</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    
-    @foreach ($users as $user)
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="example2" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th> 
+            <th scope="col">Tel</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Sexe</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($users as $user)
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
       <td>{{$user->name}}</td>
@@ -44,8 +45,20 @@
       </td>
     </tr>
     @endforeach
-  </tbody>
-</table>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th> 
+            <th scope="col">Tel</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Sexe</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
+    <!-- /.card-body -->
   </div>
 @endsection

@@ -17,7 +17,8 @@ class CreateRavitaillementsTable extends Migration
             $table->id();
             $table->integer("quantite");
             $table->date("date");
-            $table->foreignId("produits_id")->constrained("produits");
+            $table->string("decharge");
+            $table->foreignId('fournisseurs_id')->constrained("fournisseurs");
             $table->timestamps();
         });
     }
@@ -30,7 +31,7 @@ class CreateRavitaillementsTable extends Migration
     public function down()
     {
         Schema::table("ravitaillements", function(Blueprint $table){
-            $table->dropForeign("produits_id");
+            $table->dropForeign("fournisseurs_id");
         });
         Schema::dropIfExists('ravitaillements');
     }

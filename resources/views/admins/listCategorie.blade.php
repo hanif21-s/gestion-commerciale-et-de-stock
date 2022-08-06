@@ -1,29 +1,31 @@
 @extends("admins.app")
 @section('content')
-<div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h3 class="border-bottom pb-2 mb-3">Liste des Taxes</h3>
-    <div class="d-flex justify-content-end mb-2">
-      <div><a href="{{route('categories.create')}}" class="btn btn-primary mb-3">Ajouter une nouvelle catégorie</a></div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"><b>Liste des catégories</b></h3>
+      <div class="d-flex justify-content-end">
+        <div><a href="{{route('categories.create')}}" class="btn btn-primary mb-3">Ajouter une nouvelle catégorie</a></div>
+      </div>
     </div>
-    </br>
     @if(session()->has("successDelete"))
       <div class="alert alert-success">
         <h3>{{session()->get('successDelete')}}</h3>
       </div>
       @endif
-    <div>
-      <table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Libellé</th>
-      <th scope="col">Cateégorie Parent</th>
-      <th scope="col">Description</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($categories as $categorie)
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="example2" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Libellé</th>
+            <th scope="col">Catégorie Parent</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($categories as $categorie)
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
       <td>{{$categorie->libelle}}</td>
@@ -39,8 +41,18 @@
       </td>
     </tr>
     @endforeach
-  </tbody>
-</table>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Libellé</th>
+            <th scope="col">Cateégorie Parent</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
+    <!-- /.card-body -->
   </div>
 @endsection

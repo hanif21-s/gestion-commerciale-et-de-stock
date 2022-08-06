@@ -36,10 +36,11 @@
         @endforeach
     </select>
 </br>
-    <div class="mb-3">
+  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Description</label>
-    <input type="text" class="form-control" required name="description">
   </div>
+  <textarea rows="4" cols="50" required name="description" placeholder="Ajouter une description"></textarea>
+  
   </div>
 </br>
   <button type="submit" class="btn btn-primary">Enregistrer</button>

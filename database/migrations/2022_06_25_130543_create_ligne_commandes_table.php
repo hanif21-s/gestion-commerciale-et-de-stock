@@ -17,10 +17,8 @@ class CreateLigneCommandesTable extends Migration
             $table->id();
             $table->foreignId('produits_id')->constrained("produits");
             $table->integer('quantite');
-            $table->float('prix_unitaire')->nullable();
-            $table->float('prix_total')->nullable(); 
-            $table->foreignId('commandes_id')->constrained("commandes");
-            $table->boolean('etat');
+            $table->float('prix_total'); 
+            $table->foreignId('commandes_id')->constrained("commandes"); 
             $table->timestamps();
         });
     }
@@ -32,7 +30,7 @@ class CreateLigneCommandesTable extends Migration
      */
     public function down()
     {
-        Schema::table("lignes_commandes", function(Blueprint $table){
+        Schema::table("ligne_commandes", function(Blueprint $table){
             $table->dropForeign("produits_id");
             $table->dropForeign("commandes_id");
         });

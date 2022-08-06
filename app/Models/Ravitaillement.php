@@ -9,9 +9,13 @@ class Ravitaillement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["quantite","date", "produits_id",];
+    protected $fillable = ["quantite","date","decharge" , "produits_id", "fournisseurs_id" ];
 
      public function Produit(){
-        return $this->belongsTo(produit::class, 'produits_id');
+        return $this->belongsTo(Produit::class, 'produits_id');
+    }
+
+    public function Fournisseur(){
+        return $this->belongsTo(Fournisseur::class, 'fournisseurs_id');
     }
 }

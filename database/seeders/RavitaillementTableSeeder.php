@@ -15,8 +15,8 @@ class RavitaillementTableSeeder extends Seeder
     public function run()
     {
         DB::table("ravitaillements")->insert([
-            ["quantite"=>"100", "date"=>"2021-04-15", "produits_id"=>"1"],
-            ["quantite"=>"300", "date"=>"2021-08-22", "produits_id"=>"2"],
+            //["quantite"=>"100", "date"=>"2021-04-15", "produits_id"=>"1"],
+            //["quantite"=>"300", "date"=>"2021-08-22", "produits_id"=>"2"],
         ]);
     }
 }

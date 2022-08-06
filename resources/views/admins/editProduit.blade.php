@@ -60,46 +60,6 @@
         @endforeach 
     </select>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Taxe</label>
-    <select class="form-control" required name="taxes_id">
-      <option value=""></option>
-        @foreach($taxes as $taxe)
-        @if($taxe->id == $produit->taxes_id)
-          <option value="{{$taxe->id}}" selected>{{$taxe->libelle}}</option>
-          @else
-          <option value="{{$taxe->id}}">{{$taxe->libelle}}</option>
-        @endif
-        @endforeach
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Remise</label>
-    <select class="form-control" required name="remises_id">
-      <option value=""></option>
-        @foreach($remises as $remise)
-        @if($remise->id == $produit->remises_id)
-          <option value="{{$remise->id}}" selected>{{$remise->libelle}}</option>
-          @else
-          <option value="{{$remise->id}}">{{$remise->libelle}}</option>
-        @endif
-        @endforeach
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Fournisseur</label>
-    <select class="form-control" required name="fournisseurs_id">
-      <option value=""></option>
-        @foreach($fournisseurs as $fournisseur)
-        @if($fournisseur->id == $produit->fournisseurs_id)
-          <option value="{{$fournisseur->id}}" selected>{{$fournisseur->societe}}</option>
-          @else
-          <option value="{{$fournisseur->id}}">{{$fournisseur->societe}}</option>
-        @endif
-        @endforeach
-    </select>
-  </div>
-
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.produits')}}" class="btn btn-danger">Annuler</a>
 </form>

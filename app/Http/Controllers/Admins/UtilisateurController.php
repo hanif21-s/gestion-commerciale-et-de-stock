@@ -39,7 +39,6 @@ class UtilisateurController extends Controller
             "adresse"=>"required",
             "sexe"=>"required",
         ]);
-dd($request);
         User::create($request->all());
         return redirect('/admins/utilisateurs')->with("success", "Utilisateur ajouté avec succès!");
     }
@@ -61,7 +60,6 @@ dd($request);
             "adresse"=>"required",
             "sexe"=>"required",
         ]);
-
         $utilisateur->update($request->all());
         return redirect('/admins/utilisateurs')->with("success", "Utilisateur mis à jour avec succès!");
     }

@@ -23,9 +23,6 @@ class CreateProduitsTable extends Migration
             $table->date("date_peremption");
             $table->float("benefice")->nullable();
             $table->foreignId('categories_id')->constrained("categories");
-            $table->foreignId('taxes_id')->constrained("taxes");
-            $table->foreignId('remises_id')->constrained("remises");
-            $table->foreignId('fournisseurs_id')->constrained("fournisseurs");
             $table->timestamps();
         });
     }
@@ -39,9 +36,6 @@ class CreateProduitsTable extends Migration
     {
         Schema::table("produits", function(Blueprint $table){
             $table->dropForeign("categories_id");
-            $table->dropForeign("taxes_id");
-            $table->dropForeign("remises_id");
-            $table->dropForeign("fournisseurs_id");
         });
         Schema::dropIfExists('produits');
     }

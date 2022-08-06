@@ -29,15 +29,12 @@ class ProduitController extends Controller
         $commandes = Commande::whereId($commandes_id);
         $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
         $produits = Produit::all(); 
-        return view('admins.commandeProduits',compact('lignecommandes','produits'));
+        return view('admins.commandeProduits',compact('lignecommandes','produits','commandes_id'));
     }
 
     public function create() {
     $categories = Categorie::all();
-    $remises = Remise::all();
-    $taxes = Taxe::all();
-    $fournisseurs = Fournisseur::all();
-        return view('admins.createProduit',compact('categories', 'remises', 'taxes', 'fournisseurs'));
+        return view('admins.createProduit',compact('categories'));
     }
 
     public function create1($id) {
@@ -49,10 +46,7 @@ class ProduitController extends Controller
 
     public function edit(Produit $produit) {
         $categories = Categorie::all();
-        $remises = Remise::all();
-        $taxes = Taxe::all();
-        $fournisseurs = Fournisseur::all();
-        return view('admins.editProduit',compact('produit', "categories","remises", "taxes", "fournisseurs"));
+        return view('admins.editProduit',compact('produit','categories'));
     }
 
     public function store(Request $request){
@@ -65,9 +59,6 @@ class ProduitController extends Controller
             "date_peremption"=>"required",
             "benefice"=>"",
             "categories_id"=>"required",
-            "taxes_id"=>"required",
-            "remises_id"=>"required",
-            "fournisseurs_id"=>"required",
         ]);
         Produit::create($request->all());
         return redirect('/admins/produits')->with("success", "Produit ajouté avec succès!");
@@ -82,9 +73,6 @@ class ProduitController extends Controller
             "stock_minimum"=>"required",
             "date_peremption"=>"required",
             "categories_id"=>"required",
-            "taxes_id"=>"required",
-            "remises_id"=>"required",
-            "fournisseurs_id"=>"required",
         ]);
 
         $produit->update($request->all());

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,11 +78,12 @@ Route::put('admins/produits/{produit}',[App\Http\Controllers\Admins\ProduitContr
 
 //Routes Admin--Commandes
 Route::get('admins/commandes',[App\Http\Controllers\Admins\CommandeController::class, "index"])->name("admins.commandes");
-Route::get('admins/commandes/create',[App\Http\Controllers\Admins\CommandeController::class, "create"])->name("commandes.create");
+Route::get('admins/commandes/create/{client}',[App\Http\Controllers\Admins\CommandeController::class, "create"])->name("commandes.create");
 Route::get('admins/commandes/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "edit"])->name("commandes.edit");
-Route::post('admins/commandes/create',[App\Http\Controllers\Admins\CommandeController::class, "store"])->name("commandes.ajouter");
+Route::post('admins/commandes/create/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "store"])->name("commandes.ajouter");
 Route::delete('admins/commandes/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "delete"])->name("commandes.supprimer");
 Route::put('admins/commandes/{commande}',[App\Http\Controllers\Admins\CommandeController::class, "update"])->name("commandes.update");
+
 
 //Routes Admin--Ravitaillements
 Route::get('admins/ravitaillements',[App\Http\Controllers\Admins\RavitaillementController::class, "index"])->name("admins.ravitaillements");
@@ -101,11 +103,26 @@ Route::put('admins/lignecommandes/{lignecommande}',[App\Http\Controllers\Admins\
 
 //Routes Admin--Clients
 Route::get('admins/clients',[App\Http\Controllers\Admins\ClientController::class, "index"])->name("admins.clients");
+Route::get('admins/clientFacture/{commandes_id}',[App\Http\Controllers\Admins\ClientController::class, "index1"])->name("admins.clientFacture");
 Route::get('admins/clients/create',[App\Http\Controllers\Admins\ClientController::class, "create"])->name("clients.create");
 Route::get('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "edit"])->name("clients.edit");
 Route::post('admins/clients/create',[App\Http\Controllers\Admins\ClientController::class, "store"])->name("clients.ajouter");
 Route::delete('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "delete"])->name("clients.supprimer");
 Route::put('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "update"])->name("clients.update");
+//Routes Admin--Factures
+Route::get('admins/factures',[App\Http\Controllers\Admins\FactureController::class, "index"])->name("admins.factures");
+
+Route::get('admins/facture/{commande}',[App\Http\Controllers\Admins\FactureController::class, "create"])->name("factures.create");
+//PDF
+Route::get('generate/{facture}', [PDFController::class, 'generatePDF'])->name("generate");
+
+//Route Admin--Reglements
+Route::get('admins/reglements/{client_id}',[App\Http\Controllers\Admins\ReglementController::class, "index"])->name("admins.reglements");
+Route::delete('admins/reglements/{reglement}',[App\Http\Controllers\Admins\ReglementController::class, "delete"])->name("reglements.supprimer");
+Route::get('admins/reglements/create',[App\Http\Controllers\Admins\ReglementController::class, "create"])->name("reglements.create");
+Route::post('admins/reglements/create',[App\Http\Controllers\Admins\ReglementController::class, "store"])->name("reglements.ajouter");
+Route::get('admins/reglements/{reglement}',[App\Http\Controllers\Admins\ReglementController::class, "edit"])->name("reglements.edit");
+Route::put('admins/reglements/{reglement}',[App\Http\Controllers\Admins\ReglementController::class, "update"])->name("reglements.update");
 
 Route::middleware([
     'auth:sanctum', 'verified'])->get('/gerant/dashboard',function () {

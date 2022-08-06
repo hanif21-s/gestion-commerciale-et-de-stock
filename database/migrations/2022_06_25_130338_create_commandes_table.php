@@ -17,6 +17,7 @@ class CreateCommandesTable extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('users_id')->constrained("users");
+            $table->foreignId('clients_id')->constrained("clients");
             $table->timestamps();
         });
     }
@@ -30,6 +31,7 @@ class CreateCommandesTable extends Migration
     {
         Schema::table("commandes", function(Blueprint $table){
             $table->dropForeign("users_id");
+            $table->dropForeign("clients_id");
         });
         Schema::dropIfExists('commandes');
     }

@@ -15,9 +15,7 @@ class CreateReglementsTable extends Migration
     {
         Schema::create('reglements', function (Blueprint $table) {
             $table->id();
-            $table->float('montant');
-            $table->date('date');
-            $table->boolean('etat');
+            $table->string('libelle');
             $table->timestamps();
         });
     }

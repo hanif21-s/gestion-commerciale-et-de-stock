@@ -14,16 +14,4 @@ class Produit extends Model
     public function Categorie(){
         return $this->belongsTo(Categorie::class, 'categories_id');
     }
-
-    public function Taxe(){
-        return $this->belongsTo(Taxe::class, 'taxes_id');
-    }
-
-    public function Remise(){
-        return $this->belongsTo(Remise::class, 'remises_id');
-    }
-
-    public function Fournisseur(){
-        return $this->belongsTo(Fournisseur::class, 'fournisseurs_id');
-    }
 }

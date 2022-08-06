@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Commande extends Model
 {
     use HasFactory;
-    protected $fillable = ["date", "users_id",];
+    protected $fillable = ["date", "users_id", "clients_id"];
 
     public function User(){
         return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function Client(){
+        return $this->belongsTo(Client::class, 'clients_id');
     }
     
     public function LigneCommande(){

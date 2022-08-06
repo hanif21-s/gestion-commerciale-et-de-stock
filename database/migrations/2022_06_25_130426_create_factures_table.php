@@ -15,14 +15,14 @@ class CreateFacturesTable extends Migration
     {
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
-            $table->integer('num_interne');
+            $table->string('num_interne');
             $table->date('date');
             $table->float('total_HT');
-            $table->float('total_taxe');
-            $table->float('total_remise');
+            $table->float('tva');
             $table->float('total_TTC');
             $table->foreignId('commandes_id')->constrained("commandes"); 
-            $table->foreignId('clients_id')->constrained("clients");
+            $table->foreignId('remises_id')->constrained("remises");
+            $table->float('prix_remise');
             $table->foreignId('reglements_id')->constrained("reglements");
             $table->timestamps();
         });
@@ -37,7 +37,7 @@ class CreateFacturesTable extends Migration
     {
         Schema::table("factures", function(Blueprint $table){
             $table->dropForeign("commandes_id");
-            $table->dropForeign("clients_id");
+            $table->dropForeign("remises_id");
             $table->dropForeign("reglements_id");
         });
         Schema::dropIfExists('factures');

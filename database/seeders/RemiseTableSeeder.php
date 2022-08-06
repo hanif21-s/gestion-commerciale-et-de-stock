@@ -17,6 +17,7 @@ class RemiseTableSeeder extends Seeder
         DB::table("remises")->insert([
             ["libelle"=>"Ristourne", "taux"=>"3.15",],
             ["libelle"=>"Escompte", "taux"=>"6.75",],
+            ["libelle"=>"Fidelité", "taux"=>"5.00",],
         ]);
     }
 }

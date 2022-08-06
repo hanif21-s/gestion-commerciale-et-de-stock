@@ -76,26 +76,15 @@
               </span>
           @enderror
 
-          <div class="row">
-            <div class="col-6">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember" name="remember">
-                <label for="remember">
-                  Se rappeler?
-                </label>
-              </div>
-            </div>
+          <div class="row" style="text-align:center">
             <!-- /.col -->
-            <div class="col-6">
+           
               <button type="submit" class="btn btn-success btn-block">Connexion</button>
-            </div>
+         
             <!-- /.col -->
           </div>
       </form>
 
-      <p class="mb-1">
-        <a href="{{ route('register') }}">S'inscrire</a>
-      </p>
     </div>
     <!-- /.login-card-body -->
   </div>
