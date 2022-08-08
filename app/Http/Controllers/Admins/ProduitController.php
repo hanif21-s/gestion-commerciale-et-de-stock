@@ -21,16 +21,17 @@ class ProduitController extends Controller
 
     public function index(Request $request) {
         $produits = Produit::all();
+        //dd($produits);
         return view('admins.produits',compact('produits'));
     }
 
-    public function index1(Request $request) {
+    /* public function index1(Request $request) {
         $commandes_id = Commande::all()->last()->id;
         $commandes = Commande::whereId($commandes_id);
         $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
         $produits = Produit::all(); 
         return view('admins.commandeProduits',compact('lignecommandes','produits','commandes_id'));
-    }
+    } */
 
     public function create() {
     $categories = Categorie::all();

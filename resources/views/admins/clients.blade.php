@@ -38,7 +38,7 @@
       <td>{{$client->adresse}}</td>
       <td>{{$client->sexe}}</td>
       <td>
-        <a href="{{route('commandes.create', $client->id)}}" class="btn btn-secondary">Faire un achat</a>
+        <a href="{{route('commandes.create', $client->id)}}" class="btn btn-secondary">Effectuer une commande</a>
         <a href="{{route('clients.edit', ['client'=>$client->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer ce client?')){document.getElementById('form-{{$client->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
         <form id="form-{{$client->id}}" action="{{route('clients.supprimer', ['client'=>$client->id])}}" method="post"> 

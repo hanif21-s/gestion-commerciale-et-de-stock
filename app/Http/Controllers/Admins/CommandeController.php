@@ -32,6 +32,25 @@ class CommandeController extends Controller
         $commande->delete();
         return back()->with("successDelete", "La commande supprimée avec succès!");
     }
+
+    public function delete1(Commande $commande){
+        $commande->delete();
+        return redirect('/admins/clients')->with("success", "Commande annulée");
+    }
+
+    public function deleteAll(Commande $commandes){
+        $commandes_id = $commandes->id;
+        $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
+        /* $produits_id = $lignecommandes->pluck('produits_id');
+        $produit = Produit::find($produits_id);
+        $qtte_avant_suppression = $produit->pluck('qtte_stock');
+        $quantite = $lignecommandes->pluck('quantite');
+        dd($produits_id); */
+        $lignecommandes->each->delete();
+        $commandes->delete();
+        return redirect('/admins/clients')->with("success", "Suppression effectuée avec succès avec succès!");
+        //return back()->with("successDelete", "La commande supprimée avec succès!");
+    }
     
     public function create($client) {
         $clients = Client::find($client);
@@ -68,7 +87,6 @@ class CommandeController extends Controller
         }
         else if($lignecommandes->quantite <= $produit->qtte_stock){
             $stock_nv = $qtte_stock - $lignecommandes->quantite;
-            //dd($QuantiteStock);
             $produit = Produit::find($request->input('produits_id'));
             $produit->qtte_stock = $stock_nv;
             $produit->save();

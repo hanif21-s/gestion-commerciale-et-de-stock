@@ -15,9 +15,7 @@ class CreateRavitaillementsTable extends Migration
     {
         Schema::create('ravitaillements', function (Blueprint $table) {
             $table->id();
-            $table->integer("quantite");
             $table->date("date");
-            $table->string("decharge");
             $table->foreignId('fournisseurs_id')->constrained("fournisseurs");
             $table->timestamps();
         });

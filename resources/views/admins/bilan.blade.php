@@ -196,35 +196,8 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Page d'enregistrement de commande</b></h2>
+        <h2 class="card-title"><b>Bilan de la Journée</b></h2>
     </div></br>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span style="white-space: nowrap">
-                <label for="size">Client : {{$clients->nom}} {{$clients->prenoms}}</label>
-            </span>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span style="white-space: nowrap">
-                <form action="{{route('commandes.ajouter', ['commande'=>$commandes->id])}}" method="post">
-                    @csrf
-                <label for="size">Produit :</label>
-                    <select class="form-control" required name="produits_id">
-                        <option value="">Choisissez un produit</option>
-                        @foreach($produits as $produit)
-                        <option value="{{$produit->id}}">{{$produit->nom}}</option>
-                        @endforeach
-                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" min="1" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-success mb-3" >Valider</button>
-                </form>
-            </span>
-        
-        </div>
-    </div>
             <div class="card-body">
                 <div id="invoice">
                     <div class="invoice overflow-auto">
@@ -233,47 +206,29 @@ background-color: #f7f7ff;
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>N°</th>
-                                            <th class="text-left">PRODUIT</th>
-                                            <th class="text-right">PRIX UNITAIRE</th>
-                                            <th class="text-right">QUANTITE</th>
-                                            <th class="text-right">PRIX TOTAL</th>
-                                            <th scope="col">ACTIONS</th>
+                                            <th>#</th>
+                                            <th scope="col">COMMANDE</th>
+                                            <th scope="col">TOTAL TTC</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                     
-                                    </tbody>{{-- 
+                                        @foreach ($factures as $facture)
+                                            <tr>
+                                                <th scope="row">{{$loop->index + 1}}</th>
+                                                <td>{{$facture->commandes_id}}</td>
+                                                <td>{{$facture->total_TTC}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL HT =</td>
-                                            <td>$value</td>
+                                            <td colspan="2">TOTAL = {{$total_journalier}} FCFA</td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL TAXE =</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL REMISE =</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL TTC =</td>
-                                            <td></td>
-                                        </tr>
-                                    </tfoot> --}}
+                                    </tfoot> 
                                 </table>
-                                <div style="text-align:center">
-                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment annuler cette commande?')){document.getElementById('form-{{$commandes->id}}').submit()}">Annuler</a>
-                                    <form id="form-{{$commandes->id}}" action="{{route('commandes.supprimer1', ['commande'=>$commandes->id])}}" method="post"> 
-                                        @csrf
-                                        <input type="hidden" name="_method" value="delete">
-                                    </form>
-                                </div>
+<div style="text-align:center">
+  <a href="#" class="btn btn-danger">Quitter</a>
+</div>
                             </main>
                         </div>
                         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->

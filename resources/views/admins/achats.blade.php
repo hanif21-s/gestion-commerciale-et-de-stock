@@ -196,75 +196,21 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Page d'enregistrement des ravitaillements</b></h2>
+        <h2 class="card-title"><b>Page d'enregistrement de ravitaillement</b></h2>
     </div></br>
 
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <label for="size">Fournisseur :</label>
-                    <select class="form-control" required name="fournisseurs_id">
-                        <option value="">Choisissez un fournisseur</option>
-                        @foreach($fournisseurs as $fournisseur)
-                        <option value="{{$fournisseur->id}}">{{$fournisseur->nom}} {{$fournisseur->prenoms}}</option>
-                        @endforeach
-                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ajouter un nouveau fournisseur</button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Ajouter un nouveau fournisseur</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                        <form style="width:65%;" method="post" action="{{route('fournisseurs.ajouter')}}">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Société</label>
-                                        <input type="text" class="form-control" required name="societe">
-                                      </div>
-                                      <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Adresse</label>
-                                        <input type="text" class="form-control" required name="adresse">
-                                      </div>
-                                      <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Code Postal</label>
-                                        <input type="number" class="form-control" required name="code_postal">
-                                      </div>
-                                      <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Ville</label>
-                                        <input type="text" class="form-control" required name="ville">
-                                      </div>
-                                      <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Pays</label>
-                                        <input type="text" class="form-control" required name="pays">
-                                      </div>
-                                      <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Telephone</label>
-                                        <input type="number" class="form-control" required name="tel">
-                                      </div>
-                                      <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" class="form-control" required name="email">
-                                      </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                              <button type="submit" class="btn btn-primary">Enregistrer</button>
-                            </div>
-                        </form>
-                          </div>
-                        </div>
-                      </div>
+                <label for="size">Fournisseur : {{$fournisseurs->societe}}</label>
             </span>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
+                <form action="{{route('ravitaillements.ajouter', ['ravitaillement'=>$ravitaillements->id])}}" method="post">
+                    @csrf
                 <label for="size">Produit :</label>
                     <select class="form-control" required name="produits_id">
                         <option value="">Choisissez un produit</option>
@@ -272,9 +218,11 @@ background-color: #f7f7ff;
                         <option value="{{$produit->id}}">{{$produit->nom}}</option>
                         @endforeach
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#" class="btn btn-success mb-3">Valider</a>
+                    <input type="number" required name="quantite" min="1" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success mb-3" >Valider</button>
+                </form>
             </span>
+        
         </div>
     </div>
             <div class="card-body">
@@ -294,35 +242,37 @@ background-color: #f7f7ff;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ligneravitaillements as $ligneravitaillement)
-                                            <tr>
-                                                <th scope="row">{{$loop->index + 1}}</th>
-                                                <td>{{$ligneravitaillement->Produit['nom']}}</td>
-                                                <td>{{$ligneravitaillement->Produit['prix_HT']}}</td>
-                                                <td>{{$ligneravitaillement->quantite}}</td>
-                                                <td>{{$ligneravitaillement->prix_total}}</td>
-                                                <td>
-                                                    <a href="{{route('ligneravitaillements.edit', ['ligneravitaillement'=>$ligneravitaillement->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
-                                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette ligne de ravitaillement?')){document.getElementById('form-{{$ligneravitaillement->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-                                                    <form id="form-{{$ligneravitaillement->id}}" action="{{route('ligneravitaillements.supprimer', ['ligneravitaillement'=>$ligneravitaillement->id])}}" method="post"> 
-                                                      @csrf
-                                                      <input type="hidden" name="_method" value="delete">
-                                                    </form>
-                                                  </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
+                                     
+                                    </tbody>{{-- 
                                     <tfoot>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">TOTAL HT =</td>
+                                            <td>$value</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">TOTAL TAXE =</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">TOTAL REMISE =</td>
+                                            <td></td>
+                                        </tr>
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">TOTAL TTC =</td>
                                             <td></td>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> --}}
                                 </table>
                                 <div style="text-align:center">
-                                    <a href="#" class="btn btn-success">Valider</a>
-                                    <a href="#" class="btn btn-danger">Annuler</a>
+                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment annuler ce ravitaillement?')){document.getElementById('form-{{$ravitaillements->id}}').submit()}">Annuler</a>
+                                    <form id="form-{{$ravitaillements->id}}" action="{{route('ravitaillements.supprimer1', ['ravitaillement'=>$ravitaillements->id])}}" method="post"> 
+                                      @csrf
+                                      <input type="hidden" name="_method" value="delete">
+                                    </form>
                                 </div>
                             </main>
                         </div>

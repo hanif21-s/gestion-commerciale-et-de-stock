@@ -196,20 +196,20 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Page d'enregistrement de commande</b></h2>
+        <h2 class="card-title"><b>Page d'enregistrement de ravitaillement</b></h2>
     </div></br>
 
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <label for="size">Client : {{$clients->nom}} {{$clients->prenoms}}</label>
+                <label for="size">Fournisseur : {{$fournisseurs->societe}}</label>
             </span>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <form action="" method="post">
+                <form action="{{route('ravitaillements.ajouter', ['ravitaillement'=>$ravitaillements->id])}}" method="post">
                     @csrf
                 <label for="size">Produit :</label>
                     <select class="form-control" required name="produits_id">
@@ -218,7 +218,7 @@ background-color: #f7f7ff;
                         <option value="{{$produit->id}}">{{$produit->nom}}</option>
                         @endforeach
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="number" required name="quantite" min="1" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-success mb-3" >Valider</button>
                 </form>
             </span>
@@ -234,56 +234,58 @@ background-color: #f7f7ff;
                                     <thead>
                                         <tr>
                                             <th>N°</th>
-                                            <th class="text-left">PRODUIT</th>
-                                            <th class="text-right">PRIX UNITAIRE</th>
-                                            <th class="text-right">QUANTITE</th>
-                                            <th class="text-right">PRIX TOTAL</th>
+                                            <th scope="col">PRODUIT</th>
+                                            <th scope="col">PRIX UNITAIRE</th>
+                                            <th scope="col">QUANTITE</th>
+                                            <th scope="col">PRIX TOTAL</th>
                                             <th scope="col">ACTIONS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ligneCommandes as $lignecommande)
+                                        @foreach ($ligneravitaillements as $ligneravitaillement)
                                             <tr>
                                                 <th scope="row">{{$loop->index + 1}}</th>
-                                                <td>{{$lignecommande->Produit['nom']}}</td>
-                                                <td>{{$lignecommande->Produit['prix_HT']}}</td>
-                                                <td>{{$lignecommande->quantite}}</td>
-                                                <td>{{$lignecommande->prix_total}}</td>
+                                                <td>{{$ligneravitaillement->Produit['nom']}}</td>
+                                                <td>{{$ligneravitaillement->Produit['prix_achat']}}</td>
+                                                <td>{{$ligneravitaillement->quantite}}</td>
+                                                <td>{{$ligneravitaillement->prix_total}}</td>
                                                 <td>
-                                                    <a href="{{route('lignecommandes.edit', ['lignecommande'=>$lignecommande->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
-                                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette ligne de commande?')){document.getElementById('form-{{$lignecommande->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-                                                    
+                                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette ligne de ravitaillement?')){document.getElementById('form-{{$ligneravitaillement->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
+                                                    <form id="form-{{$ligneravitaillement->id}}" action="{{route('ligneravitaillements.supprimer', ['ligneravitaillement'=>$ligneravitaillement->id])}}" method="post"> 
+                                                        @csrf
+                                                        <input type="hidden" name="_method" value="delete">
+                                                    </form>
                                                   </td>
                                             </tr>
                                         @endforeach
-                                    </tbody>{{-- 
+                                    </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2"></td>
-                                            <td colspan="2">TOTAL HT =</td>
-                                            <td>$value</td>
+                                            <td colspan="2">TOTAL =</td>
+                                            <td>{{$value}}</td>
                                         </tr>
+                                        {{-- 
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">TOTAL TAXE =</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL REMISE =</td>
-                                            <td></td>
+                                            <td>{{$tva}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">TOTAL TTC =</td>
-                                            <td></td>
-                                        </tr>
-                                    </tfoot> --}}
+                                            <td>{{$ttc}}</td>
+                                        </tr> --}}
+                                    </tfoot> 
                                 </table>
-                                <div style="text-align:center">
-                                    <a href="#" class="btn btn-success">Valider</a>
-                                    <a href="#" class="btn btn-danger">Annuler</a>
-                                </div>
+<div style="text-align:center">
+  <a href="#" class="btn btn-success">Terminer</a>
+  <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer tout ce qui concerne ce ravitaillement?')){document.getElementById('form-{{$ravitaillements->id}}').submit()}">Annuler</a>
+    <form id="form-{{$ravitaillements->id}}" action="{{route('allravitaillement.supprimer', ['ravitaillements'=>$ravitaillements->id])}}" method="post"> 
+        @csrf
+        <input type="hidden" name="_method" value="delete">
+    </form>
+</div>
                             </main>
                         </div>
                         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->

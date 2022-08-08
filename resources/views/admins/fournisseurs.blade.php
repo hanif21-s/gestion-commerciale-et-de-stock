@@ -40,6 +40,7 @@
       <td>{{$fournisseur->tel}}</td>
       <td>{{$fournisseur->email}}</td>
       <td>
+        <a href="{{route('ravitaillements.create', $fournisseur->id)}}" class="btn btn-secondary">Ravitailler</a>
         <a href="{{route('fournisseurs.edit', ['fournisseur'=>$fournisseur->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer ce fournisseur?')){document.getElementById('form-{{$fournisseur->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
         <form id="form-{{$fournisseur->id}}" action="{{route('fournisseurs.supprimer', ['fournisseur'=>$fournisseur->id])}}" method="post"> 

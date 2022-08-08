@@ -54,7 +54,7 @@ class LigneCommandeController extends Controller
         
         //dd($clients);
         //return back()->with("successDelete", "La ligne commande supprimée avec succès!");
-    }
+    } 
 
     public function create() {
         $commandes = Commande::all();

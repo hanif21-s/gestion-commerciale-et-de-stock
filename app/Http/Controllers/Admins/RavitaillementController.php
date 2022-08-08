@@ -22,11 +22,14 @@ class RavitaillementController extends Controller
         return view('admins.ravitaillements',compact('ravitaillements','fournisseurs'));
     }
 
-    public function create() {
+    public function create($fournisseur) {
+    $fournisseurs = Fournisseur::find($fournisseur);
     $produits = Produit::all();
-    $fournisseurs = Fournisseur::all();
-    $ligneravitaillements = LigneRavitaillement::all();
-        return view('admins.achats',compact('produits','ligneravitaillements', 'fournisseurs'));
+    $ravitaillements = new Ravitaillement();
+    $ravitaillements->date = now()->toDateString('d-m-Y');
+    $ravitaillements->fournisseurs_id = $fournisseur;
+    $ravitaillements->save();
+        return view('admins.achats',compact('produits','ravitaillements', 'fournisseurs'));
     }
 
     public function edit(Ravitaillement $ravitaillement) {
@@ -34,42 +37,26 @@ class RavitaillementController extends Controller
         return view('admins.editRavitaillement',compact('ravitaillement', "produits"));
     }
 
-    public function store(Request $request){
-        $ravitaillements = Ravitaillement::all();
+    public function store(Request $request, $ravitaillement){
+        $ravitaillements = Ravitaillement::find($ravitaillement);
+        $fournisseurs = Fournisseur::find($ravitaillements->fournisseurs_id);
         $produits = Produit::all();
-
-        $request->validate([
-            "quantite"=>"required",
-            "date"=>"required",
-            "produits_id"=>"required",
-        ]);
-
-        $data = Ravitaillement::create($request->all());
-        //dd($data);
-        $id = DB::table('produits')
-            ->select('produits.*')
-            ->first();
-        //dd($id);
-            $qtte = $id->qtte_stock;
-        //dd($qtte);
-         $stockupdate = DB::table('produits')
-            ->join('ravitaillements', 'ravitaillements.produits_id', '=' ,'produits.id')
-            ->select( 'produits.*')
-            ->where([
-                ['ravitaillements.produits_id', '=', $data->produits_id],
-            ])
-            ->first();
-            //dd($stockupdate);
-            $qtts = $stockupdate->qtte_stock;
-            //dd($qtts);
-            $qttv = $data->quantite;
-            //dd($qttv);
-            $QuantiteStock = $qtts + $qttv;
-            //dd($QuantiteStock);
-         $produit = Produit::find($stockupdate->id);
-         $produit->qtte_stock = $QuantiteStock;
-         $produit->save();
-        return redirect('/admins/ravitaillements')->with("success", "Ravitaillement ajouté avec succès!");
+        $produit = Produit::find($request->input('produits_id'));
+        $ligneravitaillements = new LigneRavitaillement();
+        $ligneravitaillements->produits_id = $request->input('produits_id');
+        $ligneravitaillements->quantite = $request->input('quantite');
+        $ligneravitaillements->ravitaillements_id = $ravitaillement;
+        $ligneravitaillementtotal=($produit->prix_achat + $ligneravitaillements->prix_total)*$ligneravitaillements->quantite;
+        $qtte_stock = $produit->qtte_stock;
+        $stock_nv = $qtte_stock + $ligneravitaillements->quantite;
+        $produit->qtte_stock = $stock_nv;
+        $produit->save();
+        $ligneravitaillements->prix_total=$ligneravitaillementtotal;
+        $ligneravitaillements->save();
+        $prix_total = LigneRavitaillement::select(DB::raw('sum(prix_total) as total'))->where('ravitaillements_id', '=', $ravitaillement)->first();
+        $value = $prix_total->total;
+        $ligneravitaillements = LigneRavitaillement::where('ravitaillements_id', $ravitaillement)->get();
+        return view('admins.purchase',compact('fournisseurs','produits','ravitaillements','ligneravitaillements','value'));
     }
 
      public function update(Request $request, Ravitaillement $ravitaillement){
@@ -116,5 +103,17 @@ class RavitaillementController extends Controller
         $nom_complet = $ravitaillement->date;
         $ravitaillement->delete();
         return back()->with("successDelete", "Le ravitaillement du '$nom_complet' supprimé avec succès!");
+    }
+    public function delete1(ravitaillement $ravitaillement){
+        $ravitaillement->delete();
+        return redirect('/admins/fournisseurs')->with("success", "Ravitaillement annulée");
+    }
+
+    public function deleteAll(Ravitaillement $ravitaillements){
+        $ravitaillements_id = $ravitaillements->id;
+        $ligneravitaillements = LigneRavitaillement::where('ravitaillements_id', $ravitaillements_id)->get();
+        $ligneravitaillements->each->delete();
+        $ravitaillements->delete();
+        return redirect('/admins/fournisseurs')->with("success", "Suppression effectuée avec succès avec succès!");
     }
 }

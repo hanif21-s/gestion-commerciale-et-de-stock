@@ -218,7 +218,7 @@ background-color: #f7f7ff;
                         <option value="{{$produit->id}}">{{$produit->nom}}</option>
                         @endforeach
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="number" required name="quantite" placeholder="Entrez la quantité"  min="1">&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-success mb-3" >Valider</button>
                 </form>
             </span>
@@ -322,7 +322,12 @@ background-color: #f7f7ff;
       </div>
     </div>
   </div>
-  <a href="#" class="btn btn-danger">Annuler</a>
+  {{-- <a href="#" class="btn btn-danger">Annuler</a> --}}
+  <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer tout ce qui concerne cette commande?')){document.getElementById('form-{{$commandes->id}}').submit()}">Annuler</a>
+    <form id="form-{{$commandes->id}}" action="{{route('allcommande.supprimer', ['commandes'=>$commandes->id])}}" method="post"> 
+        @csrf
+        <input type="hidden" name="_method" value="delete">
+    </form>
 </div>
                             </main>
                         </div>

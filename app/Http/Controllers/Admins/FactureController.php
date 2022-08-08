@@ -31,6 +31,21 @@ class FactureController extends Controller
         return view('admins.factures',compact('factures','remises','client','reglements'));
     }
 
+    public function index1(){
+        $factures = Facture::all();
+        $client= Client::all();
+        $remises = Remise::all();
+        $reglements = Reglement::all();
+        return view('admins.allfacture',compact('factures','remises','client','reglements'));
+    }
+
+    public function balance(){
+    $date = now()->toDateString('d-m-Y');
+    $factures = Facture::where('date', $date)->get();
+    $total_journalier = Facture::where('date', $date)->sum('total_TTC');;
+    return view('admins.bilan', compact('factures','total_journalier'));
+    }
+
     public function create(Request $request, $commande){
         $date = now()->toDateString('d-m-Y');
         $factures = new Facture();

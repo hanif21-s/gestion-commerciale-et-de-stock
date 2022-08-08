@@ -99,10 +99,18 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('admins.allfactures')}}" class="nav-link">
             <i class="nav-icon fas fa-file-invoice"></i>
             <p>
               Factures
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('admins.bilan')}}" class="nav-link">
+            <i class="nav-icon fas fa-balance-scale"></i>
+            <p>
+              Bilan Journalier de vente
             </p>
           </a>
         </li>

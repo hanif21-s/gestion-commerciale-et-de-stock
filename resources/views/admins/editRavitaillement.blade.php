@@ -24,22 +24,18 @@
 
         <input type="hidden" name="_method" value="put">
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Quantité</label>
-    <input type="number" class="form-control" required name="quantite" value="{{$ravitaillement->quantite}}">
-  </div>
-  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Date</label>
     <input type="date" class="form-control" required name="date" value="{{$ravitaillement->date}}" readonly="">
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Produit</label>
-    <select class="form-control" required name="produits_id">
+    <label for="exampleInputEmail1" class="form-label">Fournisseur</label>
+    <select class="form-control" required name="fournisseurs_id">
       <option value=""></option>
-        @foreach($produits as $produit)
-        @if($produit->id == $ravitaillement->produits_id)
-          <option value="{{$produit->id}}" selected>{{$produit->nom}}</option>
+        @foreach($fournisseurs as $fournisseur)
+        @if($fournisseur->id == $ravitaillement->fournisseurs_id)
+          <option value="{{$fournisseur->id}}" selected>{{$fournisseur->nom}}</option>
           @else
-          <option value="{{$produit->id}}">{{$produit->nom}}</option>
+          <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
         @endif
         @endforeach
     </select>
