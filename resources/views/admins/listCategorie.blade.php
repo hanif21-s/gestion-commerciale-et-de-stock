@@ -16,7 +16,7 @@
     <div class="card-body">
       <table id="example2" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr> 
             <th scope="col">#</th>
             <th scope="col">Libellé</th>
             <th scope="col">Catégorie Parent</th>
@@ -34,7 +34,7 @@
       <td>
         <a href="{{route('categories.edit', ['categorie'=>$categorie->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette categorie?')){document.getElementById('form-{{$categorie->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-        <form id="form-{{$categorie->id}}" action="{{route('categories.supprimer', ['categorie'=>$categorie->id])}}" method="post"> 
+        <form id="form-{{$categorie->id}}" action="{{route('categories.supprimer', ['categorie'=>$categorie->id])}}" method="post">
           @csrf
           <input type="hidden" name="_method" value="delete">
         </form>

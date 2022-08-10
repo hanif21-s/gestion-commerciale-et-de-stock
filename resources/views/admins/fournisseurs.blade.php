@@ -1,5 +1,9 @@
 @extends("admins.app")
 @section('content')
+
+{{-- @if(Session::has('download.in.the.next.request'))
+         <meta http-equiv="refresh" content="5;url={{ Session::get('download.in.the.next.request') }}">
+@endif --}}
   <div class="card">
     <div class="card-header">
       <h3 class="card-title"><b>Liste des fournisseurs</b></h3>
@@ -43,7 +47,7 @@
         <a href="{{route('ravitaillements.create', $fournisseur->id)}}" class="btn btn-secondary">Ravitailler</a>
         <a href="{{route('fournisseurs.edit', ['fournisseur'=>$fournisseur->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer ce fournisseur?')){document.getElementById('form-{{$fournisseur->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-        <form id="form-{{$fournisseur->id}}" action="{{route('fournisseurs.supprimer', ['fournisseur'=>$fournisseur->id])}}" method="post"> 
+        <form id="form-{{$fournisseur->id}}" action="{{route('fournisseurs.supprimer', ['fournisseur'=>$fournisseur->id])}}" method="post">
           @csrf
           <input type="hidden" name="_method" value="delete">
         </form>

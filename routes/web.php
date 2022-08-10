@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 //Routes Admin--Accueil
 Route::middleware([
-    'auth:sanctum', 'verified'])->get('/admins/accueil',function () {
+    'auth:sanctum', 'verified'])->get('/accueil',function () {
         return view('admins.welcome');
     })->name('admins.welcome');
 
@@ -122,7 +122,8 @@ Route::get('admins/allfactures',[App\Http\Controllers\Admins\FactureController::
 Route::get('admins/facture/{commande}',[App\Http\Controllers\Admins\FactureController::class, "create"])->name("factures.create");
 //PDF
 Route::get('generate/{facture}', [PDFController::class, 'generatePDF'])->name("generate");
-
+Route::get('view/{facture}', [PDFController::class, 'viewPDF'])->name("sale");
+Route::get('decharge/{ravitaillement}/{fournisseur}', [PDFController::class, 'generatePdfRavi'])->name("generate2");
 //Route Admin--Reglements
 Route::get('admins/reglements/{client_id}',[App\Http\Controllers\Admins\ReglementController::class, "index"])->name("admins.reglements");
 Route::delete('admins/reglements/{reglement}',[App\Http\Controllers\Admins\ReglementController::class, "delete"])->name("reglements.supprimer");
@@ -145,3 +146,6 @@ Route::middleware([
     'auth:sanctum', 'verified'])->get('/caissier/dashboard',function () {
         return view('caissier-dashboard');
     })->name('caissier-dashboard');
+
+//test
+Route::get('admins/test',[App\Http\Controllers\Admins\CommandeController::class, "test"])->name("test");

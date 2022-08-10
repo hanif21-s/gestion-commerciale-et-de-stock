@@ -17,10 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->boolean("is_admin")->default(false);
-            $table->boolean("is_gerant")->default(false);
-            $table->boolean("is_commercial")->default(true);
-            $table->boolean("is_caissier")->default(false);
             $table->string('password');
             $table->string('tel');
             $table->string('adresse');

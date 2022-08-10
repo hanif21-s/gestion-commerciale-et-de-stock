@@ -18,7 +18,7 @@ class FactureController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth'); 
+        $this->middleware('auth');
     }
 
     public function index(){
@@ -66,7 +66,7 @@ class FactureController extends Controller
         $factures->total_TTC = $factures->total_HT + $factures->tva - $factures->prix_remise;
         //dd($factures->total_TTC);
         $factures->save();
-       
+
         return redirect('admins/factures')->with("success", "Facture ajoutée avec succès!");
     }
 

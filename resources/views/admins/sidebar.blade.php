@@ -12,7 +12,7 @@
       <div class="image">
         <img src="{{ Auth::user()->profile_photo_url }}" class="img-circle elevation-2" alt="User Image">
       </div>
-      
+
       <div class="info">
         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
       </div>
@@ -30,7 +30,7 @@
           <a href="{{ route('admins.welcome')}}" class="nav-link" :focus>
             <i class="nav-icon fas fa-door-open"></i>
               <p>
-                Accueil
+                Dashboard
               </p>
           </a>
         </li>
@@ -42,6 +42,7 @@
             </p>
           </a>
         </li>
+        @role('admin|gerant')
         <li class="nav-item">
           <a href="{{ route('admins.remises')}}" class="nav-link">
             <i class="nav-icon fab fa-resolving"></i>
@@ -50,6 +51,7 @@
             </p>
           </a>
         </li>
+        @endrole
         <li class="nav-item">
           <a href="{{ route('admins.categories')}}" class="nav-link">
             <i class="nav-icon fab fa-cuttlefish"></i>
@@ -115,7 +117,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('test')}}" class="nav-link">
             <i class="nav-icon fas fa-money-check-alt"></i>
             <p>
               Billetage

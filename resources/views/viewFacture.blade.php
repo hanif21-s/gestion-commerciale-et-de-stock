@@ -1,3 +1,5 @@
+@extends("admins.app")
+@section('content')
 <style type="text/css">
     body{margin-top:20px;
 background-color: #f7f7ff;
@@ -281,7 +283,11 @@ background-color: #f7f7ff;
                             <div class="notices">
                                 <div>SIGNATURE DU VENDEUR: </div>
                                 <div class="notice"></div>
-                            </div>
+                            </div><br>
+
+                            <div style="text-align:center">
+                                <a href="/admins/allfactures" class="btn btn-danger">Retour</a>
+                              </div>
                         </main>
                         <footer>Copyright © 2022 #HanifZer</footer>
                     </div>
@@ -292,3 +298,5 @@ background-color: #f7f7ff;
         </div>
     </div>
 </div>
+
+@endsection

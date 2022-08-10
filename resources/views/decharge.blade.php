@@ -1,5 +1,3 @@
-@extends("admins.app")
-@section('content')
 <style>
     select.form-control{display:inline-block}
 
@@ -196,7 +194,7 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Page d'enregistrement de ravitaillement</b></h2>
+        <h2 class="card-title"><b>DECHARGE</b></h2>
     </div></br>
 
     <div class="col-sm-4">
@@ -206,30 +204,14 @@ background-color: #f7f7ff;
             </span>
         </div>
     </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span style="white-space: nowrap">
-                <form action="{{route('ravitaillements.ajouter', ['ravitaillement'=>$ravitaillements->id])}}" method="post">
-                    @csrf
-                <label for="size">Produit :</label>
-                    <select class="form-control" required name="produits_id">
-                        <option value="">Choisissez un produit</option>
-                        @foreach($produits as $produit)
-                        <option value="{{$produit->id}}">{{$produit->nom}}</option>
-                        @endforeach
-                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" min="1" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-success mb-3" >Valider</button>
-                </form>
-            </span>
-
-        </div>
-    </div>
             <div class="card-body">
                 <div id="invoice">
                     <div class="invoice overflow-auto">
                         <div style="min-width: 600px">
                             <main>
+                                <div class="col invoice-details">
+                                    <div class="date">Date : {{$ravitaillements->date}}</div>
+                                </div>
                                 <table>
                                     <thead>
                                         <tr>
@@ -238,7 +220,6 @@ background-color: #f7f7ff;
                                             <th scope="col">PRIX UNITAIRE</th>
                                             <th scope="col">QUANTITE</th>
                                             <th scope="col">PRIX TOTAL</th>
-                                            <th scope="col">ACTIONS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -249,13 +230,6 @@ background-color: #f7f7ff;
                                                 <td>{{$ligneravitaillement->Produit['prix_achat']}}</td>
                                                 <td>{{$ligneravitaillement->quantite}}</td>
                                                 <td>{{$ligneravitaillement->prix_total}}</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette ligne de ravitaillement?')){document.getElementById('form-{{$ligneravitaillement->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-                                                    <form id="form-{{$ligneravitaillement->id}}" action="{{route('ligneravitaillements.supprimer', ['ligneravitaillement'=>$ligneravitaillement->id])}}" method="post">
-                                                        @csrf
-                                                        <input type="hidden" name="_method" value="delete">
-                                                    </form>
-                                                  </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -267,14 +241,10 @@ background-color: #f7f7ff;
                                         </tr>
                                     </tfoot>
                                 </table>
-<div style="text-align:center">
-  <a href="{{route('generate2', ['ravitaillement'=>$ravitaillements->id, 'fournisseur'=>$fournisseurs->id])}}" class="btn btn-success">Terminer</a>
-  <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer tout ce qui concerne ce ravitaillement?')){document.getElementById('form-{{$ravitaillements->id}}').submit()}">Annuler</a>
-    <form id="form-{{$ravitaillements->id}}" action="{{route('allravitaillement.supprimer', ['ravitaillements'=>$ravitaillements->id])}}" method="post">
-        @csrf
-        <input type="hidden" name="_method" value="delete">
-    </form>
-</div>
+                                <div class="notices">
+                                    <div>SIGNATURE DU FOURNISSEUR: </div>
+                                    <div class="notice"></div>
+                                </div>
                             </main>
                         </div>
                         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
@@ -283,4 +253,3 @@ background-color: #f7f7ff;
                 </div>
             </div>
 </div>
-@endsection

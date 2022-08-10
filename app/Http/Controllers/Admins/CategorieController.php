@@ -12,11 +12,11 @@ class CategorieController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    
+
     public function index(Request $request)
     {
         $first_categories = Categorie::whereNull('parent_id')->with('children')->get();
-        return view('admins.categories', compact('first_categories'));  
+        return view('admins.categories', compact('first_categories'));
     }
 
     public function index1() {

@@ -196,20 +196,39 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Page d'enregistrement de ravitaillement</b></h2>
+        <h2 class="card-title"><b>Page d'enregistrement de commande</b></h2>
     </div></br>
 
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <label for="size">Fournisseur : {{$fournisseurs->societe}}</label>
+                <label for="size">Date de la commande : <input type="date" name="date"> </label>
             </span>
         </div>
     </div>
+
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <form action="{{route('ravitaillements.ajouter', ['ravitaillement'=>$ravitaillements->id])}}" method="post">
+                <form action="" method="post">
+                    @csrf
+                <label for="size">Client :</label>
+                    <select class="form-control" required name="clients_id">
+                        <option value="">Choisissez un client</option>
+                        @foreach($clients as $client)
+                        <option value="{{$client->id}}">{{$client->nom}} {{$client->prenoms}}</option>
+                        @endforeach
+                    </select>
+                </form>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="form-group">
+            <span style="white-space: nowrap">
+                <form action="" method="post">
                     @csrf
                 <label for="size">Produit :</label>
                     <select class="form-control" required name="produits_id">
@@ -218,7 +237,13 @@ background-color: #f7f7ff;
                         <option value="{{$produit->id}}">{{$produit->nom}}</option>
                         @endforeach
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" min="1" placeholder="Entrez la quantité">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="number" required name="quantite" placeholder="Entrez la quantité"  min="1">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <textarea name="all_detail_added" id="all_detail_added" cols="30" rows="10" style="display: none;"></textarea>
+                    <div class="col-lg-3">
+                        <button type="button" class="btn badge-danger" onclick="add_detail_demande()"><i class="fas fa-plus"></i> Ajouter</button>
+                        <!--  ?= Html::submitButton('<i class="fas fa-plus"></i> Ajouter', ['class' => 'btn badge-danger']) ?> -->
+                        <?= HTML::resetButton('<i class="fa fa fa-undo fx-8"></i>  Annuler', ['class' => 'btn badge-warning']) ?>
+                    </div>
                     <button type="submit" class="btn btn-success mb-3" >Valider</button>
                 </form>
             </span>
@@ -242,38 +267,28 @@ background-color: #f7f7ff;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ligneravitaillements as $ligneravitaillement)
-                                            <tr>
-                                                <th scope="row">{{$loop->index + 1}}</th>
-                                                <td>{{$ligneravitaillement->Produit['nom']}}</td>
-                                                <td>{{$ligneravitaillement->Produit['prix_achat']}}</td>
-                                                <td>{{$ligneravitaillement->quantite}}</td>
-                                                <td>{{$ligneravitaillement->prix_total}}</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette ligne de ravitaillement?')){document.getElementById('form-{{$ligneravitaillement->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-                                                    <form id="form-{{$ligneravitaillement->id}}" action="{{route('ligneravitaillements.supprimer', ['ligneravitaillement'=>$ligneravitaillement->id])}}" method="post">
-                                                        @csrf
-                                                        <input type="hidden" name="_method" value="delete">
-                                                    </form>
-                                                  </td>
-                                            </tr>
-                                        @endforeach
+
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2"></td>
-                                            <td colspan="2">TOTAL =</td>
-                                            <td>{{$value}}</td>
+                                            <td colspan="2">TOTAL HT =</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">TOTAL TAXE =</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">TOTAL TTC =</td>
+                                            <td></td>
                                         </tr>
                                     </tfoot>
                                 </table>
 <div style="text-align:center">
-  <a href="{{route('generate2', ['ravitaillement'=>$ravitaillements->id, 'fournisseur'=>$fournisseurs->id])}}" class="btn btn-success">Terminer</a>
-  <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer tout ce qui concerne ce ravitaillement?')){document.getElementById('form-{{$ravitaillements->id}}').submit()}">Annuler</a>
-    <form id="form-{{$ravitaillements->id}}" action="{{route('allravitaillement.supprimer', ['ravitaillements'=>$ravitaillements->id])}}" method="post">
-        @csrf
-        <input type="hidden" name="_method" value="delete">
-    </form>
+  <a href="#" class="btn btn-success">Valider</a>
 </div>
                             </main>
                         </div>
@@ -284,3 +299,4 @@ background-color: #f7f7ff;
             </div>
 </div>
 @endsection
+

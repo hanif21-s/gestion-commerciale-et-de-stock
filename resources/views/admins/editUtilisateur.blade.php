@@ -30,62 +30,47 @@
     <label for="exampleInputEmail1" class="form-label">Email</label>
     <input type="email" class="form-control" required name="email" value="{{$utilisateur->email}}">
   </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Statut Admin</label>
-    <select class="form-control" required name="is_admin">
+  {{-- <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Role</label>
+    <select class="form-control" required name="role_id">
       <option value=""></option>
-      @if($utilisateur->is_admin == "1")
-      <option value="1" selected>Est admin(e)</option>
-      <option value="0">N'est pas admin(e)</option>
-      @else
-      <option value="1">Est admin(e)</option>
-      <option value="0" selected>N'est pas admin(e)</option>
+      @if('role_id' == "1")
+      <option value="1" selected>Admin</option>
+      <option value="2">Gerant</option>
+      <option value="3">Commercial</option>
+      <option value="4">Caissier</option>
+      @elseif ('role_id' == "2")
+      <option value="1">Admin</option>
+      <option value="2" selected>Gerant</option>
+      <option value="3">Commercial</option>
+      <option value="4">Caissier</option>
+      @elseif ('role_id' == "3")
+      <option value="1">Admin</option>
+      <option value="2">Gerant</option>
+      <option value="3" selected>Commercial</option>
+      <option value="4">Caissier</option>
+      @elseif ('role_id' == "4")
+      <option value="1">Admin</option>
+      <option value="2">Gerant</option>
+      <option value="3">Commercial</option>
+      <option value="4" selected>Caissier</option>
       @endif
     </select>
-  </div>
+  </div> --}}
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Statut Gerant</label>
-    <select class="form-control" required name="is_gerant">
+    <label for="exampleInputEmail1" class="form-label">Roles</label>
+    <select class="form-control" required name="role_id">
+      @foreach($roles as $role)
       <option value=""></option>
-      @if($utilisateur->is_gerant == "1")
-      <option value="1" selected>Est gerant(e)</option>
-      <option value="0">N'est pas gerant(e)</option>
-      @else
-      <option value="1">Est gerant(e)</option>
-      <option value="0" selected>N'est pas gerant(e)</option>
-      @endif
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Statut Commercial</label>
-    <select class="form-control" required name="is_commercial">
-      <option value=""></option>
-      @if($utilisateur->is_commercial == "1")
-      <option value="1" selected>Est commercial(e)</option>
-      <option value="0">N'est pas commercial(e)</option>
-      @else
-      <option value="1">Est commercial(e)</option>
-      <option value="0" selected>N'est pas commercial(e)</option>
-      @endif
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Statut Caissier</label>
-    <select class="form-control" required name="is_caissier">
-      <option value=""></option>
-      @if($utilisateur->is_caissier == "1")
-      <option value="1" selected>Est caissier(e)</option>
-      <option value="0">N'est pas caissier(e)</option>
-      @else
-      <option value="1">Est caissier(e)</option>
-      <option value="0" selected>N'est pas caissier(e)</option>
-      @endif
+      <option value="{{$role->id}}">{{$role->name}}</option>
+
+      @endforeach
     </select>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Mot de Passe</label>
     <input type="password" class="form-control" required name="password" value="{{$utilisateur->password}}">
-  </div> 
+  </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Tel</label>
     <input type="number" class="form-control" required name="tel" value="{{$utilisateur->tel}}">

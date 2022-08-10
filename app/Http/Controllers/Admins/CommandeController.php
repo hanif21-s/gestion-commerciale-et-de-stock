@@ -20,12 +20,12 @@ class CommandeController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    
+
     public function index() {
         $commandes = Commande::all();
         $clients = Client::all();
         $lignecommandes = LigneCommande::all();
-            return view('admins.commandes',compact('commandes', 'lignecommandes', 'clients')); 
+            return view('admins.commandes',compact('commandes', 'lignecommandes', 'clients'));
         }
 
     public function delete(Commande $commande){
@@ -51,7 +51,7 @@ class CommandeController extends Controller
         return redirect('/admins/clients')->with("success", "Suppression effectuée avec succès avec succès!");
         //return back()->with("successDelete", "La commande supprimée avec succès!");
     }
-    
+
     public function create($client) {
         $clients = Client::find($client);
         $produits = Produit::all();
@@ -61,8 +61,8 @@ class CommandeController extends Controller
         $commandes->date=$date;
         $commandes->clients_id = $client;
         $commandes->save();
-       
-       
+
+
         //return view('admins.createCommande',compact('commandes'));
         return view('admins.ventes',compact('clients','produits', 'commandes'));
     }
@@ -97,7 +97,7 @@ class CommandeController extends Controller
             $tva=$value*0.18;
             $ttc=$value+$tva;
             $lignecommandes = LigneCommande::where('commandes_id', $commande)->get();
-          
+
             return view('admins.sale',compact('clients','produits','commandes','lignecommandes','value','tva','ttc','remises','reglements'));
         }
         //dd($commandes);
@@ -118,5 +118,12 @@ class CommandeController extends Controller
         ]);
         $commande->update($request->all());
         return redirect('/admins/commandes')->with("success", "Commande mise à jour avec succès!");
+    }
+
+    public function test(){
+        $clients = Client::all();
+        $produits = Produit::all();
+        $lignecommandes = LigneCommande::all();
+        return view('admins.test', compact('clients', 'produits', 'lignecommandes'));
     }
 }

@@ -14,14 +14,14 @@
       @foreach($errors->all() as $error)
         <li>{{$error}}</li>
       @endforeach
-      </ul> 
+      </ul>
     </div>
     @endif
     <form style="width:65%;" method="post" action="{{route('utilisateurs.ajouter')}}">
       @csrf
   <div class="mb-3">
     <label class="form-label">Name</label>
-    <input type="text" class="form-control" required name="name"> 
+    <input type="text" class="form-control" required name="name">
   </div>
   <div class="mb-3">
     <label class="form-label">Email</label>
@@ -39,16 +39,15 @@
     <label for="exampleInputEmail1" class="form-label">Adresse</label>
     <input type="text" class="form-control" required name="adresse">
   </div>
-  <div class="mb-3 form-check-inline">
-    <label for="exampleInputEmail1" class="form-label">Statut : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label for="exampleInputEmail1" class="form-label">Admin</label>&nbsp;&nbsp;
-    <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label for="exampleInputEmail1" class="form-label">Gerant</label>&nbsp;&nbsp;
-    <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label for="exampleInputEmail1" class="form-label">Commercial</label>&nbsp;&nbsp;
-    <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label for="exampleInputEmail1" class="form-label">Caissier</label>&nbsp;&nbsp;
-    <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Roles</label>
+    <select class="form-control" required name="role_id">
+      @foreach($roles as $role)
+      <option value=""></option>
+      <option value="{{$role->id}}">{{$role->name}}</option>
+
+      @endforeach
+    </select>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Sexe : </label></br>
@@ -64,4 +63,4 @@
   </div>
 </div>
 @endsection
- 
+

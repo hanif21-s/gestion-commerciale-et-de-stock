@@ -4,7 +4,7 @@
     <h3 class="border-bottom pb-2 mb-3">Facture courant</h3>
     <div class="d-flex justify-content-end mb-2">
     </div>
-   
+
     </br>
     @if(session()->has("successDelete"))
       <div class="alert alert-success">
@@ -22,7 +22,7 @@
       @foreach($errors->all() as $error)
         <li>{{$error}}</li>
       @endforeach
-      </ul> 
+      </ul>
     </div>
     @endif
     <div>
@@ -41,7 +41,7 @@
     </tr>
   </thead>
   <tbody>
-    
+
     @foreach($factures as $facture)
     <tr>
       <td>{{$facture->num_interne}}</td>
@@ -57,10 +57,10 @@
       </td>
     </tr>
     @endforeach
-  
+
   </tbody>
 </table>
     </div>
-    
+
   </div>
 @endsection

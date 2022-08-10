@@ -36,6 +36,7 @@
               <td>{{$facture->total_TTC}}</td>
               <td>
                 <a href="{{route('generate', ['facture'=>$facture->id])}}" class="btn btn-success">Imprimer</a>
+                <a href="{{route('sale', ['facture'=>$facture->id])}}" class="btn btn-info">voir</a>
               </td>
             </tr>
             @endforeach
