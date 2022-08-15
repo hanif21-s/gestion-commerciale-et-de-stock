@@ -1,3 +1,5 @@
+@extends("admins.app")
+@section('content')
 <style type="text/css">
     body{margin-top:20px;
 background-color: #f7f7ff;
@@ -244,7 +246,11 @@ background-color: #f7f7ff;
                                     <div class="notices">
                                         <div>Total TTC en lettre : <b><i>{{$prix_lettre}} FCFA</i></b></div>
                                         <div class="notice"></div>
-                                    </div>
+                                    </div></br>
+                                    <div style="text-align:center">
+                                        <a href="/admins/ravitaillements" class="btn btn-danger">Retour</a>
+                                        <a href="{{route('generate2', ['ravitaillement'=>$ravitaillement->id])}}" class="btn btn-success">Imprimer</a>
+                                      </div>
                                 </main>
                             </div>
                             <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
@@ -254,4 +260,4 @@ background-color: #f7f7ff;
                 </div>
             </div>
     <!-- /.card-body -->
-
+@endsection

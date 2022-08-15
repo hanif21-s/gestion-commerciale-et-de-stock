@@ -196,7 +196,7 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Bilan de la Journée</b></h2>
+        <h2 class="card-title"><b>Bilan de cette journee du {{$date_du_jour}}</b></h2>
     </div></br>
             <div class="card-body">
                 <div id="invoice">
@@ -208,15 +208,17 @@ background-color: #f7f7ff;
                                         <tr>
                                             <th>#</th>
                                             <th scope="col">COMMANDE</th>
+                                            <th scope="col">CLIENT</th>
                                             <th scope="col">TOTAL TTC</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($factures as $facture)
+                                        @foreach ($commandes as $commande)
                                             <tr>
                                                 <th scope="row">{{$loop->index + 1}}</th>
-                                                <td>{{$facture->commandes_id}}</td>
-                                                <td>{{$facture->total_TTC}}</td>
+                                                <td>{{$commande->num_interne}}</td>
+                                                <td>{{$commande->Client['nom']}} {{$commande->Client['prenoms']}}</td>
+                                                <td>{{$commande->total_TTC}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -224,10 +226,10 @@ background-color: #f7f7ff;
                                         <tr>
                                             <td colspan="2">TOTAL = {{$total_journalier}} FCFA</td>
                                         </tr>
-                                    </tfoot> 
+                                    </tfoot>
                                 </table>
 <div style="text-align:center">
-  <a href="#" class="btn btn-danger">Quitter</a>
+  <a href="{{ route('admins.welcome')}}" class="btn btn-danger">Quitter</a>
 </div>
                             </main>
                         </div>

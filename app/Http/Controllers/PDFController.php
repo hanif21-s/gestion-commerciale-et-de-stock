@@ -28,42 +28,40 @@ class PDFController extends Controller
         $this->middleware('auth');
     }
 
-    public function viewPDF($facture_id){
-        $facture=Facture::find($facture_id);
-        $commandes_id = $facture->commandes_id;
-        $commande = Commande::find($commandes_id);
-        $client=Client::where('id',$commande->clients_id)->first();
-        $lignecommandes=LigneCommande::where('commandes_id',$facture->commandes_id)->get();
+    public function viewPDF(Commande $commande){
+        $lignecommandes=LigneCommande::where('commandes_id',$commande->id)->get();
         //dd($lignecommandes);
         $produits = Produit::all();
         //dd($produits);
         $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
-        $prix_lettre = $f->format($facture->total_TTC);
+        $prix_lettre = $f->format($commande->total_TTC);
+        $monnaie = $commande->reglement_client-$commande->total_TTC;
+        $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commande->id)->first();
+        $value = $prix_total->total;
+        $monnaie = $commande->reglement_client-$commande->total_TTC;
 
-        return view('viewFacture', compact('prix_lettre', 'facture', 'client', 'lignecommandes', 'produits'));
+        return view('viewFacture', compact('prix_lettre', 'commande', 'lignecommandes', 'monnaie','value'));
     }
 
-    public function generatePDF($facture_id)
+    public function generatePDF($commande)
     {
-
-
-        $factures=Facture::find($facture_id);
-        $commandes_id = $factures->commandes_id;
-        $commande = Commande::find($commandes_id);
-        $client=Client::where('id',$commande->clients_id)->first();
-        $lignecommandes=LigneCommande::where('commandes_id',$factures->commandes_id)->get();
-        //dd($lignecommandes);
+        $commandes = Commande::find($commande);
+        $lignecommandes=LigneCommande::where('commandes_id',$commande)->get();
         $produits = Produit::all();
-        //dd($produits);
+        $clients = Client::all();
         $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
-        $prix_lettre = $f->format($factures->total_TTC);
-
+        $prix_lettre = $f->format($commandes->total_TTC);
+        $monnaie = $commandes->reglement_client-$commandes->total_TTC;
+        $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commandes->id)->first();
+        $value = $prix_total->total;
         $data = [
             'prix_lettre' => $prix_lettre,
-            'facture' => $factures,
-            'client' => $client,
+            'commandes' => $commandes,
+            'clients' => $clients,
             'lignecommandes' => $lignecommandes,
-            'produit' => $produits
+            'produits' => $produits,
+            'monnaie' => $monnaie,
+            'value' => $value
         ];
 
         $pdf = PDF::loadView('myPDF', $data);
@@ -71,31 +69,45 @@ class PDFController extends Controller
         return $pdf->download('factures.pdf');
     }
 
-    public function generatePdfRavi($ravitaillement_id, $fournisseur_id){
-        $ravitaillements = Ravitaillement::find($ravitaillement_id);
-        $fournisseurs = Fournisseur::find($fournisseur_id);
-        $produits = Produit::all();
-        $ligneravitaillements = LigneRavitaillement::where('ravitaillements_id', $ravitaillement_id)->get();
-        $prix_total = LigneRavitaillement::select(DB::raw('sum(prix_total) as total'))->where('ravitaillements_id', '=', $ravitaillement_id)->first();
-        $value = $prix_total->total;
+    public function generatePdfRavi(Ravitaillement $ravitaillement){
+        $ligneravitaillements=LigneRavitaillement::where('ravitaillements_id',$ravitaillement->id)->get();
+        $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+        $prix_lettre = $f->format($ravitaillement->total_TTC);
 
         $data = [
-            'ravitaillements' => $ravitaillements,
-            'fournisseurs' => $fournisseurs,
-            'produits' => $produits,
+            'ravitaillement' => $ravitaillement,
             'ligneravitaillements' => $ligneravitaillements,
-            'value' => $value
+            'prix_lettre' => $prix_lettre
         ];
         $pdf = PDF::loadView('decharge', $data);
-        //$file = $pdf->download('ravitaillements.pdf');
-        //Session::flash('download.in.the.next.request', 'file');
-
-        //return Redirect::to('/admins/fournisseurs');
 
         return $pdf->download('ravitaillements.pdf');
-        //return redirect('/admins/fournisseurs');
 
 
+    }
+
+    public function generatePDFduplicata(Commande $commande)
+    {
+        $date = now()->toDateString('d-m-Y');
+        $date_du_jour = date('d/m/Y', strtotime($date));
+        $lignecommandes=LigneCommande::where('commandes_id',$commande->id)->get();
+        $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+        $prix_lettre = $f->format($commande->total_TTC);
+        $monnaie = $commande->reglement_client-$commande->total_TTC;
+        $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commande->id)->first();
+        $value = $prix_total->total;
+        $data = [
+            'prix_lettre' => $prix_lettre,
+            'commande' => $commande,
+            'lignecommandes' => $lignecommandes,
+            'monnaie' => $monnaie,
+            'value' => $value,
+            'date_du_jour' => $date_du_jour
+        ];
+
+        $pdf = PDF::loadView('duplicata', $data);
+
+        return $pdf->download('duplicata.pdf');
     }
 
 

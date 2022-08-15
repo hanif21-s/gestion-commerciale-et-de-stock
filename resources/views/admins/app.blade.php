@@ -3,6 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Copper", 8.94, "#b87333"],
+        ["Silver", 10.49, "silver"],
+        ["Gold", 19.30, "gold"],
+        ["Platinum", 21.45, "color: #e5e4e2"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Density of Precious Metals, in g/cm^3",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+
   <title>Admin | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -29,7 +64,7 @@
   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -48,7 +83,7 @@
   @include('admins.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
-  
+
     <!-- /.content-header -->
 	@include('admins.header')
     <!-- Main content -->
@@ -99,6 +134,38 @@
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
+
+<script>
+$(function () {
+    var params = window.location.pathname;
+    params = params.toLowerCase();
+
+    if (params != "/") {
+        $(".nav-sidebar li a").each(function (i) {
+            var obj = this;
+            var url = $(this).attr("href");
+            if (url == "" || url == "#") {
+                return true;
+            }
+            url = url.toLowerCase();
+            if (url.indexOf(params) > -1) {
+                $(this).parent().addClass("active open menu-open");
+                $(this).parent().parent().addClass("active open menu-open");
+                $(this).parent().parent().parent().addClass("active open menu-open");
+                $(this).parent().parent().parent().parent().addClass("active open menu-open");
+                $(this).parent().parent().parent().parent().parent().addClass("active open menu-open");
+                return false;
+            }
+        });
+    }
+});
+</script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+               crossorigin="anonymous"></script>
 <!-- DataTables  & Plugins -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -116,43 +183,19 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["print"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $("#example2").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
-    $("#example3").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  });
-  $(function () {
-        var params = window.location.pathname;
-        params = params.toLowerCase();
- 
-        if (params != "/") {
-            $(".nav-sidebar li a").each(function (i) {
-                var obj = this;
-                var url = $(this).attr("href");
-                if (url == "" || url == "#") {
-                    return true;
-                }
-                url = url.toLowerCase();
-                if (url.indexOf(params) > -1) {
-                    $(this).parent().addClass("active open menu-open");
-                    $(this).parent().parent().addClass("active open menu-open");
-                    $(this).parent().parent().parent().addClass("active open menu-open");
-                    $(this).parent().parent().parent().parent().addClass("active open menu-open");
-                    $(this).parent().parent().parent().parent().parent().addClass("active open menu-open");
-                    return false;
-                }
-            });
-        }
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
     });
+  });
 </script>
-
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
-
 <script src="{{asset('js/bootstrap.bundle.min.js')}}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

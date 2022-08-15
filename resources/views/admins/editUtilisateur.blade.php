@@ -29,39 +29,11 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email</label>
     <input type="email" class="form-control" required name="email" value="{{$utilisateur->email}}">
-  </div>
-  {{-- <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Role</label>
-    <select class="form-control" required name="role_id">
-      <option value=""></option>
-      @if('role_id' == "1")
-      <option value="1" selected>Admin</option>
-      <option value="2">Gerant</option>
-      <option value="3">Commercial</option>
-      <option value="4">Caissier</option>
-      @elseif ('role_id' == "2")
-      <option value="1">Admin</option>
-      <option value="2" selected>Gerant</option>
-      <option value="3">Commercial</option>
-      <option value="4">Caissier</option>
-      @elseif ('role_id' == "3")
-      <option value="1">Admin</option>
-      <option value="2">Gerant</option>
-      <option value="3" selected>Commercial</option>
-      <option value="4">Caissier</option>
-      @elseif ('role_id' == "4")
-      <option value="1">Admin</option>
-      <option value="2">Gerant</option>
-      <option value="3">Commercial</option>
-      <option value="4" selected>Caissier</option>
-      @endif
-    </select>
-  </div> --}}
-  <div class="mb-3">
+  </div><div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Roles</label>
     <select class="form-control" required name="role_id">
+        <option value=""></option>
       @foreach($roles as $role)
-      <option value=""></option>
       <option value="{{$role->id}}">{{$role->name}}</option>
 
       @endforeach

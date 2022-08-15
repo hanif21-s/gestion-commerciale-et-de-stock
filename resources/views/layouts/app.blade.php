@@ -42,7 +42,7 @@
   @include('backend.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
-  
+
     <!-- /.content-header -->
 	@include('backend.header')
     <!-- Main content -->

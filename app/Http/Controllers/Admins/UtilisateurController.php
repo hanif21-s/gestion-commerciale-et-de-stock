@@ -80,12 +80,12 @@ class UtilisateurController extends Controller
                $user->update(); */
 
             $utilisateur->update($request->all());
-            return back()->with("success", "Utilisateur mis à jour avec succès!");
+            return redirect('/admins/utilisateurs')->with("success", "Utilisateur mis à jour avec succès!");
         }
 
-       public function delete(User $user){
-            $nom_complet = $user->name;
-            $user->delete();
+       public function delete(User $utilisateur){
+            $nom_complet = $utilisateur->name;
+            $utilisateur->delete();
             return back()->with("successDelete", "L'utilisateur '$nom_complet' supprimé avec succès!");
         }
 }

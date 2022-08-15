@@ -50,9 +50,11 @@
            <img class="img-size-50 mr-3 img-circle" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
       </a>
       <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('profile.show') }}">
+            <i class="fas fa-user-circle "></i>  Profile </a>
             <a class="dropdown-item" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt "></i>  Deconnexion </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> 
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
           </form>
       </div>

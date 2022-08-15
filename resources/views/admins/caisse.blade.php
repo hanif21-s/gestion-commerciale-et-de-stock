@@ -196,60 +196,8 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Page d'enregistrement de commande</b></h2>
+        <h2 class="card-title"><b>ETAT DE LA CAISSE AU {{$date}}</b></h2>
     </div></br>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span style="white-space: nowrap">
-                <label for="size">Date de la commande : <input type="date" name="date"> </label>
-            </span>
-        </div>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span style="white-space: nowrap">
-                <form action="" method="post">
-                    @csrf
-                <label for="size">Client :</label>
-                    <select class="form-control" required name="clients_id">
-                        <option value="">Choisissez un client</option>
-                        @foreach($clients as $client)
-                        <option value="{{$client->id}}">{{$client->nom}} {{$client->prenoms}}</option>
-                        @endforeach
-                    </select>
-                </form>
-            </span>
-
-        </div>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <span style="white-space: nowrap">
-                <form action="" method="post">
-                    @csrf
-                <label for="size">Produit :</label>
-                    <select class="form-control" required name="produits_id">
-                        <option value="">Choisissez un produit</option>
-                        @foreach($produits as $produit)
-                        <option value="{{$produit->id}}">{{$produit->nom}}</option>
-                        @endforeach
-                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="number" required name="quantite" placeholder="Entrez la quantité"  min="1">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <textarea name="all_detail_added" id="all_detail_added" cols="30" rows="10" style="display: none;"></textarea>
-                    <div class="col-lg-3">
-                        <button type="button" class="btn badge-danger" onclick="add_detail_demande()"><i class="fas fa-plus"></i> Ajouter</button>
-                        <!--  ?= Html::submitButton('<i class="fas fa-plus"></i> Ajouter', ['class' => 'btn badge-danger']) ?> -->
-                        <?= HTML::resetButton('<i class="fa fa fa-undo fx-8"></i>  Annuler', ['class' => 'btn badge-warning']) ?>
-                    </div>
-                    <button type="submit" class="btn btn-success mb-3" >Valider</button>
-                </form>
-            </span>
-
-        </div>
-    </div>
             <div class="card-body">
                 <div id="invoice">
                     <div class="invoice overflow-auto">
@@ -258,12 +206,6 @@ background-color: #f7f7ff;
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>N°</th>
-                                            <th scope="col">PRODUIT</th>
-                                            <th scope="col">PRIX UNITAIRE</th>
-                                            <th scope="col">QUANTITE</th>
-                                            <th scope="col">PRIX TOTAL</th>
-                                            <th scope="col">ACTIONS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -271,24 +213,12 @@ background-color: #f7f7ff;
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL HT =</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL TAXE =</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                            <td colspan="2">TOTAL TTC =</td>
-                                            <td></td>
+                                            <td colspan="2"><h1>TOTAL = {{$value}} FCFA</h1></td>
                                         </tr>
                                     </tfoot>
                                 </table>
 <div style="text-align:center">
-  <a href="#" class="btn btn-success">Valider</a>
+  <a href="{{ route('admins.welcome')}}" class="btn btn-danger">Quitter</a>
 </div>
                             </main>
                         </div>
@@ -299,4 +229,3 @@ background-color: #f7f7ff;
             </div>
 </div>
 @endsection
-

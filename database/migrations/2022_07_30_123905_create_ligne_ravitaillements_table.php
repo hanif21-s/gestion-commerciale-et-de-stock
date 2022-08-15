@@ -16,10 +16,11 @@ class CreateLigneRavitaillementsTable extends Migration
         Schema::create('ligne_ravitaillements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('produits_id')->constrained("produits");
+            $table->float('prix');
             $table->integer('quantite');
-            $table->float('prix_total'); 
+            $table->float('prix_total');
             $table->foreignId('ravitaillements_id')->constrained("ravitaillements");
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 

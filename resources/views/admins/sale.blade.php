@@ -222,7 +222,7 @@ background-color: #f7f7ff;
                     <button type="submit" class="btn btn-success mb-3" >Valider</button>
                 </form>
             </span>
-        
+
         </div>
     </div>
             <div class="card-body">
@@ -251,11 +251,11 @@ background-color: #f7f7ff;
                                                 <td>{{$lignecommande->prix_total}}</td>
                                                 <td>
                                                     <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette ligne de commande?')){document.getElementById('form-{{$lignecommande->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
-                                                    <form id="form-{{$lignecommande->id}}" action="{{route('lignecommandes.supprimer', ['lignecommande'=>$lignecommande->id])}}" method="post"> 
+                                                    <form id="form-{{$lignecommande->id}}" action="{{route('lignecommandes.supprimer', ['lignecommande'=>$lignecommande->id])}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="delete">
                                                     </form>
-                                                  </td>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -275,14 +275,14 @@ background-color: #f7f7ff;
                                             <td colspan="2">TOTAL TTC =</td>
                                             <td>{{$ttc}}</td>
                                         </tr>
-                                    </tfoot> 
+                                    </tfoot>
                                 </table>
 <div style="text-align:center">
                                 <!-- Button trigger modal -->
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
     Valider
   </button>
-  
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -324,7 +324,7 @@ background-color: #f7f7ff;
   </div>
   {{-- <a href="#" class="btn btn-danger">Annuler</a> --}}
   <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer tout ce qui concerne cette commande?')){document.getElementById('form-{{$commandes->id}}').submit()}">Annuler</a>
-    <form id="form-{{$commandes->id}}" action="{{route('allcommande.supprimer', ['commandes'=>$commandes->id])}}" method="post"> 
+    <form id="form-{{$commandes->id}}" action="{{route('allcommande.supprimer', ['commandes'=>$commandes->id])}}" method="post">
         @csrf
         <input type="hidden" name="_method" value="delete">
     </form>

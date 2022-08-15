@@ -9,7 +9,7 @@ class LigneRavitaillement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["produits_id","quantite","prix_total","ravitaillements_id"];
+    protected $fillable = ["produits_id","quantite","prix_total","ravitaillements_id","prix"];
 
     public function Produit(){
         return $this->belongsTo(Produit::class, 'produits_id');

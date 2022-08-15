@@ -17,6 +17,9 @@ class CreateRavitaillementsTable extends Migration
             $table->id();
             $table->date("date");
             $table->foreignId('fournisseurs_id')->constrained("fournisseurs");
+            $table->foreignId('users_id')->constrained("users");
+            $table->string('decharge')->nullable();
+            $table->float('total_TTC')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +33,7 @@ class CreateRavitaillementsTable extends Migration
     {
         Schema::table("ravitaillements", function(Blueprint $table){
             $table->dropForeign("fournisseurs_id");
+            $table->dropForeign("users_id");
         });
         Schema::dropIfExists('ravitaillements');
     }

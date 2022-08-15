@@ -17,11 +17,9 @@ class CreateProduitsTable extends Migration
             $table->id();
             $table->string("nom");
             $table->integer("qtte_stock");
-            $table->float("prix_achat");
             $table->float("prix_HT");
             $table->integer("stock_minimum");
             $table->date("date_peremption");
-            $table->float("benefice")->nullable();
             $table->foreignId('categories_id')->constrained("categories");
             $table->timestamps();
         });

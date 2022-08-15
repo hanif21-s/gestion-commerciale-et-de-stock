@@ -202,14 +202,14 @@ background-color: #f7f7ff;
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <label for="size">Fournisseur : {{$fournisseurs->societe}}</label>
+                <label for="size">Fournisseur : </label>
             </span>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <form action="{{route('ravitaillements.ajouter', ['ravitaillement'=>$ravitaillements->id])}}" method="post">
+                <form action="" method="post">
                     @csrf
                 <label for="size">Produit :</label>
                     <select class="form-control" required name="produits_id">
@@ -222,7 +222,7 @@ background-color: #f7f7ff;
                     <button type="submit" class="btn btn-success mb-3" >Valider</button>
                 </form>
             </span>
-        
+
         </div>
     </div>
             <div class="card-body">
@@ -242,8 +242,8 @@ background-color: #f7f7ff;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                     
-                                    </tbody>{{-- 
+
+                                    </tbody>{{--
                                     <tfoot>
                                         <tr>
                                             <td colspan="2"></td>
@@ -268,8 +268,8 @@ background-color: #f7f7ff;
                                     </tfoot> --}}
                                 </table>
                                 <div style="text-align:center">
-                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment annuler ce ravitaillement?')){document.getElementById('form-{{$ravitaillements->id}}').submit()}">Annuler</a>
-                                    <form id="form-{{$ravitaillements->id}}" action="{{route('ravitaillements.supprimer1', ['ravitaillement'=>$ravitaillements->id])}}" method="post"> 
+                                    <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment annuler ce ravitaillement?')){document.getElementById('form-').submit()}">Annuler</a>
+                                    <form id="form-" action="" method="post">
                                       @csrf
                                       <input type="hidden" name="_method" value="delete">
                                     </form>

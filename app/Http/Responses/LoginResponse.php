@@ -15,7 +15,7 @@ class LoginResponse implements LoginResponseContract
      */
     public function toResponse($request)
     {
-        $role = \Auth::user()->role;
+        /* $role = \Auth::user()->role;
 
         if ($request->wantsJson()) {
             return response()->json(['two_factor' => false]);
@@ -26,6 +26,19 @@ class LoginResponse implements LoginResponseContract
                 return redirect()->intended(config('fortify.home'));
             default:
                 return redirect('/');
+            } */
+            if (auth()->user()->hasRole('admin')) {
+                return redirect()->intended(config('fortify.home'));
+            }
+            if (auth()->user()->hasRole('gerant')) {
+                return redirect()->intended(config('fortify.home'));
+            }
+
+            if (auth()->user()->hasRole('commercial')) {
+                return redirect()->intended(config('fortify.home'));
+            }
+            if (auth()->user()->hasRole('caissier')) {
+                return redirect()->intended(config('fortify.home'));
             }
     }
 }

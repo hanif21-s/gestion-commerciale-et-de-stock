@@ -22,6 +22,16 @@
 
 
     <!-- Sidebar Menu -->
+    <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+        <button class="btn btn-sidebar">
+        <i class="fas fa-search fa-fw"></i>
+        </button>
+        </div>
+        </div>
+        </div>
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
@@ -74,8 +84,20 @@
             <p>
               Commandes
             </p>
+            <i class="nav-icon fas fa-spinner"></i>
           </a>
         </li>
+        @role('admin|gerant')
+        <li class="nav-item">
+            <a href="{{ route('admins.commandesvalides')}}" class="nav-link">
+              <i class="nav-icon fas fa-cart-arrow-down"></i>
+              <p>
+                Commandes
+              </p>
+              <i class="nav-icon fas fa-check-circle"></i>
+            </a>
+          </li>
+        @endrole
         <li class="nav-item">
           <a href="{{ route('admins.ravitaillements')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-in-alt"></i>
@@ -104,7 +126,7 @@
           <a href="{{route('admins.allfactures')}}" class="nav-link">
             <i class="nav-icon fas fa-file-invoice"></i>
             <p>
-              Factures
+              Duplicatas
             </p>
           </a>
         </li>
@@ -112,17 +134,25 @@
           <a href="{{route('admins.bilan')}}" class="nav-link">
             <i class="nav-icon fas fa-balance-scale"></i>
             <p>
-              Bilan Journalier de vente
+              Bilan Journalier des commandes
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('test')}}" class="nav-link">
-            <i class="nav-icon fas fa-money-check-alt"></i>
-            <p>
-              Billetage
-            </p>
-          </a>
+            <a href="{{route('admins.depenses')}}" class="nav-link">
+              <i class="nav-icon fas fa-hand-holding-usd"></i>
+              <p>
+                Depenses
+              </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{route('admins.billetage')}}" class="nav-link">
+              <i class="nav-icon fas fa-cash-register"></i>
+              <p>
+                Bilan Journalier de billetage
+              </p>
+            </a>
         </li>
     </nav>
     <!-- /.sidebar-menu -->

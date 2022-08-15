@@ -217,16 +217,16 @@ background-color: #f7f7ff;
                             </div>
                         </header>
                         <main>
+                            <div style="text-align:center" class="col invoice-details"><h1>DUPLICATA FACTURE NUMERO: {{$commande->num_interne}}</h1></div>
                             <div class="row contacts">
                                 <div class="col invoice-to">
-                                    <div class="text-gray-light"><h2>Facture du client: <b>{{$commandes->Client['nom']}} {{$commandes->Client['prenoms']}}</b></h2></div>
-                                    <div class="address">Adresse: {{$commandes->Client['adresse']}}</div>
-                                    <div class="email"><a>Email: {{$commandes->Client['email']}}</a>
+                                    <div class="text-gray-light"><h2>Facture du client: <b>{{$commande->Client['nom']}} {{$commande->Client['prenoms']}}</b></h2></div>
+                                    <div class="address">Adresse: {{$commande->Client['adresse']}}</div>
+                                    <div class="email"><a>Email: {{$commande->Client['email']}}</a>
                                     </div>
                                 </div>
                                 <div class="col invoice-details">
-                                    <h1 class="invoice-id">FACTURE NUMERO: {{$commandes->num_interne}}</h1>
-                                    <div class="date">Date de la commande: {{$commandes->date}}</div>
+                                    <div class="date"><h3>Date de la commande: {{$commande->date}}</h3></div>
                                 </div>
                             </div>
                             <table>
@@ -259,17 +259,17 @@ background-color: #f7f7ff;
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="2">TOTAL TAXE</td>
-                                        <td>{{$commandes->tva}} FCFA</td>
+                                        <td>{{$commande->tva}} FCFA</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="2">TOTAL REMISE</td>
-                                        <td>{{$commandes->prix_remise}} FCFA</td>
+                                        <td>{{$commande->prix_remise}} FCFA</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="2">TOTAL TTC</td>
-                                        <td>{{$commandes->total_TTC}} FCFA</td>
+                                        <td>{{$commande->total_TTC}} FCFA</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -279,7 +279,7 @@ background-color: #f7f7ff;
                                 <div class="notice"></div>
                             </div>
                             <div class="notices">
-                                <div>MONTANT REMIS : <b><i>{{$commandes->reglement_client}} FCFA</i></b></div>
+                                <div>MONTANT REMIS : <b><i>{{$commande->reglement_client}} FCFA</i></b></div>
                                 <div class="notice"></div>
                             </div>
                             <div class="notices">
@@ -290,6 +290,7 @@ background-color: #f7f7ff;
                                 <div>SIGNATURE DU VENDEUR: </div>
                                 <div class="notice"></div>
                             </div>
+                            <div style="text-align:center"><h6>Fait le {{$date_du_jour}}</h6></div>
                         </main>
                         <footer>Copyright © 2022 #HanifZer</footer>
                     </div>

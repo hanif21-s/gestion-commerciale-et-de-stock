@@ -16,9 +16,9 @@ use DB;
 class LigneCommandeController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth'); 
+        $this->middleware('auth');
     }
-    
+
     public function index() {
         $commandes_id = Commande::all()->last()->id;
         $commandes = Commande::whereId($commandes_id);
@@ -26,12 +26,13 @@ class LigneCommandeController extends Controller
         //dd($lignecommandes);
         $produits = Produit::all();
             return view('admins.lignecommandes',compact('lignecommandes','produits','commandes'));
-        } 
+        }
 
     public function delete(Request $request, LigneCommande $lignecommande){
         $remises = Remise::all();
         $reglements = Reglement::all();
         $produits_id = $lignecommande->produits_id;
+        dd($produits_id);
         $produit = Produit::find($produits_id);
         $qtte_avant_supp = $produit->qtte_stock;
         $quantite = $lignecommande->quantite;
@@ -43,24 +44,24 @@ class LigneCommandeController extends Controller
         $commandes = Commande::find($commandes_id);
         $clients = Client::find($commandes->clients_id);
         $produits = Produit::all();
-        
+
             $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commandes_id)->first();
             $value = $prix_total->total;
             $tva=$value*0.18;
             $ttc=$value+$tva;
             $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
-          
-            return view('admins.sale',compact('clients','produits','commandes','lignecommandes','value','tva','ttc','remises','reglements'));
-        
+
+            //return view('admins.sale',compact('clients','produits','commandes','lignecommandes','value','tva','ttc','remises','reglements'));
+
         //dd($clients);
-        //return back()->with("successDelete", "La ligne commande supprimée avec succès!");
-    } 
+        return back()->with("successDelete", "La ligne commande supprimée avec succès!");
+    }
 
     public function create() {
         $commandes = Commande::all();
         $produits = Produit::all();
         return view('admins.createLigneCommande', compact('commandes', 'produits'));
-    } 
+    }
 
 
     public function store(Request $request, $id){
@@ -71,7 +72,7 @@ class LigneCommandeController extends Controller
         $lignecommandes = new LigneCommande();
         $produits_id = Produit::find($id);
         //dd($produits_id);
-        $lignecommandes->produits_id=$id; 
+        $lignecommandes->produits_id=$id;
         $lignecommandes->quantite = $request->input('quantite');
         $lignecommandes->commandes_id =$commandes_id;
         $lignecommandetotal=($produits_id->prix_HT + $lignecommandes->prix_total)*$lignecommandes->quantite;
@@ -91,7 +92,7 @@ class LigneCommandeController extends Controller
             $lignecommandes->prix_total=$lignecommandetotal;
             $lignecommandes->save();
             return redirect('/admins/commandeProduits')->with("success", "Ligne commande ajoutée avec succès!");
-        } 
+        }
     }
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommandesTable extends Migration
+class CreateDepensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCommandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commandes', function (Blueprint $table) {
+        Schema::create('depenses', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->string('libelle');
+            $table->float("montant");
             $table->foreignId('users_id')->constrained("users");
-            $table->foreignId('clients_id')->constrained("clients");
             $table->timestamps();
         });
     }
@@ -29,10 +30,9 @@ class CreateCommandesTable extends Migration
      */
     public function down()
     {
-        Schema::table("commandes", function(Blueprint $table){
+        Schema::table("depenses", function(Blueprint $table){
             $table->dropForeign("users_id");
-            $table->dropForeign("clients_id");
         });
-        Schema::dropIfExists('commandes');
+        Schema::dropIfExists('depenses');
     }
 }

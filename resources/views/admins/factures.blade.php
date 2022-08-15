@@ -1,7 +1,7 @@
 @extends("admins.app")
 @section("content")
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h3 class="border-bottom pb-2 mb-3">Facture courant</h3>
+    <h3 class="border-bottom pb-2 mb-3">Facture de la commande courante</h3>
     <div class="d-flex justify-content-end mb-2">
     </div>
 
@@ -31,32 +31,32 @@
     <tr>
       <th scope="col">Num interne</th>
       <th scope="col">Date</th>
+      <th scope="col">Client</th>
       <th scope="col">Total HT</th>
       <th scope="col">Prix TVA</th>
       <th scope="col">Prix Remise</th>
       <th scope="col">Total TTC</th>
-      <th scope="col">Commmande</th>
       <th scope="col">Reglement</th>
+      <th scope="col">Monnaie</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-
-    @foreach($factures as $facture)
     <tr>
-      <td>{{$facture->num_interne}}</td>
-      <td>{{$facture->date}}</td>
-      <td>{{$facture->total_HT}}</td>
-      <td>{{$facture->tva}}</td>
-      <td>{{$facture->prix_remise}}</td>
-      <td>{{$facture->total_TTC}}</td>
-      <td>{{$facture->commandes_id}}</td>
-      <td>{{$facture->reglements_id}}</td>
+      <td>{{$commande->num_interne}}</td>
+      <td>{{$commande->date}}</td>
+      <td>{{$commande->Client['nom']}} {{$commande->Client['prenoms']}}</td>
+      <td>{{$value}}</td>
+      <td>{{$commande->tva}}</td>
+      <td>{{$commande->prix_remise}}</td>
+      <td>{{$commande->total_TTC}}</td>
+      <td>{{$reglement_client}}</td>
+      <td>{{$monnaie}}</td>
       <td>
-        <a href="{{route('generate', ['facture'=>$facture->id])}}" class="btn btn-success">Imprimer</a>
+        <a href="{{route('generate', ['commande'=>$commande->id])}}" class="btn btn-success" title="Imprimer"><i class="nav-icon fas fa-print"></i></a>
+        <a href="/admins/commandes" class="btn btn-danger" title="Quitter"><i class="nav-icon fas fa-sign-out-alt"></i></a>
       </td>
     </tr>
-    @endforeach
 
   </tbody>
 </table>

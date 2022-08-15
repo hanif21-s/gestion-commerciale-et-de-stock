@@ -16,9 +16,6 @@ class ReglementTableSeeder extends Seeder
     {
         DB::table("reglements")->insert([
             ["libelle"=>"Espèce"],
-            ["libelle"=>"T-Money"],
-            ["libelle"=>"Flooz"],
-            ["libelle"=>"Carte Banquaire"],
         ]);
     }
 }

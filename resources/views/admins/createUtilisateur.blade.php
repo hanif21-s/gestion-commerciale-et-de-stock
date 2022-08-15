@@ -32,6 +32,10 @@
     <input type="password" class="form-control" required name="password">
   </div>
   <div class="mb-3">
+    <label for="password_confirmation" class="form-label">Confirmer mot de passe</label>
+    <input type="password" id="motdepasse" class="form-control" name="password_confirmation" required autocomplete="new-password" >
+</div>
+  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Telephone</label>
     <input type="number" id="phone" class="form-control" required name="tel">
   </div>
@@ -42,8 +46,8 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Roles</label>
     <select class="form-control" required name="role_id">
+        <option value=""></option>
       @foreach($roles as $role)
-      <option value=""></option>
       <option value="{{$role->id}}">{{$role->name}}</option>
 
       @endforeach
@@ -63,4 +67,3 @@
   </div>
 </div>
 @endsection
-

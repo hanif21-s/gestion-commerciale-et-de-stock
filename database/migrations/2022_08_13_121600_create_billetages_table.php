@@ -15,6 +15,7 @@ class CreateBilletagesTable extends Migration
     {
         Schema::create('billetages', function (Blueprint $table) {
             $table->id();
+            $table->boolean('type')->nullable()->default(false);
             $table->integer('B_10000');
             $table->integer('B_5000');
             $table->integer('B_2000');
@@ -28,7 +29,9 @@ class CreateBilletagesTable extends Migration
             $table->integer('P_25');
             $table->integer('P_10');
             $table->integer('P_5');
-            $table->foreignId('factures_id')->constrained("factures"); 
+            $table->float('total')->nullable();
+            $table->foreignId('commandes_id')->nullable()->constrained("commandes");
+            $table->foreignId('depenses_id')->nullable()->constrained("depenses");
             $table->timestamps();
         });
     }
@@ -41,7 +44,8 @@ class CreateBilletagesTable extends Migration
     public function down()
     {
         Schema::table("billetages", function(Blueprint $table){
-            $table->dropForeign("factures_id");
+            $table->dropForeign("commandes_id");
+            $table->dropForeign("depenses_id");
         });
         Schema::dropIfExists('billetages');
     }

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 
 class RemiseTableSeeder extends Seeder
 {
@@ -15,6 +15,7 @@ class RemiseTableSeeder extends Seeder
     public function run()
     {
         DB::table("remises")->insert([
+            ["libelle"=>"Aucune", "taux"=>"0.00",],
             ["libelle"=>"Ristourne", "taux"=>"3.15",],
             ["libelle"=>"Escompte", "taux"=>"6.75",],
             ["libelle"=>"Fidelité", "taux"=>"5.00",],

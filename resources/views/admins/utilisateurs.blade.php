@@ -42,7 +42,7 @@
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cet utilisateur?')){document.getElementById('form-{{$user->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
         <form id="form-{{$user->id}}" action="{{route('utilisateurs.supprimer', ['utilisateur'=>$user->id])}}" method="post">
           @csrf
-          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="_method" value="delete"> 
         </form>
       </td>
     </tr>
