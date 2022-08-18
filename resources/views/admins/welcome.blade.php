@@ -9,161 +9,73 @@
 <h1>Bienvenue !  {{ Auth::user()->name }}</h1>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
-            @role('admin|gerant')
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">ETAT DE LA CAISSE AU <b>{{$date}}</b></h3>
+        @role('admin|gerant')
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{$value}} FCFA</h3>
+                    <p>TOTAL EN CAISSE </p>
                 </div>
-                <div class="card-body">
-                    <h2>TOTAL = {{$value}} FCFA</h2>
+                <div class="icon">
+                    <i class="fas fa-hand-holding-usd"></i>
                 </div>
             </div>
-            @endrole
+        </div>
+        @endrole
 
-<div class="card">
-<div class="card-header">
-<h3 class="card-title">Condensed Full Width Table</h3>
-</div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{\App\Models\Client::all()->count()}}</h3>
+                    <p>Clients</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="{{route('admins.clients')}}" class="small-box-footer">Details <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
 
-<div class="card-body p-0">
-<table class="table table-sm">
-<thead>
-<tr>
-<th style="width: 10px">#</th>
-<th>Task</th>
-<th>Progress</th>
-<th style="width: 40px">Label</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.</td>
-<td>Update software</td>
-<td>
-<div class="progress progress-xs">
-<div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-</div>
-</td>
-<td><span class="badge bg-danger">55%</span></td>
-</tr>
-<tr>
-<td>2.</td>
-<td>Clean database</td>
-<td>
-<div class="progress progress-xs">
-<div class="progress-bar bg-warning" style="width: 70%"></div>
-</div>
-</td>
-<td><span class="badge bg-warning">70%</span></td>
-</tr>
-<tr>
-<td>3.</td>
-<td>Cron job running</td>
-<td>
-<div class="progress progress-xs progress-striped active">
-<div class="progress-bar bg-primary" style="width: 30%"></div>
-</div>
-</td>
-<td><span class="badge bg-primary">30%</span></td>
-</tr>
-<tr>
-<td>4.</td>
-<td>Fix and squish bugs</td>
-<td>
-<div class="progress progress-xs progress-striped active">
-<div class="progress-bar bg-success" style="width: 90%"></div>
-</div>
-</td>
-<td><span class="badge bg-success">90%</span></td>
-</tr>
-</tbody>
-</table>
-</div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{\App\Models\Fournisseur::all()->count()}}</h3>
+                    <p>Fournisseurs</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="{{route('admins.fournisseurs')}}" class="small-box-footer">Details <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
 
-</div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Graphe des commandes</h3>
+                </div>
+                <div class="card-body p-0" id="linechart_material" style="width: 800px; height: 500px;"></div>
+            </div>
+        </div>
 
-</div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Graphe des ravitaillements</h3>
+                </div>
+                <div class="card-body p-0" id="curve_chart" style="width: 900px; height: 300px;"></div>
+            </div>
+        </div>
 
-<div class="col-md-6">
-<div class="card">
-<div class="card-header">
-<h3 class="card-title">Simple Full Width Table</h3>
-
-</div>
-
-<div class="card-body p-0">
-    <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
-</div>
-</div>
-
-</div>
-
-<div class="card">
-<div class="card-header">
-<h3 class="card-title">Striped Full Width Table</h3>
-</div>
-
-<div class="card-body p-0">
-<table class="table table-striped">
-<thead>
-<tr>
-<th style="width: 10px">#</th>
-<th>Task</th>
-<th>Progress</th>
-<th style="width: 40px">Label</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.</td>
-<td>Update software</td>
-<td>
-<div class="progress progress-xs">
-<div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-</div>
-</td>
-<td><span class="badge bg-danger">55%</span></td>
-</tr>
-<tr>
-<td>2.</td>
-<td>Clean database</td>
-<td>
-<div class="progress progress-xs">
-<div class="progress-bar bg-warning" style="width: 70%"></div>
-</div>
-</td>
-<td><span class="badge bg-warning">70%</span></td>
-</tr>
-<tr>
-<td>3.</td>
-<td>Cron job running</td>
-<td>
-<div class="progress progress-xs progress-striped active">
-<div class="progress-bar bg-primary" style="width: 30%"></div>
-</div>
-</td>
-<td><span class="badge bg-primary">30%</span></td>
-</tr>
-<tr>
-<td>4.</td>
-<td>Fix and squish bugs</td>
-<td>
-<div class="progress progress-xs progress-striped active">
-<div class="progress-bar bg-success" style="width: 90%"></div>
-</div>
-</td>
-<td><span class="badge bg-success">90%</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-</div>
-
-</div>
-
-</div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Etat du nombre de produits par catégories</h3>
+                </div>
+                <div class="card-body p-0" id="piechart_3d" style="width: 900px; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

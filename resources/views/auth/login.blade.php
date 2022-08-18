@@ -23,13 +23,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Projet</b> | H-App
+    <b>Projet</b> | Wecount
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Veuillez insérer vos données de connexion</p>
-      
+
       @if ($message = Session::get('error'))
 
       <div class="alert alert-danger alert-dismissible">
@@ -46,7 +46,7 @@
               <font color="red"><center>Certaines informations ne correspondent pas, vérifiez s'il vous plait </center> </font>
 
           @endif
-    
+
 
           <div class="input-group mb-3">
             <input type="email" name="email" id="email" class="form-control" placeholder="Email">
@@ -78,9 +78,9 @@
 
           <div class="row" style="text-align:center">
             <!-- /.col -->
-           
+
               <button type="submit" class="btn btn-success btn-block">Connexion</button>
-         
+
             <!-- /.col -->
           </div>
       </form>

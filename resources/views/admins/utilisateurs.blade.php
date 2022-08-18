@@ -32,7 +32,13 @@
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
       <td>{{$user->name}}</td>
-      <td></td>
+      <td>
+        @if(!empty($user->getRoleNames()))
+            @foreach($user->getRoleNames() as $val)
+                <label class="badge badge-dark">{{ $val }}</label>
+            @endforeach
+        @endif
+    </td>
       <td>{{$user->email}}</td>
       <td>{{$user->tel}}</td>
       <td>{{$user->adresse}}</td>
@@ -42,7 +48,7 @@
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cet utilisateur?')){document.getElementById('form-{{$user->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
         <form id="form-{{$user->id}}" action="{{route('utilisateurs.supprimer', ['utilisateur'=>$user->id])}}" method="post">
           @csrf
-          <input type="hidden" name="_method" value="delete"> 
+          <input type="hidden" name="_method" value="delete">
         </form>
       </td>
     </tr>

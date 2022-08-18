@@ -29,19 +29,6 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email</label>
     <input type="email" class="form-control" required name="email" value="{{$utilisateur->email}}">
-  </div><div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Roles</label>
-    <select class="form-control" required name="role_id">
-        <option value=""></option>
-      @foreach($roles as $role)
-      <option value="{{$role->id}}">{{$role->name}}</option>
-
-      @endforeach
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Mot de Passe</label>
-    <input type="password" class="form-control" required name="password" value="{{$utilisateur->password}}">
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Tel</label>
@@ -63,6 +50,29 @@
       <option value="f" selected>f</option>
       @endif
     </select>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Roles</label>
+  </div>
+  <div class="form-group ml-5">
+    @foreach($roles as $role)
+                            <div class="form-group">
+                                <input
+                                type="checkbox"
+                                class="form-check-input"
+                                value="{{$role->id}}"
+                                name="roles[]"
+
+                                @foreach($utilisateur->roles as $userRole)
+                                    @if($userRole->id === $role->id)
+                                        checked
+                                    @endif
+                                @endforeach
+                                >
+                                <label for="" class="form-check-label">{{$role->name}}</label>
+
+                            </div>
+    @endforeach
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.utilisateurs')}}" class="btn btn-danger">Annuler</a>

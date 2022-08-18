@@ -114,6 +114,7 @@ Route::delete('admins/clients/{client}',[App\Http\Controllers\Admins\ClientContr
 Route::put('admins/clients/{client}',[App\Http\Controllers\Admins\ClientController::class, "update"])->name("clients.update");
 //Routes Admin--Factures
 Route::get('admins/bilan',[App\Http\Controllers\Admins\FactureController::class, "balance"])->name("admins.bilan");
+Route::post('admins/bilan/search',[App\Http\Controllers\Admins\FactureController::class, "bilan"])->name("bilan.jour");
 Route::get('/accueil',[App\Http\Controllers\Admins\FactureController::class, "caisse"])->name("admins.welcome");
 Route::put('admins/factures/{commande}',[App\Http\Controllers\Admins\FactureController::class, "index"])->name("admins.factures");
 Route::get('admins/allfactures',[App\Http\Controllers\Admins\FactureController::class, "index1"])->name("admins.allfactures");

@@ -28,10 +28,6 @@
     <input type="number" class="form-control" required name="qtte_stock">
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Prix d'achat</label>
-    <input type="number" class="form-control" required name="prix_achat">
-  </div>
-  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Prix HT</label>
     <input type="number" class="form-control" required name="prix_HT">
   </div>
@@ -52,7 +48,7 @@
         @endforeach
     </select>
   </div>
-  
+
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.produits')}}" class="btn btn-danger">Annuler</a>
 </form>

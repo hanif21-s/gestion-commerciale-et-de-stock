@@ -32,10 +32,6 @@
     <input type="number" class="form-control" required name="qtte_stock" value="{{$produit->qtte_stock}}">
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Prix d'achat</label>
-    <input type="number" class="form-control" required name="prix_achat" value="{{$produit->prix_achat}}">
-  </div>
-  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Prix HT</label>
     <input type="number" class="form-control" required name="prix_HT" value="{{$produit->prix_HT}}">
   </div>
@@ -57,7 +53,7 @@
           @else
           <option value="{{$categorie->id}}">{{$categorie->libelle}}</option>
         @endif
-        @endforeach 
+        @endforeach
     </select>
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>

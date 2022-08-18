@@ -7,38 +7,100 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Copper", 8.94, "#b87333"],
-        ["Silver", 10.49, "silver"],
-        ["Gold", 19.30, "gold"],
-        ["Platinum", 21.45, "color: #e5e4e2"]
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Total'],
+
+          <?php
+        $ravitaillements = DB::select('SELECT date , sum(total_TTC) as somme FROM ravitaillements GROUP BY date ORDER BY date ASC LIMIT 7');
+        foreach($ravitaillements as $ravitaillement){
+            $date_du_jour = $ravitaillement->date;
+            $date = date('d/m/Y', strtotime($date_du_jour));
+            $somme = $ravitaillement->somme;
+            ?>["<?= $date ?>",  <?= $somme ?>],
+            <?php
+        } ?>
       ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
+        var options = {
+          title: 'Ravitaillements',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+  google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart2);
+
+    function drawChart2() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Jour');
+      data.addColumn('number', 'Total');
+
+      data.addRows([
+        <?php
+        $commandes = DB::select('SELECT date , sum(total_TTC) as somme FROM commandes WHERE etat = "1" GROUP BY date ORDER BY date ASC LIMIT 7');
+        foreach($commandes as $commande){
+            $date_du_jour = $commande->date;
+            $date = date('d/m/Y', strtotime($date_du_jour));
+            $somme = $commande->somme;
+            ?>["<?= $date ?>",  <?= $somme ?>],
+            <?php
+        } ?>
+      ]);
 
       var options = {
-        title: "Density of Precious Metals, in g/cm^3",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+        chart: {
+          subtitle: 'en Franc (CFA)'
+        },
+        width: 900,
+        height: 500
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-  }
+
+      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+
+    google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart3);
+      function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+            ['Catégories', 'Nombre de produits'],
+
+            <?php
+            $categories = DB::select('SELECT count(*) as nbr_produit, categories.libelle from produits,categories where produits.categories_id = categories.id GROUP BY categories.libelle');
+            $nbre_produits = \App\Models\Produit::all()->count();
+            foreach($categories as $element1){
+                $nbre = $element1->nbr_produit;
+                $libelle = $element1->libelle;
+        ?>["<?= $libelle ?>" ,  <?= $nbre ?> ],
+            <?php
+            }
+
+        ?>
+      ]);
+
+        var options = {
+          title: 'Nombre de Produits par catégories',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+
   </script>
 
-  <title>Admin | Dashboard</title>
+  <title>Wecount</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

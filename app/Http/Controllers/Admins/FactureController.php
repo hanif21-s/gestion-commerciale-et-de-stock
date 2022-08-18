@@ -58,6 +58,37 @@ class FactureController extends Controller
         $MP_10 = $request->input('MP_10')*10;
         $MP_5 = $request->input('MP_5')*5;
         $somme_billetage_monnaie = $MB_10000 + $MB_5000 + $MB_2000 + $MB_1000 + $MB_500 + $MP_500 + $MP_250 + $MP_200 + $MP_100 + $MP_50 + $MP_25 + $MP_10 + $MP_5;
+
+        $s10k = Billetage::select(DB::raw('sum(B_10000) as s10k'))->where('type', '=', 1)->first();
+        $somme10k = $s10k->s10k;
+        $s5k = Billetage::select(DB::raw('sum(B_5000) as s5k'))->where('type', '=', 1)->first();
+        $somme5k = $s5k->s5k;
+        $s2k = Billetage::select(DB::raw('sum(B_2000) as s2k'))->where('type', '=', 1)->first();
+        $somme2k = $s2k->s2k;
+        $s1k = Billetage::select(DB::raw('sum(B_1000) as s1k'))->where('type', '=', 1)->first();
+        $somme1k = $s1k->s1k;
+        $s5b = Billetage::select(DB::raw('sum(B_500) as s5b'))->where('type', '=', 1)->first();
+        $somme5b = $s5b->s5b;
+        $s5b2 = Billetage::select(DB::raw('sum(P_500) as s5b2'))->where('type', '=', 1)->first();
+        $somme5b2 = $s5b2->s5b2;
+        $s2b5 = Billetage::select(DB::raw('sum(P_250) as s2b5'))->where('type', '=', 1)->first();
+        $somme2b5 = $s2b5->s2b5;
+        $s2b = Billetage::select(DB::raw('sum(P_200) as s2b'))->where('type', '=', 1)->first();
+        $somme2b = $s2b->s2b;
+        $s1b = Billetage::select(DB::raw('sum(P_100) as s1b'))->where('type', '=', 1)->first();
+        $somme1b = $s1b->s1b;
+        $s50 = Billetage::select(DB::raw('sum(P_50) as s50'))->where('type', '=', 1)->first();
+        $somme50 = $s50->s50;
+        $s25 = Billetage::select(DB::raw('sum(P_25) as s25'))->where('type', '=', 1)->first();
+        $somme25 = $s25->s25;
+        $s10 = Billetage::select(DB::raw('sum(P_10) as s10'))->where('type', '=', 1)->first();
+        $somme10 = $s10->s10;
+        $s5 = Billetage::select(DB::raw('sum(P_5) as s5'))->where('type', '=', 1)->first();
+        $somme5 = $s5->s5;
+        if($MB_10000 > $somme10k || $MB_5000 > $somme5k || $MB_2000 > $somme2k || $MB_1000 > $somme1k || $MB_500 > $somme5b || $MP_500 > $somme5b2 || $MP_250 > $somme2b5 || $MP_200 > $somme2b ||$MP_100 > $somme1b || $MP_50 > $somme50 || $MP_25 > $somme25 || $MP_10 > $somme10 || $MP_5 > $somme5){
+            return back()->withErrors([
+                'message' => 'Billet ou pièce insuffisant en caisse']);
+        }
         if($reglement_client<$total_ttc){
             return back()->withErrors([
                 'message' => 'Le montant du client est insuffisant!']);
@@ -136,29 +167,19 @@ class FactureController extends Controller
     return view('admins.bilan', compact('date_du_jour','commandes','total_journalier'));
     }
 
-    public function create(Request $request, $commande){
-        $date = now()->toDateString('d-m-Y');
-        $factures = new Facture();
-        $factures->num_interne=$this->make_random_custom_string(6);
-        $factures->date=$date;
-        $factures->reglements_id=$request->input('reglements_id');
-        $factures->remises_id=$request->input('remises_id');
-        $remises_id = Remise::find($request->input('remises_id'));
-        $taux_remise = $remises_id->taux;
-        $factures->commandes_id=$commande;
-        $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commande)->first();
-        $value = $prix_total->total;
-        $factures->total_HT=$value;
-        $factures->tva=$value*0.18;
-        $prix_remise = $value * $taux_remise / 100;
-        //dd($prix_remise);
-        $factures->prix_remise=$prix_remise;
-        $factures->total_TTC = $factures->total_HT + $factures->tva - $factures->prix_remise;
-        //dd($factures->total_TTC);
-        $factures->save();
-
-        return redirect('admins/factures')->with("success", "Facture ajoutée avec succès!");
-    }
+    public function bilan(Request $request){
+        $date = $request->input('date');
+        $date_du_jour = date('d/m/Y', strtotime($date));
+        $commandes = Commande::where([
+            ['date', $date],
+            ['etat', 1],
+        ])->get();
+        $total_journalier = Commande::where([
+            ['date', $date],
+            ['etat', 1],
+        ])->sum('total_TTC');
+        return view('admins.bilanjours', compact('date_du_jour','commandes','total_journalier'));
+        }
 
 
     public function make_random_custom_string($n){

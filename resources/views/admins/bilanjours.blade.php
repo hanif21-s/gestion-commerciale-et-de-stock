@@ -196,15 +196,7 @@ background-color: #f7f7ff;
 </style>
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><b>Bilan de cette journee du {{$date_du_jour}}</b></h2>
-        <div style="text-align:center">
-            <form action="{{route('bilan.jour')}}" method="POST">
-                @csrf
-            <label for="size">Date :</label>
-            <input type="date" required name="date" max="{{now()->toDateString('Y-m-d')}}">&nbsp;&nbsp;&nbsp;
-            <button type="submit" class="btn btn-info">Bilan</button>
-            </form>
-        </div>
+        <h2 class="card-title"><b>Bilan de la journee du {{$date_du_jour}}</b></h2>
     </div></br>
             <div class="card-body">
                 <div id="invoice">
@@ -237,7 +229,7 @@ background-color: #f7f7ff;
                                     </tfoot>
                                 </table>
 <div style="text-align:center">
-  <a href="{{ route('admins.welcome')}}" class="btn btn-danger">Quitter</a>
+  <a href="{{ route('admins.bilan')}}" class="btn btn-danger">Quitter</a>
 </div>
                             </main>
                         </div>

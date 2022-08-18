@@ -65,60 +65,6 @@ class CommandeController extends Controller
         //return back()->with("successDelete", "La commande supprimée avec succès!");
     }
 
-    /* public function create($client) {
-        $clients = Client::find($client);
-        $produits = Produit::all();
-        $date = now()->toDateString('d-m-Y');
-        $commandes = new Commande();
-        $commandes->users_id=Auth::user()->id;
-        $commandes->date=$date;
-        $commandes->clients_id = $client;
-        $commandes->save();
-
-
-        //return view('admins.createCommande',compact('commandes'));
-        return view('admins.ventes',compact('clients','produits', 'commandes'));
-    } */
-
-
-    /* public function store(Request $request, $commande){
-        $remises = Remise::all();
-        $reglements = Reglement::all();
-        $commandes = Commande::find($commande);
-        $clients = Client::find($commandes->clients_id);
-        $produits = Produit::all();
-        $produit = Produit::find($request->input('produits_id'));
-        $lignecommandes = new LigneCommande();
-        $lignecommandes->produits_id = $request->input('produits_id');
-        $lignecommandes->quantite = $request->input('quantite');
-        $lignecommandes->commandes_id = $commande;
-        $lignecommandetotal=($produit->prix_HT + $lignecommandes->prix_total)*$lignecommandes->quantite;
-        $qtte_stock = $produit->qtte_stock;
-        if($lignecommandes->quantite > $produit->qtte_stock){
-            return back()->withErrors([
-                'message' => 'Ajout de la ligne de commande impossible ! Quantité du produit en stock insuffisant']);
-        }
-        else if($lignecommandes->quantite <= $produit->qtte_stock){
-            $stock_nv = $qtte_stock - $lignecommandes->quantite;
-            $produit = Produit::find($request->input('produits_id'));
-            $produit->qtte_stock = $stock_nv;
-            $produit->save();
-            $lignecommandes->prix_total=$lignecommandetotal;
-            $lignecommandes->save();
-            $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commande)->first();
-            $value = $prix_total->total;
-            $tva=$value*0.18;
-            $ttc=$value+$tva;
-            $lignecommandes = LigneCommande::where('commandes_id', $commande)->get();
-
-            return view('admins.sale',compact('clients','produits','commandes','lignecommandes','value','tva','ttc','remises','reglements'));
-        }
-        //dd($commandes);
-
-        //Commande::create($request->all());
-        //return redirect('/admins/commandeProduits')->with("success", "Commande ajoutée avec succès!");
-    } */
-
     public function edit(Commande $commande) {
         $clients = Client::all();
         return view('admins.editCommande',compact('commande','clients'));

@@ -60,26 +60,12 @@ class UtilisateurController extends Controller
             $request->validate([
                 "name"=>"required",
                 "email"=>"required",
-                "password"=>"required" ,
                 "tel"=>"required",
                 "adresse"=>"required",
                 "sexe"=>"required",
-                "role_id"=>"required"
             ]);
-            /* $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->tel = $request->tel;
-            $user->adresse = $request->adresse;
-            $user->sexe = $request->sexe;
-                $roleId = $request->role_id;
-
-                $role = Role::find($roleId);
-                $user->assignRole([$role]);
-               $user->update(); */
-
             $utilisateur->update($request->all());
+            $utilisateur->syncRoles($request->roles);
             return redirect('/admins/utilisateurs')->with("success", "Utilisateur mis à jour avec succès!");
         }
 

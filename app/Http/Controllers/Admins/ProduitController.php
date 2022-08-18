@@ -29,7 +29,7 @@ class ProduitController extends Controller
         $commandes_id = Commande::all()->last()->id;
         $commandes = Commande::whereId($commandes_id);
         $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
-        $produits = Produit::all(); 
+        $produits = Produit::all();
         return view('admins.commandeProduits',compact('lignecommandes','produits','commandes_id'));
     } */
 
@@ -54,22 +54,19 @@ class ProduitController extends Controller
         $request->validate([
             "nom"=>"required",
             "qtte_stock"=>"required",
-            "prix_achat"=>"required",
             "prix_HT"=>"required",
-            "stock_minimum"=>"required", 
+            "stock_minimum"=>"required",
             "date_peremption"=>"required",
-            "benefice"=>"",
             "categories_id"=>"required",
         ]);
         Produit::create($request->all());
         return redirect('/admins/produits')->with("success", "Produit ajouté avec succès!");
     }
-   
+
      public function update(Request $request, Produit $produit){
         $request->validate([
             "nom"=>"required",
             "qtte_stock"=>"required",
-            "prix_achat"=>"required",
             "prix_HT"=>"required",
             "stock_minimum"=>"required",
             "date_peremption"=>"required",

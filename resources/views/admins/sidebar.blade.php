@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
-    <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+  <a href="#" class="brand-link">
+    <img src="{{asset('dist/img/LOGO_A.jpg')}}" alt="Wecount Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">Wecount</span>
   </a>
 
   <!-- Sidebar -->
@@ -85,6 +85,7 @@
               Commandes
             </p>
             <i class="nav-icon fas fa-spinner"></i>
+            <span class="right badge badge-danger">{{\App\Models\Commande::where('etat', 0)->count()}}</span>
           </a>
         </li>
         @role('admin|gerant')
