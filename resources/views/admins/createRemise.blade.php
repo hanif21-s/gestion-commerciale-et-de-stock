@@ -14,7 +14,7 @@
       @foreach($errors->all() as $error)
         <li>{{$error}}</li>
       @endforeach
-      </ul> 
+      </ul>
     </div>
     @endif
     <form style="width:65%;" method="post" action="{{route('remises.ajouter')}}">
@@ -25,7 +25,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label">Taux (%)</label>
-    <input type="number" class="form-control" required name="taux" step="any">
+    <input type="number" class="form-control" required name="taux" step="any" min="0">
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.remises')}}" class="btn btn-danger">Annuler</a>

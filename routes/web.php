@@ -26,6 +26,8 @@ Route::middleware([
     })->name('admins.welcome');
 
 //Routes Admin--Utilisateurs
+Route::get('admins/utilisateurs/profile',[App\Http\Controllers\Admins\UtilisateurController::class, "edit2"])->name("utilisateurs.edit2");
+Route::put('admins/utilisateurs/profileupdate',[App\Http\Controllers\Admins\UtilisateurController::class, "update2"])->name("utilisateurs.update2");
 Route::get('admins/utilisateurs',[App\Http\Controllers\Admins\UtilisateurController::class, "index"])->name("admins.utilisateurs");
 Route::delete('admins/utilisateurs/{utilisateur}',[App\Http\Controllers\Admins\UtilisateurController::class, "delete"])->name("utilisateurs.supprimer");
 Route::get('admins/utilisateurs/create',[App\Http\Controllers\Admins\UtilisateurController::class, "create"])->name("utilisateurs.create");

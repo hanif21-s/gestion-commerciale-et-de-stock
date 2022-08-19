@@ -6,6 +6,11 @@
       background-color: #ffd000;
     }
   </style>
+  @if(session()->has("success"))
+  <div class="alert alert-success">
+    <h3>{{session()->get('success')}}</h3>
+  </div>
+  @endif
 <h1>Bienvenue !  {{ Auth::user()->name }}</h1>
 <div class="container-fluid">
     <div class="row">
