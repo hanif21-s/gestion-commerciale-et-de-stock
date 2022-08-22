@@ -8,27 +8,20 @@
 
     <?php
                 $produits = \App\Models\Produit::all();
+                $date_alerte  = \Carbon\Carbon::now()->addDays(5)->format('Y-m-d');
                 foreach ($produits as $produit) {
                     if($produit->qtte_stock <= $produit->stock_minimum){
                         ?>
                                     <marquee class="marq" bgcolor="red" behavior="" direction="">Le produit {{$produit->nom}} est en rupture de stock!</marquee>
                         <?php
                     }
-
-                    /* $date = now()->toDateString('d-m-Y');
-                    dd($date);
-
-                    if($produit->qtte_stock <= $produit->stock_minimum){
+                    if($date_alerte >= $produit->date_peremption){
                         ?>
-                            <div Align="center">
-                                <span class="right badge badge-danger">
-                                    <h5>{{$produit->nom}} est en rupture de stock!</h5></br>
-                                </span>
-                            </div>
+                                    <marquee class="marq" bgcolor="red" behavior="" direction="">La date de peremption du produit {{$produit->nom}} est très proche!</marquee>
                         <?php
-                    } */
+                    }
                 }
-            ?>
+    ?>
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
