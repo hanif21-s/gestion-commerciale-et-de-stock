@@ -23,7 +23,6 @@
             <th scope="col">Email</th>
             <th scope="col">Tel</th>
             <th scope="col">Adresse</th>
-            <th scope="col">Sexe</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -31,7 +30,14 @@
           @foreach ($users as $user)
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
-      <td>{{$user->name}}</td>
+      <td>
+        @if($user->sexe == 'm')
+            <label for="">M. {{$user->name}}</label>
+        @endif
+        @if($user->sexe == 'f')
+            <label for="">Mme. {{$user->name}}</label>
+        @endif
+    </td>
       <td>
         @if(!empty($user->getRoleNames()))
             @foreach($user->getRoleNames() as $val)
@@ -42,7 +48,6 @@
       <td>{{$user->email}}</td>
       <td>{{$user->tel}}</td>
       <td>{{$user->adresse}}</td>
-      <td>{{$user->sexe}}</td>
       <td>
         <a href="{{route('utilisateurs.edit', ['utilisateur'=>$user->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cet utilisateur?')){document.getElementById('form-{{$user->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
@@ -62,7 +67,6 @@
             <th scope="col">Email</th>
             <th scope="col">Tel</th>
             <th scope="col">Adresse</th>
-            <th scope="col">Sexe</th>
             <th scope="col">Actions</th>
           </tr>
         </tfoot>

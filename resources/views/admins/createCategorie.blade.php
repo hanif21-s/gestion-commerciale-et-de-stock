@@ -40,11 +40,11 @@
     <label for="exampleInputEmail1" class="form-label">Description</label>
   </div>
   <textarea rows="4" cols="50" required name="description" placeholder="Ajouter une description"></textarea>
-  
+
   </div>
 </br>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
-  <a href="{{route('admins.categories')}}" class="btn btn-danger">Annuler</a>
+  <a href="{{route('admins.listCategorie')}}" class="btn btn-danger">Annuler</a>
 </form>
   </div>
 </div>

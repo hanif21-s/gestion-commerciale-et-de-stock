@@ -4,7 +4,9 @@
     <div class="card-header">
       <h3 class="card-title"><b>Liste des produits</b></h3>
       <div class="d-flex justify-content-end">
+        @role('admin|gerant')
         <div><a href="{{route('produits.create')}}" class="btn btn-primary mb-3">Ajouter un nouveau produit</a></div>
+        @endrole
       </div>
     </div>
     @if(session()->has("successDelete"))
@@ -24,7 +26,9 @@
             <th scope="col">Stock minimum</th>
             <th scope="col">Peremption</th>
             <th scope="col">Catégorie</th>
+            @role('admin|gerant')
             <th scope="col">Action</th>
+            @endrole
           </tr>
         </thead>
         <tbody>
@@ -37,6 +41,7 @@
             <td>{{$produit->stock_minimum}}</td>
             <td>{{$produit->date_peremption}}</td>
             <td>{{$produit->Categorie['libelle']}}</td>
+            @role('admin|gerant')
             <td>
               <a href="{{route('produits.edit', ['produit'=>$produit->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
 
@@ -46,6 +51,7 @@
                 <input type="hidden" name="_method" value="delete">
               </form>
             </td>
+            @endrole
           </tr>
           @endforeach
         </tbody>
@@ -58,7 +64,9 @@
             <th scope="col">Stock minimum</th>
             <th scope="col">Peremption</th>
             <th scope="col">Catégorie</th>
+            @role('admin|gerant')
             <th scope="col">Action</th>
+            @endrole
           </tr>
         </tfoot>
       </table>

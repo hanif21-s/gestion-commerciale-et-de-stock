@@ -48,7 +48,7 @@
       <td>{{$commande->prix_remise}}</td>
       <td>{{$commande->total_TTC}}</td>
       <td>
-        <a href="{{route('sale', ['commande'=>$commande->id])}}" class="btn btn-success" title="Imprimer"><i class="nav-icon fas fa-eye"></i></a>
+        <a href="{{route('sale', ['commande'=>$commande->id])}}" class="btn btn-success" title="voir"><i class="nav-icon fas fa-eye"></i></a>
       </td>
     </tr>
     @endforeach

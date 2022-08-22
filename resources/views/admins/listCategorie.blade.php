@@ -7,6 +7,11 @@
         <div><a href="{{route('categories.create')}}" class="btn btn-primary mb-3">Ajouter une nouvelle catégorie</a></div>
       </div>
     </div>
+    @if(session()->has("success"))
+  <div class="alert alert-success">
+    <h3>{{session()->get('success')}}</h3>
+  </div>
+  @endif
     @if(session()->has("successDelete"))
       <div class="alert alert-success">
         <h3>{{session()->get('successDelete')}}</h3>
@@ -16,7 +21,7 @@
     <div class="card-body">
       <table id="example2" class="table table-bordered table-striped">
         <thead>
-          <tr> 
+          <tr>
             <th scope="col">#</th>
             <th scope="col">Libellé</th>
             <th scope="col">Catégorie Parent</th>
@@ -29,7 +34,18 @@
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
       <td>{{$categorie->libelle}}</td>
-      <td>{{$categorie->parent_id}}</td>
+      <td>
+        @foreach ($cats as $cat)
+            @if ($categorie->parent_id == $cat)
+            <?php
+                $cato = \App\Models\Categorie::find($categorie->parent_id);
+                ?>
+                <label for="">{{$cato->libelle}}</label>
+                <?php
+            ?>
+            @endif
+        @endforeach
+      </td>
       <td>{{$categorie->description}}</td>
       <td>
         <a href="{{route('categories.edit', ['categorie'=>$categorie->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>

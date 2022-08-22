@@ -21,7 +21,8 @@ class CategorieController extends Controller
 
     public function index1() {
         $categories = Categorie::all();
-            return view('admins.listCategorie',compact('categories'));
+        $cats = Categorie::all()->pluck('id');
+            return view('admins.listCategorie',compact('categories','cats'));
         }
 
     public function store(Request $request){
@@ -32,7 +33,7 @@ class CategorieController extends Controller
         ]);
 
         Categorie::create($request->all());
-        return redirect('/admins/categories')->with("success", "Catégorie ajoutée avec succès!");
+        return redirect('/admins/Listcategories')->with("success", "Catégorie ajoutée avec succès!");
     }
 
     public function create() {
@@ -42,12 +43,13 @@ class CategorieController extends Controller
 
     public function edit(Categorie $categorie) {
         $categories = Categorie::all();
+        $cats = Categorie::all()->pluck('id');
         //dd($categories);
         $parents = DB::table('categories')
             ->select('categories.parent_id')
             ->get();
         //dd($parent);
-        return view('admins.editCategorie',compact('categorie', "categories", "parents"));
+        return view('admins.editCategorie',compact('categorie', "categories", "parents", "cats"));
     }
 
     public function update(Request $request, Categorie $categorie){
@@ -58,7 +60,7 @@ class CategorieController extends Controller
         ]);
 
         $categorie->update($request->all());
-        return redirect('/admins/categories')->with("success", "Catégorie mise à jour avec succès!");
+        return redirect('/admins/Listcategories')->with("success", "Catégorie mise à jour avec succès!");
     }
 
     public function delete(Categorie $categorie){

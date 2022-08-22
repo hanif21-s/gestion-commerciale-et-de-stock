@@ -126,6 +126,7 @@ Route::get('admins/facture/{commande}',[App\Http\Controllers\Admins\FactureContr
 Route::get('generate/{commande}', [PDFController::class, 'generatePDF'])->name("generate");
 Route::get('generate/duplicata/{commande}', [PDFController::class, 'generatePDFduplicata'])->name("generateduplicata");
 Route::get('view/{commande}', [PDFController::class, 'viewPDF'])->name("sale");
+Route::get('detail/{commande}', [PDFController::class, 'detail'])->name("detail");
 Route::get('ravitaillement/imprimer/{ravitaillement}', [PDFController::class, 'generatePdfRavi'])->name("generate2");
 //Route Admin--Reglements
 Route::get('admins/reglements/{client_id}',[App\Http\Controllers\Admins\ReglementController::class, "index"])->name("admins.reglements");
@@ -139,19 +140,14 @@ Route::put('admins/reglements/{reglement}',[App\Http\Controllers\Admins\Reglemen
 Route::get('admins/verificationbilletage',[App\Http\Controllers\Admins\BilletageController::class, "index"])->name("admins.billetage");
 Route::post('admins/resultat/verificationbilletage',[App\Http\Controllers\Admins\BilletageController::class, "resultat"])->name("resultat.billetage");
 
-Route::middleware([
-    'auth:sanctum', 'verified'])->get('/gerant/dashboard',function () {
-        return view('gerant-dashboard');
-    })->name('gerant-dashboard');
+/* #Display all notifications to Admin
 
-Route::middleware([
-    'auth:sanctum', 'verified'])->get('/commercial/dashboard',function () {
-        return view('commercial-dashboard');
-    })->name('commercial-dashboard');
+Route::get('/notification', [AdminController::class,'showNotificaton']);
 
-Route::middleware([
-    'auth:sanctum', 'verified'])->get('/caissier/dashboard',function () {
-        return view('caissier-dashboard');
-    })->name('caissier-dashboard');
+#Notification mark as Read
+
+Route::post('/mark-as-read',[AdminController::class, 'markNotification'])->name('markNotification');
+
+Route::get('/send', 'StockMinimumController@sendNotification'); */
 
 

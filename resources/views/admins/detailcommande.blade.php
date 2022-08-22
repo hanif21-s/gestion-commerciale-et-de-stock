@@ -1,3 +1,5 @@
+@extends("admins.app")
+@section('content')
 <style type="text/css">
     body{margin-top:20px;
 background-color: #f7f7ff;
@@ -197,36 +199,16 @@ background-color: #f7f7ff;
             <div id="invoice">
                 <div class="invoice overflow-auto">
                     <div style="min-width: 600px">
-                        <header>
-                            <div class="row">
-                                <div class="col">
-                                    <a>
-                                        <img src="{{ storage_path('app/public/dist/img/logo.png') }}" style="width: 50%">
-									</a>
-                                </div>
-                                <div class="col company-details">
-                                    <h2 class="name">
-                                        <a target="_blank" href="javascript:;">
-									GERME-TECH
-									</a>
-                                    </h2>
-                                    <div>Lomé-Agoè</div>
-                                    <div>(228) 9759-0675</div>
-                                    <div>contact@germetech.com</div>
-                                </div>
-                            </div>
-                        </header>
                         <main>
                             <div class="row contacts">
                                 <div class="col invoice-to">
-                                    <div class="text-gray-light"><h2>Facture du client: <b>{{$commandes->Client['nom']}} {{$commandes->Client['prenoms']}}</b></h2></div>
-                                    <div class="address">Adresse: {{$commandes->Client['adresse']}}</div>
-                                    <div class="email"><a>Email: {{$commandes->Client['email']}}</a>
+                                    <div class="text-gray-light"><h2>Facture n° {{$commande->num_interne}} du client: <b>{{$commande->Client['nom']}} {{$commande->Client['prenoms']}}</b></h2></div>
+                                    <div class="address">Adresse: {{$commande->Client['adresse']}}</div>
+                                    <div class="email"><a>Email: {{$commande->Client['email']}}</a>
                                     </div>
                                 </div>
                                 <div class="col invoice-details">
-                                    <h1 class="invoice-id">FACTURE NUMERO: {{$commandes->num_interne}}</h1>
-                                    <div class="date">Date de la commande: {{$commandes->date}}</div>
+                                    <div class="date"><h3>Date de la commande: {{$commande->date}}</h3></div>
                                 </div>
                             </div>
                             <table>
@@ -259,44 +241,33 @@ background-color: #f7f7ff;
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="2">TOTAL TAXE</td>
-                                        <td>{{$commandes->tva}} FCFA</td>
+                                        <td>{{$commande->tva}} FCFA</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="2">TOTAL REMISE</td>
-                                        <td>{{$commandes->prix_remise}} FCFA</td>
+                                        <td>{{$commande->prix_remise}} FCFA</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="2">TOTAL TTC</td>
-                                        <td>{{$commandes->total_TTC}} FCFA</td>
+                                        <td>{{$commande->total_TTC}} FCFA</td>
                                     </tr>
                                 </tfoot>
                             </table>
-                            <div class="thanks">Merci à vous!</div>
-                            <div class="notices">
-                                <div>Votre prix total revient à <b><i>{{$prix_lettre}} FCFA</i></b></div>
-                                <div class="notice"></div>
-                            </div>
-                            <div class="notices">
-                                <div>MONTANT REMIS : <b><i>{{$commandes->reglement_client}} FCFA</i></b></div>
-                                <div class="notice"></div>
-                            </div>
-                            <div class="notices">
-                                <div>MONNAIE : <b><i> {{$monnaie}} FCFA</i></b></div>
-                                <div class="notice"></div>
-                            </div>
-                            <div class="notices">
-                                <div>SIGNATURE DU VENDEUR: </div>
-                                <div class="notice"></div>
-                            </div>
+                            <div class="thanks"></div>
                         </main>
                         <footer>Copyright © 2022 #HanifZer</footer>
                     </div>
                     <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
                     <div></div>
+                    <div style="text-align:center">
+                        <a href="/admins/commandesvalides" class="btn btn-danger">Retour</a>
+                      </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@endsection

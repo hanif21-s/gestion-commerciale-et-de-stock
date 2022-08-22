@@ -44,6 +44,7 @@
               </p>
           </a>
         </li>
+        @role('admin')
         <li class="nav-item">
           <a href="{{ route('admins.utilisateurs')}}" class="nav-link">
             <i class="nav-icon fa fa-user"></i>
@@ -52,6 +53,7 @@
             </p>
           </a>
         </li>
+        @endrole
         @role('admin|gerant')
         <li class="nav-item">
           <a href="{{ route('admins.remises')}}" class="nav-link">
@@ -62,6 +64,7 @@
           </a>
         </li>
         @endrole
+        @role('admin|gerant')
         <li class="nav-item">
           <a href="{{ route('admins.categories')}}" class="nav-link">
             <i class="nav-icon fab fa-cuttlefish"></i>
@@ -70,6 +73,8 @@
             </p>
           </a>
         </li>
+        @endrole
+        @role('admin|gerant|commercial')
         <li class="nav-item">
           <a href="{{ route('admins.produits')}}" class="nav-link">
             <i class="nav-icon fab fa-product-hunt"></i>
@@ -78,6 +83,7 @@
             </p>
           </a>
         </li>
+        @endrole
         <li class="nav-item">
           <a href="{{ route('admins.commandes')}}" class="nav-link">
             <i class="nav-icon fas fa-cart-arrow-down"></i>
@@ -99,6 +105,7 @@
             </a>
           </li>
         @endrole
+        @role('admin|gerant')
         <li class="nav-item">
           <a href="{{ route('admins.ravitaillements')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-in-alt"></i>
@@ -107,6 +114,8 @@
             </p>
           </a>
         </li>
+        @endrole
+        @role('admin|gerant|commercial')
         <li class="nav-item">
           <a href="{{ route('admins.clients')}}" class="nav-link">
             <i class="nav-icon fas fa-street-view"></i>
@@ -115,6 +124,8 @@
             </p>
           </a>
         </li>
+        @endrole
+        @role('admin|gerant')
         <li class="nav-item">
           <a href="{{ route('admins.fournisseurs')}}" class="nav-link">
             <i class="nav-icon fas fa-user-tie"></i>
@@ -123,6 +134,8 @@
             </p>
           </a>
         </li>
+        @endrole
+        @role('admin')
         <li class="nav-item">
           <a href="{{route('admins.allfactures')}}" class="nav-link">
             <i class="nav-icon fas fa-file-invoice"></i>
@@ -131,6 +144,7 @@
             </p>
           </a>
         </li>
+        @endrole
         <li class="nav-item">
           <a href="{{route('admins.bilan')}}" class="nav-link">
             <i class="nav-icon fas fa-balance-scale"></i>
@@ -139,6 +153,7 @@
             </p>
           </a>
         </li>
+        @role('admin|gerant')
         <li class="nav-item">
             <a href="{{route('admins.depenses')}}" class="nav-link">
               <i class="nav-icon fas fa-hand-holding-usd"></i>
@@ -147,6 +162,8 @@
               </p>
             </a>
         </li>
+        @endrole
+        @role('caissier')
         <li class="nav-item">
             <a href="{{route('admins.billetage')}}" class="nav-link">
               <i class="nav-icon fas fa-cash-register"></i>
@@ -155,6 +172,7 @@
               </p>
             </a>
         </li>
+        @endrole
     </nav>
     <!-- /.sidebar-menu -->
   </div>

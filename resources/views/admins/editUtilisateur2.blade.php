@@ -1,7 +1,7 @@
 @extends("admins.app")
 @section("content")
 <div class="my-3 p-6 bg-body rounded shadow-sm">
-  <h3 class="border-bottom pb-2 mb-3">Edition d'un utilisateur</h3>
+  <h3 class="border-bottom pb-2 mb-3">Mon profile</h3>
   <div class="mt-4">
     @if(session()->has("success"))
       <div class="alert alert-success">

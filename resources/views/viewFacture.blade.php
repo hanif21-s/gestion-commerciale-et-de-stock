@@ -203,8 +203,8 @@ background-color: #f7f7ff;
                             <div class="row">
                                 <div class="col">
                                     <a>
-
-												</a>
+                                        <img src="{{asset('dist/img/logo.png')}}" height="100" width="300">
+									</a>
                                 </div>
                                 <div class="col company-details">
                                     <h2 class="name">

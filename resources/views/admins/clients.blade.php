@@ -7,6 +7,11 @@
         <div><a href="{{route('clients.create')}}" class="btn btn-primary mb-3">Ajouter un nouveau client</a></div>
       </div>
     </div>
+    @if(session()->has("success"))
+  <div class="alert alert-success">
+    <h3>{{session()->get('success')}}</h3>
+  </div>
+  @endif
     @if(session()->has("successDelete"))
       <div class="alert alert-success">
         <h3>{{session()->get('successDelete')}}</h3>
@@ -23,7 +28,6 @@
             <th scope="col">Email</th>
             <th scope="col">Tel</th>
             <th scope="col">Adresse</th>
-            <th scope="col">Sexe</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -31,12 +35,18 @@
           @foreach ($clients as $client)
     <tr>
       <th scope="row">{{$loop->index + 1}}</th>
-      <td>{{$client->nom}}</td>
+        <td>
+            @if($client->sexe == 'm')
+                <label for="">M. {{$client->nom}}</label>
+            @endif
+            @if($client->sexe == 'f')
+                <label for="">Mme. {{$client->nom}}</label>
+            @endif
+        </td>
       <td>{{$client->prenoms}}</td>
       <td>{{$client->email}}</td>
       <td>{{$client->tel}}</td>
       <td>{{$client->adresse}}</td>
-      <td>{{$client->sexe}}</td>
       <td>
         {{-- <a href="{{route('commandes.create', $client->id)}}" class="btn btn-secondary">Effectuer une commande</a> --}}
         <a href="{{route('clients.edit', ['client'=>$client->id])}}" class="btn btn-info"><i class="nav-icon fas fa-edit"></i></a>
@@ -56,7 +66,6 @@
           <th scope="col">Email</th>
           <th scope="col">Tel</th>
           <th scope="col">Adresse</th>
-          <th scope="col">Sexe</th>
           <th scope="col">Actions</th>
         </tr>
       </table>

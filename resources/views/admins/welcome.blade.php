@@ -14,7 +14,7 @@
 <h1>Bienvenue !  {{ Auth::user()->name }}</h1>
 <div class="container-fluid">
     <div class="row">
-        @role('admin|gerant')
+        @role('admin|gerant|caissier')
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
@@ -37,7 +37,9 @@
                 <div class="icon">
                     <i class="fas fa-user-plus"></i>
                 </div>
+                @role('admin|gerant')
                 <a href="{{route('admins.clients')}}" class="small-box-footer">Details <i class="fas fa-arrow-circle-right"></i></a>
+                @endrole
             </div>
         </div>
 
@@ -50,7 +52,9 @@
                 <div class="icon">
                     <i class="fas fa-user-plus"></i>
                 </div>
+                @role('admin|gerant')
                 <a href="{{route('admins.fournisseurs')}}" class="small-box-footer">Details <i class="fas fa-arrow-circle-right"></i></a>
+                @endrole
             </div>
         </div>
 

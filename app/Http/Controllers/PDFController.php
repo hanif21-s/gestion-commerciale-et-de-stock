@@ -43,6 +43,21 @@ class PDFController extends Controller
         return view('viewFacture', compact('prix_lettre', 'commande', 'lignecommandes', 'monnaie','value'));
     }
 
+    public function detail(Commande $commande){
+        $lignecommandes=LigneCommande::where('commandes_id',$commande->id)->get();
+        //dd($lignecommandes);
+        $produits = Produit::all();
+        //dd($produits);
+        $f = new \NumberFormatter("fr", \NumberFormatter::SPELLOUT);
+        $prix_lettre = $f->format($commande->total_TTC);
+        $monnaie = $commande->reglement_client-$commande->total_TTC;
+        $prix_total = LigneCommande::select(DB::raw('sum(prix_total) as total'))->where('commandes_id', '=', $commande->id)->first();
+        $value = $prix_total->total;
+        $monnaie = $commande->reglement_client-$commande->total_TTC;
+
+        return view('admins.detailcommande', compact('prix_lettre', 'commande', 'lignecommandes', 'monnaie','value'));
+    }
+
     public function generatePDF($commande)
     {
         $commandes = Commande::find($commande);

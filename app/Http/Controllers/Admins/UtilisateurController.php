@@ -67,6 +67,7 @@ class UtilisateurController extends Controller
                 User::where('id',$id)->update(array('mdp' => $nvo_mdp));
                 User::where('id',$id)->update(array('password' => $nvo_mdp_hash));
                 return redirect('/accueil')->with("success", "Profil modifié avec succès!");
+                //return redirect()->route('logout');
             }
         }
 
@@ -75,7 +76,7 @@ class UtilisateurController extends Controller
                 "name"=>"required",
                 "email"=>"required",
                 "password"=>"required",
-                "tel"=>"required",
+                "tel"=>"required|min:8|max:8",
                 "adresse"=>"required",
                 "sexe"=>"required",
                 "role_id"=>"required"
@@ -107,7 +108,7 @@ class UtilisateurController extends Controller
             $request->validate([
                 "name"=>"required",
                 "email"=>"required",
-                "tel"=>"required",
+                "tel"=>"required|min:8|max:8",
                 "adresse"=>"required",
                 "sexe"=>"required",
             ]);

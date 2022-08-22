@@ -12,19 +12,12 @@ class ClientController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    
+
     public function index() {
     $clients = Client::all();
         return view('admins.clients',compact('clients'));
     }
 
-    public function index1($commandes_id) {
-        $last_id_commandes=$commandes_id;
-        $clients = Client::all();
-        $reglements= Reglement::all();
-            return view('admins.clientFacture',compact('clients','last_id_commandes','reglements'));
-        }
-    
     public function create() {
         return view('admins.createClient');
     }
@@ -38,14 +31,13 @@ class ClientController extends Controller
             "nom"=>"required",
             "prenoms"=>"required",
             "email"=>"required",
-            "tel"=>"required",
+            "tel"=>"required|min:8|max:8",
             "adresse"=>"required",
             "sexe"=>"required",
         ]);
         //dd($id);
         Client::create($request->all());
-        //return redirect('/admins/clients')->with("success", "Client(e) ajouté(e) avec succès!");
-        return back()->with("success", "Client(e) ajouté(e) avec succès!");
+        return redirect('/admins/clients')->with("success", "Client(e) ajouté(e) avec succès!");
     }
 
      public function update(Request $request, Client $client){
@@ -53,14 +45,14 @@ class ClientController extends Controller
             "nom"=>"required",
             "prenoms"=>"required",
             "email"=>"required",
-            "tel"=>"required",
+            "tel"=>"required|min:8|max:8",
             "adresse"=>"required",
             "sexe"=>"required",
         ]);
         $client->update($request->all());
         return redirect('/admins/clients')->with("success", "Client(e) mis(e) à jour avec succès!");
     }
-    
+
    public function delete(Client $client){
         $nom_complet = $client->NomnomPatient." ".$client->prenoms;
         $client->delete();

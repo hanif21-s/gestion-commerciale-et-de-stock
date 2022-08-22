@@ -104,7 +104,7 @@ right connector from last child*/
 
 <div class="my-3 p-3 bg-body rounded shadow-sm" id="scrolly">
   <h3 class="border-bottom pb-2 mb-3">Arbre Généalogique des Categories</h3>
-    <div class="d-flex justify-content-start mb-2"><a href="{{route('admins.listCategorie')}}" class="btn btn-primary mb-3">Liste des Catégories</a></div>
+    <div class="d-flex justify-content-end mb-2"><a href="{{route('admins.listCategorie')}}" class="btn btn-primary mb-3">Liste des Catégories</a></div>
   </br>
   @if(session()->has("successDelete"))
   <div class="alert alert-success">

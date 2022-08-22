@@ -201,8 +201,8 @@ background-color: #f7f7ff;
                             <div class="row">
                                 <div class="col">
                                     <a>
-
-												</a>
+                                        <img src="{{ storage_path('app/public/dist/img/logo.png') }}" style="width: 50%">
+									</a>
                                 </div>
                                 <div class="col company-details">
                                     <h2 class="name">

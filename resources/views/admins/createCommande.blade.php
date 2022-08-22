@@ -202,7 +202,7 @@ background-color: #f7f7ff;
     <div class="col-sm-4">
         <div class="form-group">
             <span style="white-space: nowrap">
-                <label for="size">Date de la commande : <input type="date" required name="date" id="date" max="{{now()->toDateString('Y-m-d')}}"> </label>
+                <label for="size">Date de la commande : <input type="date" required name="date" id="date" max="{{now()->toDateString('Y-m-d')}}" value="{{  now()->toDateString('Y-m-d') }}"> </label>
             </span>
         </div>
     </div>

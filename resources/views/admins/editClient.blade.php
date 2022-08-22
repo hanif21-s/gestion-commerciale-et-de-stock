@@ -44,7 +44,16 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Sexe</label>
-    <input type="text" class="form-control" required name="sexe" value="{{$client->sexe}}">
+    <select class="form-control" required name="sexe">
+      <option value=""></option>
+      @if($client->sexe == "m")
+      <option value="m" selected>m</option>
+      <option value="f">f</option>
+      @else
+      <option value="m">m</option>
+      <option value="f" selected>f</option>
+      @endif
+    </select>
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.clients')}}" class="btn btn-danger">Annuler</a>

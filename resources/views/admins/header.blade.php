@@ -1,10 +1,40 @@
+<style>
+    .marq {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+</style>
 <div class="content-wrapper">
+
+    <?php
+                $produits = \App\Models\Produit::all();
+                foreach ($produits as $produit) {
+                    if($produit->qtte_stock <= $produit->stock_minimum){
+                        ?>
+                                    <marquee class="marq" bgcolor="red" behavior="" direction="">Le produit {{$produit->nom}} est en rupture de stock!</marquee>
+                        <?php
+                    }
+
+                    /* $date = now()->toDateString('d-m-Y');
+                    dd($date);
+
+                    if($produit->qtte_stock <= $produit->stock_minimum){
+                        ?>
+                            <div Align="center">
+                                <span class="right badge badge-danger">
+                                    <h5>{{$produit->nom}} est en rupture de stock!</h5></br>
+                                </span>
+                            </div>
+                        <?php
+                    } */
+                }
+            ?>
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          {{-- <h1 class="m-0">Dashboard</h1> --}}
+
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">

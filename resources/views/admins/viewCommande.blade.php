@@ -1,5 +1,10 @@
 @extends("admins.app")
 @section('content')
+<style>
+    #number {
+  width: 3em;
+}
+</style>
 <div class="container-fluid">
     @if($errors->any())
     <div class="alert alert-danger">
@@ -33,32 +38,32 @@
                         <HR size=2 width="100%">
                         <label for="size"><h4>BILLETAGE MONNAIE</h4></label>
                         <HR size=2 width="100%">
-                        <label for="size">Billet de 10 000 F:</label>
-                        <input type="number" required name="MB_10000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Billet de 5000 F:</label>
-                        <input type="number" required name="MB_5000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Billet de 2000F:</label>
-                        <input type="number" required name="MB_2000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Billet de 1000F:</label>
-                        <input type="number" required name="MB_1000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Billet de 500F:</label>
-                        <input type="number" required name="MB_500" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 500F:</label>
-                        <input type="number" required name="MP_500" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 250F:</label>
-                        <input type="number" required name="MP_250" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 200F</label>
-                        <input type="number" required name="MP_200" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 100F:</label>
-                        <input type="number" required name="MP_100" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 50F</label>
-                        <input type="number" required name="MP_50" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 25F</label>
-                        <input type="number" required name="MP_25" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 10F</label>
-                        <input type="number" required name="MP_10" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                        <label for="size">Pièce de 5F</label>
-                        <input type="number" required name="MP_5" placeholder="Entrez le nombre"  min="0" value="0"></br></br>
+                        <label for="size"><i class="nav-icon fas fa-money-bill"></i> 10 000</label>
+                        <input type="number" required name="MB_10000" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-money-bill"></i> 5000</label>
+                        <input type="number" required name="MB_5000" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-money-bill"></i> 2000</label>
+                        <input type="number" required name="MB_2000" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-money-bill"></i> 1000</label>
+                        <input type="number" required name="MB_1000" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br>
+                        <label for="size"><i class="nav-icon fas fa-money-bill"></i> 500</label>
+                        <input type="number" required name="MB_500" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 500F:</label>
+                        <input type="number" required name="MP_500" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 250F:</label>
+                        <input type="number" required name="MP_250" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 200F</label>
+                        <input type="number" required name="MP_200" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br>
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 100F:</label>
+                        <input type="number" required name="MP_100" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 50F</label>
+                        <input type="number" required name="MP_50" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 25F</label>
+                        <input type="number" required name="MP_25" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 10F</label>
+                        <input type="number" required name="MP_10" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br>
+                        <label for="size"><i class="nav-icon fas fa-coins"></i> 5F</label>
+                        <input type="number" required name="MP_5" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br></br>
                     </div>
                 </div>
             </div>
@@ -100,32 +105,32 @@
                             <HR size=2 width="100%">
                             <label for="size"><h4>BILLETAGE REGLEMENT</h4></label>
                             <HR size=2 width="100%">
-                            <label for="size">Billet de 10 000 F:</label>
-                            <input type="number" required name="B_10000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Billet de 5000 F:</label>
-                            <input type="number" required name="B_5000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Billet de 2000F:</label>
-                            <input type="number" required name="B_2000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Billet de 1000F:</label>
-                            <input type="number" required name="B_1000" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Billet de 500F:</label>
-                            <input type="number" required name="B_500" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 500F:</label>
-                            <input type="number" required name="P_500" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 250F:</label>
-                            <input type="number" required name="P_250" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 200F</label>
-                            <input type="number" required name="P_200" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 100F:</label>
-                            <input type="number" required name="P_100" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 50F</label>
-                            <input type="number" required name="P_50" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 25F</label>
-                            <input type="number" required name="P_25" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 10F</label>
-                            <input type="number" required name="P_10" placeholder="Entrez le nombre"  min="0" value="0"></br>
-                            <label for="size">Pièce de 5F</label>
-                            <input type="number" required name="P_5" placeholder="Entrez le nombre"  min="0" value="0"></br></br>
+                            <label for="size"><i class="nav-icon fas fa-money-bill"></i> 10 000</label>
+                            <input type="number" required name="B_10000" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-money-bill"></i> 5000</label>
+                            <input type="number" required name="B_5000" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-money-bill"></i> 2000</label>
+                            <input type="number" required name="B_2000" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-money-bill"></i> 1000</label>
+                            <input type="number" required name="B_1000" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br>
+                            <label for="size"><i class="nav-icon fas fa-money-bill"></i> 500</label>
+                            <input type="number" required name="B_500" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 500F:</label>
+                            <input type="number" required name="P_500" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 250F:</label>
+                            <input type="number" required name="P_250" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 200F</label>
+                            <input type="number" required name="P_200" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br>
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 100F:</label>
+                            <input type="number" required name="P_100" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 50F</label>
+                            <input type="number" required name="P_50" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 25F</label>
+                            <input type="number" required name="P_25" placeholder="Entrez le nombre"  min="0" value="0" id="number">
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 10F</label>
+                            <input type="number" required name="P_10" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br>
+                            <label for="size"><i class="nav-icon fas fa-coins"></i> 5F</label>
+                            <input type="number" required name="P_5" placeholder="Entrez le nombre"  min="0" value="0" id="number"></br></br>
                             <button type="submit" class="btn btn-success">Terminer</button>
                         </div>
                     </tfoot></br>

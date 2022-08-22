@@ -26,7 +26,9 @@
             <th scope="col">Date</th>
             <th scope="col">User</th>
             <th scope="col">Client</th>
+            @role('caissier|gerant|admin')
             <th scope="col">Actions</th>
+            @endrole
           </tr>
         </thead>
         <tbody>
@@ -36,14 +38,21 @@
       <td>{{$commande->date}}</td>
       <td>{{$commande->User['name']}}</td>
       <td>{{$commande->Client['nom']}} {{$commande->Client['prenoms']}}</td>
+      @role('admin|gerant|caissier')
       <td>
+        @role('admin|gerant')
+        <a href="{{route('detail', ['commande'=>$commande->id])}}" class="btn btn-success" title="Voir"><i class="nav-icon fas fa-eye"></i></a>
+        @endrole
+        @role('caissier')
         <a href="{{route('commandes.see', ['commande'=>$commande->id])}}" class="btn btn-success" title="Voir"><i class="nav-icon fas fa-eye"></i></a>
         <a href="#" class="btn btn-danger" onclick="if(confirm('voulez-vous vraiment supprimer cette commande?')){document.getElementById('form-{{$commande->id}}').submit()}"><i class="nav-icon fas fa-trash-alt"></i></a>
         <form id="form-{{$commande->id}}" action="{{route('commandes.supprimer', ['commande'=>$commande->id])}}" method="post">
           @csrf
           <input type="hidden" name="_method" value="delete">
         </form>
+        @endrole
       </td>
+      @endrole
     </tr>
     @endforeach
         </tbody>
@@ -53,7 +62,9 @@
             <th scope="col">Date</th>
             <th scope="col">User</th>
             <th scope="col">Client</th>
+            @role('caissier|gerant|admin')
             <th scope="col">Actions</th>
+            @endrole
           </tr>
         </tfoot>
       </table>

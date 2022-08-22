@@ -46,23 +46,12 @@ class CommandeController extends Controller
         return back()->with("successDelete", "Commande '$num_interne' supprimée avec succès!");
     }
 
-    /* public function delete1(Commande $commande){
-        $commande->delete();
-        return redirect('/admins/clients')->with("success", "Commande annulée");
-    } */
-
     public function deleteAll(Commande $commandes){
         $commandes_id = $commandes->id;
         $lignecommandes = LigneCommande::where('commandes_id', $commandes_id)->get();
-        /* $produits_id = $lignecommandes->pluck('produits_id');
-        $produit = Produit::find($produits_id);
-        $qtte_avant_suppression = $produit->pluck('qtte_stock');
-        $quantite = $lignecommandes->pluck('quantite');
-        dd($produits_id); */
         $lignecommandes->each->delete();
         $commandes->delete();
         return redirect('/admins/clients')->with("success", "Suppression effectuée avec succès avec succès!");
-        //return back()->with("successDelete", "La commande supprimée avec succès!");
     }
 
     public function edit(Commande $commande) {

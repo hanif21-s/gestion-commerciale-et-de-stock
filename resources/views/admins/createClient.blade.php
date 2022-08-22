@@ -14,7 +14,7 @@
       @foreach($errors->all() as $error)
         <li>{{$error}}</li>
       @endforeach
-      </ul> 
+      </ul>
     </div>
     @endif
     <form style="width:65%;" method="post" action="{{route('clients.ajouter')}}">
@@ -40,8 +40,12 @@
     <input type="text" class="form-control" required name="adresse">
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Sexe</label>
-    <input type="text" class="form-control" required name="sexe">
+    <label for="exampleInputEmail1" class="form-label">Sexe : </label></br>
+    <select class="form-control" required name="sexe">
+      <option value=""></option>
+      <option value="m">m</option>
+      <option value="f">f</option>
+    </select>
   </div>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a href="{{route('admins.clients')}}" class="btn btn-danger">Annuler</a>

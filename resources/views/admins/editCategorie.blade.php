@@ -31,22 +31,27 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Categorie Parent</label>
     <select class="form-control" name="parent_id">
-         @foreach($parents as $parent)
-         
-          <option value="{{$categorie->parent_id}}" selected>{{$categorie->parent_id}}</option>
-          
-        @endforeach
-         
+        <option value=""></option>
+            <?php
+                $catos = \App\Models\Categorie::all();
+                foreach ($catos as $cato){
+                    if ($categorie->parent_id == $cato->id){
+                    ?>
+                <option value="{{$categorie->parent_id}}" selected>{{$cato->libelle}}</option>
+                <?php
+                }
+                }
 
+            ?>
     </select>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Description</label>
     <input type="text" class="form-control" required name="description" value="{{$categorie->description}}">
   </div>
-  
+
   <button type="submit" class="btn btn-primary">Enregistrer</button>
-  <a href="{{route('admins.categories')}}" class="btn btn-danger">Annuler</a>
+  <a href="{{route('admins.listCategorie')}}" class="btn btn-danger">Annuler</a>
 </form>
   </div>
 </div>
